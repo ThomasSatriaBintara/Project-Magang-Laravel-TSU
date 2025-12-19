@@ -49,13 +49,13 @@
 
             <div class="mb-8">
                 <label class="block text-black font-semibold text-sm mb-2 ml-1">Konfirmasi Kata Sandi</label>
-                <input type="password" placeholder="Masukkan Kembali Kata Sandi" 
+                <input type="password" placeholder="Masukkan Kembali Kata Sandi Baru" 
                     class="w-full border border-gray-400 px-4 py-3 rounded text-sm placeholder-gray-300 italic placeholder:font-light focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
             </div>
 
             <div class="pt-4">
                 <button type="submit" class="w-full bg-tsu-teal text-white font-bold py-3 rounded-lg hover:bg-tsu-teal-dark transition shadow-md text-base">
-                    Verifikasi Kode
+                    Ubah Sekarang
                 </button>
             </div>
             

@@ -4,6 +4,8 @@
 
 @section('content')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
             <h2 class="text-3xl font-bold text-black mb-2">Project Website Penjualan</h2>
@@ -23,16 +25,15 @@
             </div>
         </div>
 
-        <button class="bg-tsu-teal hover:bg-tsu-teal-dark text-white font-bold py-3 px-8 rounded-full flex items-center gap-2 shadow-lg transition transform hover:-translate-y-0.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="btnDaftar" onclick="prosesPendaftaran()" class="bg-tsu-teal hover:bg-tsu-teal-dark text-white font-bold py-3 px-8 rounded-full flex items-center gap-2 shadow-lg transition transform hover:-translate-y-0.5">
+            <svg id="iconDaftar" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-            Daftar Sekarang
+            <span id="textDaftar">Daftar Sekarang</span>
         </button>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
-        
         <div class="lg:col-span-3 border border-gray-300 bg-white rounded-2xl p-5 flex items-start gap-4 shadow-sm">
             <div class="mt-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
@@ -61,15 +62,14 @@
             </svg>
             <h3 class="font-bold text-black text-lg">Deskripsi Jobdesk</h3>
         </div>
-        
         <div class="text-sm text-black space-y-2 leading-relaxed pl-1">
-            <p class="mb-2">Magang Project Website Penjualan akan berperan dalam proses pembuatan dan pengembangan sistem penjualan berbasis website. Peserta magang akan terlibat dalam:</p>
-            <ul class="list-disc ml-5 space-y-1 marker:text-tsu-teal"> {{-- Ganti marker:text-black ke warna tsu-teal agar lebih profesional --}}
-                <li>Membuat tampilan antarmuka (UI) menggunakan design guideline yang telah disediakan.</li>
+            <p class="mb-2">Magang Project Website Penjualan akan berperan dalam proses pengembangan sistem penjualan berbasis website.</p>
+            <ul class="list-disc ml-5 space-y-1 marker:text-tsu-teal">
+                <li>Membuat tampilan antarmuka (UI) menggunakan design guideline.</li>
                 <li>Melakukan integrasi API antara frontend dan backend.</li>
-                <li>Mengembangkan fitur utama seperti manajemen produk, transaksi penjualan, laporan, dan user management.</li>
+                <li>Mengembangkan fitur utama seperti manajemen produk dan transaksi.</li>
                 <li>Menguji fungsionalitas sistem dan memastikan alur kerja berjalan baik.</li>
-                <li>Mendokumentasikan proses pengembangan dan melakukan perbaikan berdasarkan feedback tim.</li>
+                <li>Mendokumentasikan proses pengembangan.</li>
             </ul>
         </div>
     </div>
@@ -81,15 +81,13 @@
             </svg>
             <h3 class="font-bold text-black text-lg">Kriteria Pendaftar</h3>
         </div>
-        
         <div class="text-sm text-black space-y-2 leading-relaxed pl-1">
             <ul class="list-disc ml-5 space-y-1 marker:text-tsu-teal">
-                <li>Mahasiswa aktif S1/D3 jurusan Informatika, Sistem Informasi, Ilmu Komputer, atau bidang terkait.</li>
+                <li>Mahasiswa aktif S1/D3 jurusan Informatika atau terkait.</li>
                 <li>Memiliki kemampuan dasar HTML, CSS, dan JavaScript.</li>
-                <li>Memahami salah satu framework: Laravel / NodeJS / React / Vue (nilai tambah).</li>
+                <li>Memahami framework Laravel / NodeJS / React (nilai tambah).</li>
                 <li>Mampu bekerja secara mandiri maupun tim.</li>
-                <li>Teliti, komunikatif, dan memiliki minat tinggi dalam pengembangan web.</li>
-                <li>Bersedia mengikuti arahan mentor dan menyelesaikan tugas sesuai timeline.</li>
+                <li>Teliti dan memiliki minat tinggi dalam pengembangan web.</li>
             </ul>
         </div>
     </div>
@@ -101,12 +99,82 @@
             </svg>
             <h3 class="font-bold text-black text-lg">Capaian Pembelajaran</h3>
         </div>
-        
         <div class="text-sm text-black space-y-2 leading-relaxed pl-1">
             <ul class="list-disc ml-5 space-y-1 marker:text-tsu-teal">
-                <li>Setelah mengikuti program magang ini, mahasiswa mampu menerapkan konsep pengembangan web dalam pembuatan aplikasi penjualan, menguasai proses pembuatan fitur CRUD serta integrasi frontend-backend menggunakan REST API, memahami penerapan standar UI/UX pada halaman operasional, menggunakan Git sebagai alat kolaborasi dan manajemen versi, melakukan pengujian aplikasi untuk memastikan kualitas fungsionalitas, serta berkomunikasi efektif dalam tim pengembang untuk menyelesaikan project sesuai kebutuhan.</li>
+                <li>Setelah mengikuti program magang ini, mahasiswa mampu menerapkan konsep pengembangan web dalam pembuatan aplikasi penjualan, menguasai proses pembuatan fitur CRUD serta integrasi frontend–backend menggunakan REST API, memahami penerapan standar UI/UX pada halaman operasional, menggunakan Git sebagai alat kolaborasi dan manajemen versi, melakukan pengujian aplikasi untuk memastikan kualitas fungsionalitas, serta berkomunikasi efektif dalam tim pengembang untuk menyelesaikan project sesuai kebutuhan.</li>
             </ul>
         </div>
     </div>
 
+    <script>
+        let hasDocuments = false; 
+        let isRegistered = false;
+
+        function prosesPendaftaran() {
+            if(isRegistered) {
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Anda Sudah Terdaftar',
+                    text: 'Anda tidak dapat mendaftar ulang pada program ini.',
+                    confirmButtonColor: '#086375'
+                });
+                return;
+            }
+
+            if (!hasDocuments) {
+                Swal.fire({
+                    title: 'Dokumen Belum Lengkap!',
+                    text: 'Silakan upload CV dan Transkrip Nilai di menu Setting terlebih dahulu.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#086375',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ke Pengaturan Sekarang'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ url('/setting') }}";
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Konfirmasi Pendaftaran',
+                    text: "Setelah mendaftar, Anda tidak dapat membatalkan pendaftaran ini. Yakin ingin melanjutkan?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#086375',
+                    cancelButtonColor: '#aaa',
+                    confirmButtonText: 'Ya, Daftar Sekarang',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        simulasiSuksesDaftar();
+                    }
+                });
+            }
+        }
+
+        function simulasiSuksesDaftar() {
+            isRegistered = true;
+            
+            Swal.fire({
+                title: 'Berhasil Terdaftar!',
+                text: 'Lamaran Anda telah terkirim ke tim Program, Anda akan dihubungi lebih lanjut jika lolos.',
+                icon: 'success',
+                confirmButtonColor: '#086375'
+            });
+
+            const btn = document.getElementById('btnDaftar');
+            const icon = document.getElementById('iconDaftar');
+            const text = document.getElementById('textDaftar');
+
+            btn.classList.remove('bg-tsu-teal', 'hover:bg-tsu-teal-dark');
+            btn.classList.add('bg-gray-400', 'cursor-not-allowed');
+            btn.disabled = true;
+            
+            icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />`;
+            icon.classList.remove('rotate-45');
+            
+            text.innerText = 'Sudah Mendaftar';
+        }
+    </script>
 @endsection

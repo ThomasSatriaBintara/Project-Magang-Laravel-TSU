@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        'tsu-teal': '#086375',       // Warna utama tombol & logo
+                        'tsu-teal': '#086375',
                         'tsu-teal-dark': '#064e5c',
                     },
                     fontFamily: {
@@ -40,19 +40,19 @@
         <h1 class="text-2xl font-bold text-black mb-4">Kode OTP</h1>
         
         <p class="text-black text-sm mb-8 leading-relaxed max-w-sm mx-auto">
-            Kami telah mengirimkan kode verifikasi OTP ke alamat email Anda
+            Kami telah mengirimkan kode verifikasi OTP ke alamat email Anda. Silahkan cek pada bagian spam.
         </p>
 
         <form action="{{ route('password.reset') }}" method="GET" class="w-full max-w-md text-left">
             
             <div class="mb-8">
-                <label class="block text-black font-semibold text-sm mb-2 ml-1">Email</label>
-                <input type="email" placeholder="Masukkan Email WAJIB Berdomain @tsu.ac.id" 
+                <label class="block text-black font-semibold text-sm mb-2 ml-1">Kode</label>
+                <input type="email" placeholder="Masukkan Kode OTP" 
                     class="w-full border border-gray-400 px-4 py-3 rounded text-sm placeholder-gray-300 italic placeholder:font-light focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
             </div>
 
             <button type="submit" class="w-full bg-tsu-teal text-white font-bold py-3 rounded-lg hover:bg-tsu-teal-dark transition shadow-md text-base">
-                Kirimkan Kode
+                Verifikasi Kode
             </button>
             
         </form>

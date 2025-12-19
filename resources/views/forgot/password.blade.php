@@ -13,7 +13,7 @@
             theme: {
                 extend: {
                     colors: {
-                        'tsu-teal': '#086375',       // Warna utama tombol & logo
+                        'tsu-teal': '#086375',
                         'tsu-teal-dark': '#064e5c',
                     },
                     fontFamily: {
@@ -40,7 +40,7 @@
         <h1 class="text-2xl font-bold text-black mb-4">Lupa Kata Sandi</h1>
         
         <p class="text-black text-sm mb-8 leading-relaxed max-w-sm mx-auto">
-            Kami akan mengirim kode verifikasi untuk mengatur ulang kata sandi melalui email Anda
+            Kami akan mengirim kode verifikasi untuk mengatur ulang kata sandi melalui email Anda.
         </p>
 
         <form action="{{ route('password.otp') }}" method="GET" class="w-full max-w-md text-left">

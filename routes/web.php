@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 //landing
 Route::get('/', function () {
     return view('pages.landing');
-})->name('landing'); // Tambahkan nama untuk landing page
+})->name('landing');
 
 //auth
 Route::get('/register', function () {
@@ -43,9 +43,14 @@ Route::get('/logbook', function () {
 })->name('logbook');
 
 Route::get('/penilaian', function () {
-    return view('pages.penilaian'); 
+    return view('pages/penilaian.penilaian'); 
 })->name('penilaian');
 
 Route::get('/pembimbing', function () {
-    return view('pages.pembimbing');
+    return view('pages/pembimbing.pembimbing');
 })->name('pembimbing');
+
+//setting
+Route::get('/setting', function () {
+    return view('/pages.setting');
+})->name('setting');

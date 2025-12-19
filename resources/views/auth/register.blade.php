@@ -13,11 +13,11 @@
             theme: {
                 extend: {
                     colors: {
-                        'tsu-teal': '#086375',      // Warna utama (Button & Active Tab)
+                        'tsu-teal': '#086375',
                         'tsu-teal-dark': '#064e5c',
-                        'tsu-bg-right': '#4EA7B2',  // Warna background kanan (estimasi)
-                        'tsu-blue-link': '#2563eb', // Warna link login
-                        'tsu-border': '#393939' // Untuk border tab (estimasi warna hitam/abu tua)
+                        'tsu-bg-right': '#4EA7B2',
+                        'tsu-blue-link': '#2563eb',
+                        'tsu-border': '#393939'
                     },
                     fontFamily: {
                         'sans': ['Poppins', 'sans-serif'],
@@ -53,7 +53,7 @@
                 </button>
             </div>
 
-            <form action="#" method="POST" class="space-y-4 w-full max-w-md">
+            <form action="#" method="GET" class="space-y-4 w-full max-w-md">
                 
                 <div>
                     <label class="block text-black font-medium text-sm mb-1">Nama Lengkap</label>
@@ -150,7 +150,6 @@
                 }
             }
 
-            // Event Listeners
             tabMahasiswa.addEventListener('click', function() {
                 setActiveTab('mahasiswa');
             });
@@ -159,8 +158,35 @@
                 setActiveTab('dosen');
             });
 
-            // Set default tab saat halaman dimuat
             setActiveTab('mahasiswa'); 
+        });
+
+        function handleRegister(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Registrasi Berhasil!',
+                text: 'Selamat, akun Anda telah terdaftar di sistem TSU.',
+                icon: 'success',
+                confirmButtonColor: '#086375',
+                confirmButtonText: 'Masuk Sekarang'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ url('/login') }}";
+                }
+            });
+        }
+
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.replace('bg-tsu-teal', 'bg-white'));
+                tabs.forEach(t => t.classList.replace('text-white', 'text-black'));
+                tab.classList.replace('bg-white', 'bg-tsu-teal');
+                tab.classList.replace('text-black', 'text-white');
+                
+                document.getElementById('field-nim').classList.toggle('hidden', tab.id === 'tab-dosen');
+                document.getElementById('field-nuptk').classList.toggle('hidden', tab.id === 'tab-mahasiswa');
+            });
         });
     </script>
 </body>

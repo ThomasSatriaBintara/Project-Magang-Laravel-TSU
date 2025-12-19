@@ -13,9 +13,9 @@
             theme: {
                 extend: {
                     colors: {
-                        'tsu-teal': '#086375',       // Warna utama tombol & logo
+                        'tsu-teal': '#086375',
                         'tsu-teal-dark': '#064e5c',
-                        'tsu-blue-link': '#2563eb',  // Warna link lupa password
+                        'tsu-blue-link': '#2563eb',
                     },
                     fontFamily: {
                         'sans': ['Poppins', 'sans-serif'],

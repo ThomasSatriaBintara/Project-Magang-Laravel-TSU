@@ -30,9 +30,9 @@
         .full-page-gradient {
             background: linear-gradient(
                 to top right, 
-                #09697E 0%, /* Pojok Kanan Atas */
+                #09697E 0%,
                 #84B4BE 50%, 
-                #FFFFFF 100% /* Pojok Bawah Kiri */
+                #FFFFFF 100%
             );
         }
     </style>
