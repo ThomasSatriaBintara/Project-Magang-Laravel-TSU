@@ -15,7 +15,6 @@
         <h3 class="text-xl font-bold mb-6">Lowongan Terbaru - 2026</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> 
-            {{-- Tips: Pindahkan data ini ke Controller nanti jika sempat --}}
             @php
                 $jobs = [
                     ['title' => 'Project Website Penjualan', 'company' => 'PT. Tiga Serangkai', 'role' => 'Frontend Developer', 'id' => 1],

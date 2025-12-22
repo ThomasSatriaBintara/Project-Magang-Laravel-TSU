@@ -22,7 +22,7 @@
                     Cari
                 </button>
             </div>
-            {{-- Tambahkan ID openModal di sini --}}
+
             <button id="openModal" class="bg-tsu-blue text-white text-sm font-semibold py-2 px-4 rounded-full shadow-md hover:bg-blue-700 transition flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
@@ -31,10 +31,8 @@
             </button>
         </div>
 
-        {{-- Ganti bagian div overflow-x-auto kamu dengan ini --}}
         <div class="relative">
             
-
             <div id="emptyState" class="flex flex-col items-center justify-center py-20 px-4">
                 <h3 class="text-lg font-bold text-gray-700 text-center">Kelihatannya Kamu Belum Mempunyai Logbook</h3>
                 <p class="text-gray-500 text-sm text-center">
@@ -64,7 +62,6 @@
             </div>
         </div>
 
-        {{-- Tambahkan teks peringatan di dalam Modal (sebelum tombol Simpan) --}}
         <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-4">
             <div class="flex">
                 <div class="flex-shrink-0">
@@ -82,7 +79,7 @@
 
     <div id="logbookModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300">
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-0 overflow-hidden transform transition-all scale-95 duration-300" id="logbookModalContent">
-            {{-- Header Modal --}}
+            
             <div class="bg-tsu-teal p-4 text-white flex justify-between items-center">
                 <h3 class="text-lg font-bold">Tambah Logbook Baru</h3>
                 <button id="closeModal" class="text-white hover:text-gray-200">
@@ -102,7 +99,6 @@
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Jenis Logbook</label>
                 <select id="inputJenis" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition">
-                    <option value="Harian">Harian</option>
                     <option value="Mingguan">Mingguan</option>
                     <option value="Bulanan">Bulanan</option>
                 </select>
@@ -140,7 +136,6 @@
         const emptyState = document.getElementById('emptyState');
         const tableContainer = document.getElementById('tableContainer');
 
-        // Element Filter
         const filterDateInput = document.getElementById('filterDate');
         const filterBtn = document.getElementById('filterBtn');
 

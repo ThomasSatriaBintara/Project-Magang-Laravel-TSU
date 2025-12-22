@@ -25,7 +25,6 @@
         }
     </script>
     
-    {{-- DEFINISI STYLE GRADASI FULL PAGE DITEMPATKAN DI SINI --}}
     <style>
         .full-page-gradient {
             background: linear-gradient(

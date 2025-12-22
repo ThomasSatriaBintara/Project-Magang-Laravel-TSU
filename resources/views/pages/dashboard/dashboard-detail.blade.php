@@ -122,20 +122,7 @@
             }
 
             if (!hasDocuments) {
-                Swal.fire({
-                    title: 'Dokumen Belum Lengkap!',
-                    text: 'Silakan upload CV dan Transkrip Nilai di menu Setting terlebih dahulu.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#086375',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ke Pengaturan Sekarang'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "{{ url('/setting') }}";
-                    }
-                });
-            } else {
+                
                 Swal.fire({
                     title: 'Konfirmasi Pendaftaran',
                     text: "Setelah mendaftar, Anda tidak dapat membatalkan pendaftaran ini. Yakin ingin melanjutkan?",

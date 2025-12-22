@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -26,6 +28,13 @@
             }
         }
     </script>
+    <style>
+        input[type="radio"] {
+            accent-color: #086375;
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-[#4c9ca8] to-[#2c6e7a] font-sans min-h-screen flex items-center justify-center p-0 m-0 overflow-hidden">
 
@@ -53,7 +62,7 @@
                 </button>
             </div>
 
-            <form action="#" method="GET" class="space-y-4 w-full max-w-md">
+            <form id="formRegister" onsubmit="handleRegister(event)" class="space-y-4 w-full max-w-md">
                 
                 <div>
                     <label class="block text-black font-medium text-sm mb-1">Nama Lengkap</label>
@@ -63,13 +72,13 @@
 
                 <div id="field-nim">
                     <label class="block text-black font-medium text-sm mb-1">NIM</label>
-                    <input type="text" placeholder="Masukkan NIM" 
+                    <input type="text" placeholder="Masukkan NIM Mahasiswa" 
                         class="w-full border border-gray-400 px-4 py-2.5 rounded text-sm placeholder-gray-400 focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
                 </div>
 
                 <div id="field-nuptk" class="hidden">
                     <label class="block text-black font-medium text-sm mb-1">NUPTK</label>
-                    <input type="text" placeholder="Masukkan NUPTK" 
+                    <input type="text" placeholder="Masukkan NUPTK Dosen Pembimbing" 
                         class="w-full border border-gray-400 px-4 py-2.5 rounded text-sm placeholder-gray-400 focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
                 </div>
 
@@ -156,7 +165,7 @@
 
             tabDosen.addEventListener('click', function() {
                 setActiveTab('dosen');
-            });
+            }); 
 
             setActiveTab('mahasiswa'); 
         });
@@ -188,6 +197,7 @@
                 document.getElementById('field-nuptk').classList.toggle('hidden', tab.id === 'tab-mahasiswa');
             });
         });
+
     </script>
 </body>
 </html>

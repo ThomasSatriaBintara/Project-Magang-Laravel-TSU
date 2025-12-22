@@ -5,6 +5,7 @@
 @section('header_title', 'Pengaturan')
 
 @section('content')
+
 <div class="max-w-5xl mx-auto pb-10">
     
     <div class="flex flex-wrap items-center gap-2 mb-8 bg-white p-2 rounded-3xl border border-gray-100 shadow-sm">
@@ -55,7 +56,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">Nama Lengkap</label>
-                        <input type="text" value="Thomas gtg" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-teal focus:border-tsu-teal transition outline-none bg-gray-50/30">
+                        <input type="text" value="Thomas gtg" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
                     <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">NIM</label>
@@ -68,7 +69,8 @@
 
         <div id="tab-security" class="tab-content hidden">
             <h3 class="text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
-            <form action="#" class="space-y-6 max-w-md">
+            <form id="formReset" onsubmit="handleReset(event)" class="w-full max-w-md text-left space-y-5">
+            @csrf
                 <div class="space-y-2">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Saat Ini</label>
                     <input type="password" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
@@ -129,7 +131,7 @@
 
 <style>
     .tab-btn.active {
-        background-color: #0d9488 !important; /* tsu-teal */
+        background-color: #0d9488 !important;
         color: white !important;
         box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.2);
     }
@@ -165,6 +167,19 @@
             reader.onload = (e) => document.getElementById('previewFoto').src = e.target.result;
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function handleReset(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Sandi Berhasil Diubah!',
+            text: 'Silakan masuk kembali dengan kata sandi baru Anda.',
+            icon: 'success',
+            confirmButtonColor: '#086375',
+            confirmButtonText: 'Ke Halaman Login'
+        }).then((result) => {
+            window.location.href = "{{ url('/login') }}";
+        });
     }
 
     function saveDocs() {
