@@ -63,13 +63,13 @@
             <div class="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center">
                 <h3 class="text-gray-600 font-semibold text-lg mb-2">Nilai Program</h3>
                 <span class="text-[100px] font-black text-tsu-blue leading-none tracking-tighter">87</span>
-                <p class="text-gray-400 mt-4 font-medium text-sm">Teguh Susyanto, S.Kom.</p>
+                <p class="text-gray-400 mt-4 font-medium text-sm">Kuriman Tech, S.Kom, M.Kom.</p>
             </div>
 
             <div class="bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center">
                 <h3 class="text-gray-600 font-semibold text-lg mb-2">Nilai Dosen Pembimbing</h3>
                 <span class="text-[100px] font-black text-tsu-teal leading-none tracking-tighter">85</span>
-                <p class="text-gray-400 mt-4 font-medium text-sm">Wawan Laksito, S.Kom.</p>
+                <p class="text-gray-400 mt-4 font-medium text-sm">Wawan Laksito, S.Kom, M.M.</p>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                     sudah berfungsi dengan baik."
                 </p>
                 <div class="mt-6 text-right border-t border-gray-200 pt-4">
-                    <p class="text-tsu-teal font-black text-lg">Wawan Laksito, S.Kom.</p>
+                    <p class="text-tsu-teal font-black text-lg">Wawan Laksito, S.Kom, M.M.</p>
                 </div>
             </div>
         </div>

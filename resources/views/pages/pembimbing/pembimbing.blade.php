@@ -32,7 +32,7 @@
                     </div>
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <span class="text-gray-500 text-sm">WhatsApp</span>
-                        <span class="text-gray-800 font-medium text-sm">+62 812-3456-XXXX</span>
+                        <span class="text-gray-800 font-medium text-sm">+62 812-3456-7890</span>
                     </div>
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <span class="text-gray-500 text-sm">Perusahaan</span>
@@ -65,7 +65,7 @@
                     <img src="https://ui-avatars.com/api/?name=Wawan+Laksito&background=0d9488&color=fff&size=128" alt="Foto Dosen" class="w-full h-full rounded-full object-cover">
                 </div>
                 <span class="bg-teal-50 text-tsu-teal px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-2">Dosen Pembimbing</span>
-                <h3 class="text-xl font-black text-gray-800">Wawan Laksito, S.Kom, M.M</h3>
+                <h3 class="text-xl font-black text-gray-800">Wawan Laksito, S.Kom, M.M.</h3>
                 <p class="text-gray-500 text-sm mb-6">NIDN: 062105XXXXX</p>
                 
                 <div class="w-full space-y-3">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <span class="text-gray-500 text-sm">WhatsApp</span>
-                        <span class="text-gray-800 font-medium text-sm">+62 812-3456-XXXX</span>
+                        <span class="text-gray-800 font-medium text-sm">+62 812-3456-7890</span>
                     </div>
                     <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
                         <span class="text-gray-500 text-sm">Instansi</span>

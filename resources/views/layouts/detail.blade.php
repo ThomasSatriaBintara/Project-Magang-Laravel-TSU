@@ -37,7 +37,7 @@
             
             <div class="flex items-center gap-8">
                 <a href="{{ url('/program') }}" class="transition hover:opacity-80">
-                    <img src="/images/logo_tsu_white.svg" class="h-8" alt="Logo TSU">
+                    <img src="/images/logo_tsu_white.svg" class="h-12" alt="Logo TSU">
                 </a>
                 <div class="h-8 w-[1.5px] bg-white/30 hidden md:block"></div>
                 <h1 class="text-xl font-bold tracking-wide hidden md:block">@yield('header_title', 'Detail Magang')</h1>

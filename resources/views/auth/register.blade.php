@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="flex w-full mb-6 border border-tsu-border rounded-full p-[1px] max-w-md">
+            <div class="flex w-full mb-6 border border-tsu-border rounded-full p-[0px] max-w-md">
                 <button id="tab-mahasiswa" 
                     class="tab-btn w-1/2 py-2 rounded-l-full bg-tsu-teal text-white font-semibold text-center text-sm sm:text-base transition">
                     Mahasiswa

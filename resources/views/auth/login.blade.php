@@ -58,8 +58,6 @@
 
             <form action="{{ route('dashboard') }}" method="GET" class="space-y-5 w-full max-w-md">
                 
-                {{-- Ubah method dari POST menjadi GET, dan action mengarah ke rute program --}}
-                
                 <div>
                     <label class="block text-black font-medium text-sm mb-2">Email</label>
                     <input type="email" placeholder="Masukkan Email WAJIB Berdomain @tsu.ac.id" 

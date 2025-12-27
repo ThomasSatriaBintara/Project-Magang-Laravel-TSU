@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="max-w-5xl mx-auto pb-10">
+<div class="max-w-6xl mx-auto pb-10">
     
     <div class="flex flex-wrap items-center gap-2 mb-8 bg-white p-2 rounded-3xl border border-gray-100 shadow-sm">
         <button onclick="switchTab('profile')" id="btn-profile" class="tab-btn active flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all">
@@ -45,7 +45,7 @@
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
                         </label>
-                        <input type="file" id="foto" class="hidden" accept="image/*" onchange="previewImage(this)">
+                        <input type="file" id="foto" class="hidden" accept="image/*" onchange="previewImageProfile(this)">
                     </div>
                     <div>
                         <h4 class="font-bold text-gray-700 text-lg">Foto Profil</h4>
@@ -70,14 +70,35 @@
         <div id="tab-security" class="tab-content hidden">
             <h3 class="text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
             <form id="formReset" onsubmit="handleReset(event)" class="w-full max-w-md text-left space-y-5">
-            @csrf
-                <div class="space-y-2">
-                    <label class="text-sm font-bold text-gray-600">Kata Sandi Saat Ini</label>
-                    <input type="password" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
+                @csrf
+                <div class="space-y-2 relative">
+                    <label class="text-sm font-bold text-gray-600">Kata Sandi Lama</label>
+                    <div class="relative">
+                        <input type="password" id="pass_lama" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
+                        <button type="button" onclick="togglePass('pass_lama')" class="absolute right-4 top-4 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="space-y-2">
+
+                <div class="space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Baru</label>
-                    <input type="password" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Minimal 8 karakter">
+                    <div class="relative">
+                        <input type="password" id="pass_baru" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
+                        <button type="button" onclick="togglePass('pass_baru')" class="absolute right-4 top-4 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-2 relative">
+                    <label class="text-sm font-bold text-gray-600">Konfirmasi Kata Sandi Baru</label>
+                    <div class="relative">
+                        <input type="password" id="pass_konfirmasi" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
+                        <button type="button" onclick="togglePass('pass_konfirmasi')" class="absolute right-4 top-4 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="bg-tsu-blue text-white px-10 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition">Perbarui Kata Sandi</button>
             </form>
@@ -87,37 +108,68 @@
             <h3 class="text-2xl font-black text-gray-800 mb-2">Dokumen Pendukung</h3>
             <p class="text-gray-500 mb-10 italic">Lengkapi dokumen di bawah ini agar tombol "Daftar Magang" dapat diakses.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="bg-red-50 text-red-500 p-4 rounded-2xl group-hover:bg-red-500 group-hover:text-white transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                            </svg>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-red-50 text-red-500 p-4 rounded-2xl group-hover:bg-red-500 group-hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">File CV</h4>
+                                <p id="cv-status" class="text-xs text-red-500 font-bold">Belum Ada File</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">File CV</h4>
-                            <p id="cv-status" class="text-xs text-red-500 font-bold">Belum Ada File</p>
+                        <div id="preview-container-cv" class="hidden mb-3">
+                            <button type="button" onclick="previewPDF('cv_file')" class="text-xs text-tsu-teal underline font-bold">👁 Pratinjau CV</button>
                         </div>
                     </div>
-                    <label for="cv_file" class="block w-full text-center bg-gray-100 text-gray-600 py-3 rounded-xl font-bold cursor-pointer hover:bg-gray-200">Pilih PDF</label>
-                    <input type="file" id="cv_file" class="hidden" accept=".pdf" onchange="updateFileStatus('cv-status', this)">
+                    <div>
+                        <label for="cv_file" class="block w-full text-center bg-gray-100 text-gray-600 py-3 rounded-xl font-bold cursor-pointer hover:bg-gray-200">Pilih PDF</label>
+                        <input type="file" id="cv_file" class="hidden" accept=".pdf" onchange="updateFileStatus('cv-status', this)">
+                    </div>
                 </div>
 
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="bg-blue-50 text-blue-500 p-4 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-blue-50 text-blue-500 p-4 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Transkrip Nilai</h4>
+                                <p id="transkrip-status" class="text-xs text-red-500 font-bold">Belum Ada File</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-800">Transkrip Nilai</h4>
-                            <p id="transkrip-status" class="text-xs text-red-500 font-bold">Belum Ada File</p>
+                        <div id="preview-container-transkrip" class="hidden mb-3">
+                            <button type="button" onclick="previewPDF('transkrip_file')" class="text-xs text-tsu-teal underline font-bold">👁 Pratinjau Transkrip</button>
                         </div>
                     </div>
-                    <label for="transkrip_file" class="block w-full text-center bg-gray-100 text-gray-600 py-3 rounded-xl font-bold cursor-pointer hover:bg-gray-200">Pilih PDF</label>
-                    <input type="file" id="transkrip_file" class="hidden" accept=".pdf" onchange="updateFileStatus('transkrip-status', this)">
+                    <div>
+                        <label for="transkrip_file" class="block w-full text-center bg-gray-100 text-gray-600 py-3 rounded-xl font-bold cursor-pointer hover:bg-gray-200">Pilih PDF</label>
+                        <input type="file" id="transkrip_file" class="hidden" accept=".pdf" onchange="updateFileStatus('transkrip-status', this)">
+                    </div>
+                </div>
+
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-orange-50 text-orange-500 p-4 rounded-2xl group-hover:bg-orange-500 group-hover:text-white transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" /></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">KRS Terbaru</h4>
+                                <p id="krs-status" class="text-xs text-red-500 font-bold">Belum Ada File</p>
+                            </div>
+                        </div>
+                        <div id="preview-container-krs" class="hidden mb-3">
+                            <button type="button" onclick="previewPDF('krs_file')" class="text-xs text-tsu-teal underline font-bold">👁 Pratinjau KRS</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="krs_file" class="block w-full text-center bg-gray-100 text-gray-600 py-3 rounded-xl font-bold cursor-pointer hover:bg-gray-200 transition">Pilih PDF</label>
+                        <input type="file" id="krs_file" class="hidden" accept=".pdf" onchange="updateFileStatus('krs-status', this)">
+                    </div>
                 </div>
             </div>
 
@@ -152,16 +204,37 @@
         activeBtn.classList.remove('text-gray-500', 'hover:bg-gray-50');
     }
 
+    function togglePass(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
     function updateFileStatus(id, input) {
         if (input.files.length > 0) {
             const el = document.getElementById(id);
-            el.innerText = input.files[0].name;
+            const fileName = input.files[0].name;
+            el.innerText = fileName.length > 15 ? fileName.substring(0, 15) + "..." : fileName;
             el.classList.remove('text-red-500');
             el.classList.add('text-tsu-teal');
+
+            const prefix = id.split('-')[0];
+            const containerId = 'preview-container-' + prefix;
+            const container = document.getElementById(containerId);
+            if(container) container.classList.remove('hidden');
         }
     }
 
-    function previewImage(input) {
+    function previewPDF(inputId) {
+        const fileInput = document.getElementById(inputId);
+        if (fileInput && fileInput.files[0]) {
+            const fileURL = URL.createObjectURL(fileInput.files[0]);
+            window.open(fileURL, '_blank');
+        } else {
+            alert('Pilih file terlebih dahulu');
+        }
+    }
+
+    function previewImageProfile(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = (e) => document.getElementById('previewFoto').src = e.target.result;
@@ -178,28 +251,23 @@
             confirmButtonColor: '#086375',
             confirmButtonText: 'Ke Halaman Login'
         }).then((result) => {
-            window.location.href = "{{ url('/login') }}";
+            if (result.isConfirmed) window.location.href = "{{ url('/login') }}";
         });
     }
 
     function saveDocs() {
-        const pingIndicator = document.getElementById('docPing');
-        
         const btn = event.target;
-        const originalText = btn.innerText;
         btn.innerText = 'Menyimpan...';
         btn.disabled = true;
 
         setTimeout(() => {
-            if (pingIndicator) {
-                pingIndicator.classList.add('hidden');
-            }
+            const pingIndicator = document.getElementById('docPing');
+            if (pingIndicator) pingIndicator.classList.add('hidden');
             
             btn.innerText = 'Dokumen Tersimpan!';
-            btn.classList.remove('bg-tsu-teal');
-            btn.classList.add('bg-green-500');
+            btn.classList.replace('bg-tsu-teal', 'bg-green-500');
             
-            alert('Dokumen berhasil disimpan. Sekarang Anda sudah bisa mendaftar magang!');
+            Swal.fire('Berhasil', 'Dokumen disimpan. Anda sekarang bisa mendaftar magang!', 'success');
         }, 1500);
     }
 </script>
