@@ -7,14 +7,14 @@
 @section('content')
 <div class="max-w-6xl mx-auto pb-10">
     
-    <div class="mb-8 px-2">
+    <div class="fade-up mb-8 px-2">
         <h2 class="text-2xl font-bold text-gray-800">Pembimbing Magang Anda</h2>
         <p class="text-gray-500 mt-1">Gunakan informasi di bawah ini untuk berkonsultasi mengenai kegiatan magang atau laporan akhir.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
         
-        <div class="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
+        <div class="fade-up delay-100 bg-white border border-gray-200 rounded-[2rem] p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
             <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-10 -mt-10 group-hover:bg-blue-100 transition-colors"></div>
 
             <div class="flex flex-col items-center text-center relative z-10">
@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
+        <div class="fade-up delay-200 g-white border border-gray-200 rounded-[2rem] p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden group">
             <div class="absolute top-0 right-0 w-32 h-32 bg-teal-50 rounded-bl-full -mr-10 -mt-10 group-hover:bg-teal-100 transition-colors"></div>
             
             <div class="flex flex-col items-center text-center relative z-10">
@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <div class="bg-tsu-teal/5 border border-tsu-teal/10 rounded-3xl p-8">
+    <div class="fade-up delay-300 bg-tsu-teal/5 border border-tsu-teal/10 rounded-3xl p-8">
         <div class="flex flex-col md:flex-row items-center gap-6">
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-tsu-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">

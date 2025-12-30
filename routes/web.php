@@ -34,9 +34,13 @@ Route::get('/dashboard', function () {
     return view('pages/dashboard.dashboard');
 })->name('dashboard');
 
-Route::get('/dashboard/detail/{id}', function ($id) {
-    return view('pages./dashboard.dashboard-detail', compact('id')); 
-})->name('dashboard.detail');
+Route::get('/program', function () {
+    return view('pages/program.program');
+})->name('program');
+
+Route::get('/program/detail/{id}', function ($id) {
+    return view('pages/program.program-detail', compact('id')); 
+})->name('program.detail');
 
 Route::get('/logbook', function () {
     return view('pages/logbook.logbook');

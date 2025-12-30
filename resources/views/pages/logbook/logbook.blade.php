@@ -6,24 +6,24 @@
 
 @section('content')
 
-    <div class="bg-tsu-teal text-white rounded-xl p-6 mb-8 shadow-md">
+    <div class=" fade-up bg-tsu-teal text-white rounded-xl p-6 mb-8 shadow-md">
         <h2 class="text-xl font-bold mb-2">Jangan lupa untuk Mengisi Logbook!</h2>
         <p class="text-sm text-gray-200 font-light">
             Catat semua kegiatan Anda di sini untuk dinilai oleh Pembimbing.
         </p>
     </div>
 
-    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+    <div class="fade-up delay-100 bg-white p-6 rounded-xl shadow-md border border-gray-200">
         
         <div class="flex justify-between items-center mb-6">
-            <div class="flex items-center gap-4">
+            <div class="fade-up delay-100 flex items-center gap-4">
                 <input type="date" id="filterDate" class="border border-gray-300 rounded-md p-2 text-sm focus:ring-tsu-teal focus:border-tsu-teal">
                 <button id="filterBtn" class="bg-tsu-teal text-white text-sm font-semibold py-2 px-4 rounded-md hover:bg-tsu-teal-dark transition">
                     Cari
                 </button>
             </div>
 
-            <button id="openModal" class="bg-tsu-blue text-white text-sm font-semibold py-2 px-4 rounded-full shadow-md hover:bg-blue-700 transition flex items-center gap-2">
+            <button id="openModal" class="fade-up delay-300 bg-tsu-blue text-white text-sm font-semibold py-2 px-4 rounded-full shadow-md hover:bg-blue-700 transition flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                 </svg>
@@ -33,7 +33,7 @@
 
         <div class="relative">
             
-            <div id="emptyState" class="flex flex-col items-center justify-center py-20 px-4">
+            <div id="emptyState" class="fade-up delay-400 flex flex-col items-center justify-center py-20 px-4">
                 <h3 class="text-lg font-bold text-gray-700 text-center">Kelihatannya Kamu Belum Mempunyai Logbook</h3>
                 <p class="text-gray-500 text-sm text-center">
                     Klik 
@@ -62,14 +62,14 @@
             </div>
         </div>
 
-        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-4">
+        <div class="fade-up delay-00 bg-yellow-50 border-l-4 border-yellow-400 p-3 mt-4">
             <div class="flex">
                 <div class="flex-shrink-0">
                     <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <div class="ml-3">
+                <div class="fade-up delay-500 ml-3">
                     <p class="text-xs text-yellow-700">
                         Peringatan: Logbook yang telah ditambahkan <strong>tidak dapat diubah atau dihapus</strong> kembali.
                     </p>
