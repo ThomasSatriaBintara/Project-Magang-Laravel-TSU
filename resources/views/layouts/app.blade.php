@@ -182,7 +182,6 @@
         logoutModal.classList.remove('flex');
     });
 
-    // Menutup modal jika klik di luar area modal
     logoutModal.addEventListener('click', (e) => {
         if (e.target === logoutModal) {
             logoutModal.classList.add('hidden');
