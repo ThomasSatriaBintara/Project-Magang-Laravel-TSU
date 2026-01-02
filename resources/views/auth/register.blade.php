@@ -22,11 +22,9 @@
         }
     </script>
     <style>
-        /* Animasi Rotasi Panah */
         .rotate-180 { transform: rotate(180deg); }
         .transition-transform { transition: transform 0.3s ease; }
         
-        /* Custom Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: transparent; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #086375; border-radius: 10px; }
@@ -65,7 +63,7 @@
                 
                 <div class="space-y-1.5">
                     <label class="text-xs font-bold text-gray-700 uppercase tracking-wide">Nama Lengkap</label>
-                    <input type="text" id="input-nama" placeholder="Contoh: Thomas Satria" required
+                    <input type="text" id="input-nama" placeholder="Contoh: Gibran Rakabuming" required
                         class="w-full bg-gray-50 border border-gray-200 px-4 py-3 rounded-xl text-sm focus:bg-white focus:border-tsu-teal focus:ring-4 focus:ring-tsu-teal/10 outline-none transition-all">
                 </div>
 
@@ -152,7 +150,6 @@
     </div>
 
     <script>
-        // --- CUSTOM DROPDOWN LOGIC ---
         function toggleDropdown() {
             const menu = document.getElementById('dropdown-menu');
             const arrow = document.getElementById('arrow-icon');
@@ -171,10 +168,9 @@
             document.getElementById('selected-prodi').innerText = val;
             document.getElementById('selected-prodi').classList.replace('text-gray-400', 'text-gray-800');
             document.getElementById('prodi-input').value = val;
-            toggleDropdown(); // Close menu
+            toggleDropdown();
         }
 
-        // Close dropdown when clicking outside
         window.addEventListener('click', function(e) {
             if (!document.getElementById('field-prodi').contains(e.target)) {
                 document.getElementById('dropdown-menu').classList.add('hidden');
@@ -182,7 +178,6 @@
             }
         });
 
-        // --- TAB SWITCHER LOGIC ---
         function switchTab(type) {
             const tabMhs = document.getElementById('tab-mahasiswa');
             const tabDsn = document.getElementById('tab-dosen');
@@ -197,14 +192,14 @@
                 fieldNim.classList.remove('hidden');
                 fieldProdi.classList.remove('hidden');
                 fieldNuptk.classList.add('hidden');
-                inputNama.placeholder = "Contoh: Thomas Satria";
+                inputNama.placeholder = "Contoh: Gibran Rakabuming";
             } else {
                 tabDsn.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 bg-tsu-teal text-white shadow-sm";
                 tabMhs.className = "flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all duration-300 text-gray-500 hover:text-gray-700";
                 fieldNuptk.classList.remove('hidden');
                 fieldNim.classList.add('hidden');
                 fieldProdi.classList.add('hidden');
-                inputNama.placeholder = "Contoh: Dr. Budi Santoso";
+                inputNama.placeholder = "Contoh: Prabowo Subianto";
             }
         }
 
