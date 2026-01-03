@@ -8,20 +8,20 @@
 
 <div class="max-w-6xl mx-auto pb-10">
     
-    <div class="flex flex-wrap items-center gap-2 mb-8 bg-white p-2 rounded-3xl border border-gray-100 shadow-sm">
+    <div class="fade-up flex flex-wrap items-center gap-2 mb-8 bg-white p-2 rounded-3xl border border-gray-100 shadow-sm">
         <button onclick="switchTab('profile')" id="btn-profile" class="tab-btn active flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
             Profil
         </button>
-        <button onclick="switchTab('security')" id="btn-security" class="tab-btn flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all text-gray-500 hover:bg-gray-50">
+        <button onclick="switchTab('security')" id="btn-security" class="fade-up tab-btn flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all text-gray-500 hover:bg-gray-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             Keamanan
         </button>
-        <button onclick="switchTab('documents')" id="btn-documents" class="tab-btn flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all text-gray-500 hover:bg-gray-50 relative">
+        <button onclick="switchTab('documents')" id="btn-documents" class="fade-up tab-btn flex-1 flex items-center justify-center gap-3 px-6 py-4 rounded-2xl font-bold transition-all text-gray-500 hover:bg-gray-50 relative">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
@@ -30,17 +30,17 @@
         </button>
     </div>
 
-    <div class="bg-white border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-sm min-h-[500px]">
+    <div class="fade-up delay-100 bg-white border border-gray-200 rounded-[2.5rem] p-8 md:p-12 shadow-sm min-h-[500px]">
         
         <div id="tab-profile" class="tab-content">
-            <h3 class="text-2xl font-black text-gray-800 mb-8">Informasi Profil</h3>
+            <h3 class="fade-up delay-100 text-2xl font-black text-gray-800 mb-8">Informasi Profil</h3>
             <form action="#" class="space-y-8">
                 <div class="flex flex-col md:flex-row items-center gap-8 pb-8 border-b border-gray-100">
                     <div class="relative">
-                        <div class="w-36 h-36 rounded-full border-4 border-gray-50 overflow-hidden shadow-inner">
+                        <div class="fade-up delay-200 w-36 h-36 rounded-full border-4 border-gray-50 overflow-hidden shadow-inner">
                             <img id="previewFoto" src="https://ui-avatars.com/api/?name=Thomas+gtg&background=0d9488&color=fff&size=128" class="w-full h-full object-cover">
                         </div>
-                        <label for="foto" class="absolute bottom-1 right-1 bg-tsu-blue text-white p-2.5 rounded-full cursor-pointer hover:scale-110 transition shadow-lg">
+                        <label for="foto" class="fade-up delay-200 absolute bottom-1 right-1 bg-tsu-blue text-white p-2.5 rounded-full cursor-pointer hover:scale-110 transition shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
@@ -48,68 +48,68 @@
                         <input type="file" id="foto" class="hidden" accept="image/*" onchange="previewImageProfile(this)">
                     </div>
                     <div>
-                        <h4 class="font-bold text-gray-700 text-lg">Foto Profil</h4>
-                        <p class="text-sm text-gray-400 mt-1 max-w-xs">Gunakan foto formal dengan format JPG atau PNG (Maks. 2MB).</p>
+                        <h4 class="fade-up delay-200 font-bold text-gray-700 text-lg">Foto Profil</h4>
+                        <p class="fade-up delay-200 text-sm text-gray-400 mt-1 max-w-xs">Gunakan foto formal dengan format JPG atau PNG (Maks. 2MB).</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="space-y-2">
+                <div class="fade-up delay-300 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="fade-up delay-300 space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">Nama Lengkap</label>
                         <input type="text" value="Thomas gtg" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
-                    <div class="space-y-2">
+                    <div class="fade-up delay-400 space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">NIM</label>
                         <input type="text" value="22430035" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
                 </div>
-                <button type="submit" class="bg-tsu-teal text-white px-12 py-4 rounded-2xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">Simpan Profil</button>
+                <button type="submit" class="fade-up delay-500 bg-tsu-teal text-white px-12 py-4 rounded-2xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-100">Simpan Profil</button>
             </form>
         </div>
 
         <div id="tab-security" class="tab-content hidden">
-            <h3 class="text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
+            <h3 class="fade-up text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
             <form id="formReset" onsubmit="handleReset(event)" class="w-full max-w-md text-left space-y-5">
                 @csrf
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-100 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Lama</label>
                     <div class="relative">
-                        <input type="password" id="pass_lama" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
-                        <button type="button" onclick="togglePass('pass_lama')" class="absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_lama" class="fade-up delay-200 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
+                        <button type="button" onclick="togglePass('pass_lama')" class="fade-up delay-200 absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-300 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Baru</label>
                     <div class="relative">
-                        <input type="password" id="pass_baru" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
-                        <button type="button" onclick="togglePass('pass_baru')" class="absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_baru" class="fade-up delay-400 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
+                        <button type="button" onclick="togglePass('pass_baru')" class="fade-up delay-400 absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-500 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Konfirmasi Kata Sandi Baru</label>
                     <div class="relative">
-                        <input type="password" id="pass_konfirmasi" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
-                        <button type="button" onclick="togglePass('pass_konfirmasi')" class="absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_konfirmasi" class="fade-up delay-600 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
+                        <button type="button" onclick="togglePass('pass_konfirmasi')" class="fade-up delay-600 absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
                 </div>
-                <button type="submit" class="bg-tsu-blue text-white px-10 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition">Perbarui Kata Sandi</button>
+                <button type="submit" class="fade-up delay-700 bg-tsu-blue text-white px-10 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition">Perbarui Kata Sandi</button>
             </form>
         </div>
 
         <div id="tab-documents" class="tab-content hidden">
-            <h3 class="text-2xl font-black text-gray-800 mb-2">Dokumen Pendukung</h3>
-            <p class="text-gray-500 mb-10 italic">Lengkapi dokumen di bawah ini agar tombol "Daftar Magang" dapat diakses.</p>
+            <h3 class="fade-up text-2xl font-black text-gray-800 mb-2">Dokumen Pendukung</h3>
+            <p class="fade-up delay-100 text-gray-500 mb-10 italic">Lengkapi dokumen di bawah ini agar tombol "Daftar Magang" dapat diakses.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+            <div class="fade-up delay-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="fade-up delay-300 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-red-50 text-red-500 p-4 rounded-2xl group-hover:bg-red-500 group-hover:text-white transition">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="fade-up delay-400 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-blue-50 text-blue-500 p-4 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="fade-up delay-500 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-orange-50 text-orange-500 p-4 rounded-2xl group-hover:bg-orange-500 group-hover:text-white transition">
@@ -173,7 +173,7 @@
                 </div>
             </div>
 
-            <button onclick="saveDocs()" class="w-full mt-10 bg-tsu-teal text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-700 transition shadow-xl shadow-teal-100">
+            <button onclick="saveDocs()" class="fade-up delay-600 w-full mt-10 bg-tsu-teal text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-700 transition shadow-xl shadow-teal-100">
                 Simpan Semua Dokumen
             </button>
         </div>
@@ -270,5 +270,28 @@
             Swal.fire('Berhasil', 'Dokumen disimpan. Anda sekarang bisa mendaftar magang!', 'success');
         }, 1500);
     }
+
+document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#documents') {
+            
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            const docTab = document.getElementById('tab-documents');
+            if (docTab) {
+                docTab.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active-class', 'border-tsu-teal');
+            });
+            
+            const btnDoc = document.querySelector('[data-target="tab-documents"]');
+            if (btnDoc) {
+                btnDoc.classList.add('active-class'); 
+            }
+        }
+    });
 </script>
 @endsection

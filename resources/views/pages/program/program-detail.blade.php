@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @php
-        $deadlineDate = \Carbon\Carbon::parse('2026-01-1'); 
+        $deadlineDate = \Carbon\Carbon::parse('2026-02-1'); 
         $isClosed = now()->greaterThan($deadlineDate);
     @endphp
 
@@ -59,7 +59,6 @@
         @endif
     </div>
 
-    {{-- STATS SECTION --}}
     <div class="fade-up delay-400 grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
         <div class="lg:col-span-3 border border-gray-300 bg-white rounded-2xl p-5 flex items-start gap-4 shadow-sm">
             <div class="mt-1">
@@ -101,7 +100,6 @@
         </div>
     </div>
 
-    {{-- KRITERIA SECTION --}}
     <div class="fade-up delay-600 border border-gray-300 bg-white rounded-2xl p-6 mb-6 shadow-sm">
         <div class="flex items-center gap-3 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="fade-up delay-600 h-6 w-6 text-green-500" viewBox="0 0 20 20" fill="currentColor">
@@ -120,7 +118,6 @@
         </div>
     </div>
 
-    {{-- CAPAIAN SECTION --}}
     <div class="fade-up delay-700 border border-gray-300 bg-white rounded-2xl p-6 mb-8 shadow-sm">
         <div class="flex items-center gap-3 mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="fade-up delay-700 h-6 w-6 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -161,7 +158,7 @@
                     confirmButtonText: 'Ke Pengaturan Sekarang'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "{{ url('/setting') }}";
+                        window.location.href = "{{ url('/setting') }}#documents";
                     }
                 });
             } else {
