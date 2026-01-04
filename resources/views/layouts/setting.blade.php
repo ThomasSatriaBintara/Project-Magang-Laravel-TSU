@@ -54,11 +54,11 @@
                 </div>
 
                 <div class="fade-up delay-300 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="fade-up delay-300 space-y-2">
+                    <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">Nama Lengkap</label>
                         <input type="text" value="Thomas gtg" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
-                    <div class="fade-up delay-400 space-y-2">
+                    <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">NIM</label>
                         <input type="text" value="22430035" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
@@ -71,31 +71,31 @@
             <h3 class="fade-up text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
             <form id="formReset" onsubmit="handleReset(event)" class="w-full max-w-md text-left space-y-5">
                 @csrf
-                <div class="fade-up delay-100 space-y-2 relative">
+                <div class="space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Lama</label>
                     <div class="relative">
-                        <input type="password" id="pass_lama" class="fade-up delay-200 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
-                        <button type="button" onclick="togglePass('pass_lama')" class="fade-up delay-200 absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_lama" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
+                        <button type="button" onclick="togglePass('pass_lama')" class="absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="fade-up delay-300 space-y-2 relative">
+                <div class="space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Baru</label>
                     <div class="relative">
-                        <input type="password" id="pass_baru" class="fade-up delay-400 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
-                        <button type="button" onclick="togglePass('pass_baru')" class="fade-up delay-400 absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_baru" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
+                        <button type="button" onclick="togglePass('pass_baru')" class="absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
                 </div>
 
-                <div class="fade-up delay-500 space-y-2 relative">
+                <div class="space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Konfirmasi Kata Sandi Baru</label>
                     <div class="relative">
-                        <input type="password" id="pass_konfirmasi" class="fade-up delay-600 w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
-                        <button type="button" onclick="togglePass('pass_konfirmasi')" class="fade-up delay-600 absolute right-4 top-4 text-gray-400">
+                        <input type="password" id="pass_konfirmasi" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
+                        <button type="button" onclick="togglePass('pass_konfirmasi')" class="absolute right-4 top-4 text-gray-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                         </button>
                     </div>
@@ -109,7 +109,7 @@
             <p class="fade-up delay-100 text-gray-500 mb-10 italic">Lengkapi dokumen di bawah ini agar tombol "Daftar Magang" dapat diakses.</p>
             
             <div class="fade-up delay-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="fade-up delay-300 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-red-50 text-red-500 p-4 rounded-2xl group-hover:bg-red-500 group-hover:text-white transition">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="fade-up delay-400 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-blue-50 text-blue-500 p-4 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="fade-up delay-500 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-orange-50 text-orange-500 p-4 rounded-2xl group-hover:bg-orange-500 group-hover:text-white transition">
@@ -190,19 +190,33 @@
 </style>
 
 <script>
+    // Fungsi Utama Pindah Tab
     function switchTab(tabName) {
+        // Sembunyikan semua konten
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+        // Munculkan konten yang dipilih
         document.getElementById('tab-' + tabName).classList.remove('hidden');
 
+        // Reset semua tombol ke style pasif
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active', 'text-white');
             btn.classList.add('text-gray-500', 'hover:bg-gray-50');
         });
 
+        // Set tombol yang diklik ke style aktif
         const activeBtn = document.getElementById('btn-' + tabName);
-        activeBtn.classList.add('active');
-        activeBtn.classList.remove('text-gray-500', 'hover:bg-gray-50');
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+            activeBtn.classList.remove('text-gray-500', 'hover:bg-gray-50');
+        }
     }
+
+    // Jalankan otomatis saat halaman dimuat jika ada hash #documents di URL
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash === '#documents') {
+            switchTab('documents');
+        }
+    });
 
     function togglePass(id) {
         const input = document.getElementById(id);
@@ -270,28 +284,5 @@
             Swal.fire('Berhasil', 'Dokumen disimpan. Anda sekarang bisa mendaftar magang!', 'success');
         }, 1500);
     }
-
-document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.hash === '#documents') {
-            
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-            });
-
-            const docTab = document.getElementById('tab-documents');
-            if (docTab) {
-                docTab.classList.remove('hidden');
-            }
-
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active-class', 'border-tsu-teal');
-            });
-            
-            const btnDoc = document.querySelector('[data-target="tab-documents"]');
-            if (btnDoc) {
-                btnDoc.classList.add('active-class'); 
-            }
-        }
-    });
 </script>
 @endsection
