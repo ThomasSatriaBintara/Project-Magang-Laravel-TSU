@@ -190,20 +190,15 @@
 </style>
 
 <script>
-    // Fungsi Utama Pindah Tab
     function switchTab(tabName) {
-        // Sembunyikan semua konten
         document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-        // Munculkan konten yang dipilih
         document.getElementById('tab-' + tabName).classList.remove('hidden');
 
-        // Reset semua tombol ke style pasif
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.classList.remove('active', 'text-white');
             btn.classList.add('text-gray-500', 'hover:bg-gray-50');
         });
 
-        // Set tombol yang diklik ke style aktif
         const activeBtn = document.getElementById('btn-' + tabName);
         if (activeBtn) {
             activeBtn.classList.add('active');
@@ -211,7 +206,6 @@
         }
     }
 
-    // Jalankan otomatis saat halaman dimuat jika ada hash #documents di URL
     document.addEventListener('DOMContentLoaded', function() {
         if (window.location.hash === '#documents') {
             switchTab('documents');

@@ -7,7 +7,7 @@ Route::get('/', function () { return view('layouts.landing'); })->name('landing'
 Route::get('/login', function () { return view('layouts/auth.login'); })->name('login');
 Route::get('/register', function () { return view('layouts/auth.register'); })->name('register');
 
-// Forgot Password Group
+// Forgot Password
 Route::prefix('password')->group(function () {
     Route::get('/', function () { return view('layouts.auth.forgot.password'); })->name('password.request');
     Route::get('/otp', function () { return view('layouts.auth.forgot.password-otp'); })->name('password.otp');

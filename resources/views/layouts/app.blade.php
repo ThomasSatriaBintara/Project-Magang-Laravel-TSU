@@ -66,7 +66,6 @@
         </div>
 
         @php
-            // Logika Deteksi Role & Active State
             $isMahasiswa = request()->is('mahasiswa*');
             $isDosen = request()->is('dosen*');
             $isAdmin = request()->is('admin*');
@@ -74,7 +73,6 @@
             $activeClass = 'bg-[#074755] text-white shadow-md';
             $inactiveClass = 'bg-white text-black hover:bg-gray-100 transition shadow-sm';
 
-            // Menentukan Link Setting Dinamis
             $settingLink = '#';
             if($isMahasiswa) $settingLink = route('mahasiswa.setting');
             elseif($isDosen) $settingLink = route('dosen.setting');
@@ -82,7 +80,6 @@
 
         <nav class="flex-1 px-4 space-y-3 mt-2">
             
-            {{-- MENU KHUSUS MAHASISWA --}}
             @if($isMahasiswa)
                 <a href="{{ route('mahasiswa.dashboard') }}" 
                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.dashboard') ? $activeClass : $inactiveClass }}">
@@ -125,7 +122,6 @@
                 </a>
             @endif
 
-            {{-- MENU KHUSUS DOSEN --}}
             @if($isDosen)
                 <a href="{{ route('dosen.dashboard') }}" 
                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.dashboard') ? $activeClass : $inactiveClass }}">
@@ -169,7 +165,6 @@
                         </div>
                     </button>
                     
-                    {{-- Dropdown Menu --}}
                     <div class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl py-2 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
                         <a href="{{ $settingLink }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-tsu-teal font-medium transition-colors">
                             <span class="mr-3 text-lg">⚙️</span> Pengaturan
@@ -188,7 +183,6 @@
         </div>
     </main>
 
-    {{-- Modal Logout --}}
     <div id="logoutModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-transform duration-300 scale-95">
             <div class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">

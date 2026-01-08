@@ -181,12 +181,10 @@
             confirmButtonText: 'Ya, Validasi!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Kurangi pending, Tambah sukses
                 pendingCount--;
                 successCount++;
                 updateStats();
 
-                // Ganti tampilan tombol jadi status sukses
                 const actionArea = btn.closest('.action-area');
                 actionArea.innerHTML = '<span class="text-green-500 font-bold flex items-center gap-1 text-sm animate-bounce"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg> Berhasil Validasi</span>';
                 
@@ -205,7 +203,7 @@
             confirmButtonText: 'Kirim Revisi'
         }).then((result) => {
             if (result.isConfirmed) {
-                pendingCount--; // Tetap berkurang dari daftar "perlu validasi"
+                pendingCount--;
                 updateStats();
                 const actionArea = btn.closest('.action-area');
                 actionArea.innerHTML = '<span class="text-red-500 font-bold flex items-center gap-1 text-sm">❌ Menunggu Revisi</span>';

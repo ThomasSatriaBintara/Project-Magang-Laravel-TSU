@@ -25,12 +25,10 @@
 </style>
 
 <div class="w-full pb-10">
-    {{-- Form Wrapper untuk Backend --}}
     <form id="formPenilaian" enctype="multipart/form-data">
         @csrf
         <div id="printArea" class="max-w-5xl mx-auto print-container">
             
-            {{-- Card Judul Program --}}
             <div class="fade-up bg-white border border-gray-200 rounded-3xl p-8 mb-6 shadow-sm">
                 <h2 class="text-3xl font-bold text-gray-800">Program Website Penjualan</h2>
                 <p class="text-xl text-gray-500 mt-2">PT. Tiga Serangkai</p>
@@ -41,7 +39,6 @@
                 </div>
             </div>
 
-            {{-- Grid Nilai --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="fade-up delay-100 bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center border-l-8 border-l-tsu-blue">
                     <h3 class="text-gray-600 font-semibold text-lg mb-2">Nilai Program</h3>
@@ -56,7 +53,6 @@
                 </div>
             </div>
 
-            {{-- Komentar Pembimbing --}}
             <div class="fade-up delay-300 mb-10">
                 <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Komentar Pembimbing</h3>
                 <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-inner text-center md:text-left">
@@ -70,7 +66,6 @@
                 </div>
             </div>
 
-            {{-- Tabel Konversi --}}
             <div class="fade-up delay-400 mb-6">
                 <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Konversi Mata Kuliah</h3>
                 <div class="overflow-hidden border border-gray-200 rounded-2xl shadow-sm">
@@ -115,7 +110,6 @@
             </div>
         </div>
 
-        {{-- File Management Display --}}
         <div id="fileDisplayArea" class="max-w-5xl mx-auto mb-10 hidden fade-up">
             <div class="flex items-center justify-between mb-4 px-2">
                 <h3 class="text-xl font-bold text-gray-800">File Terlampir (Sertifikat & Nilai)</h3>
@@ -125,7 +119,6 @@
                 </div>
         </div>
 
-        {{-- Group Tombol Utama --}}
         <div class="fade-up delay-600 max-w-5xl mx-auto flex flex-col md:flex-row gap-4 no-print px-4 md:px-0">
             {{-- Tombol Cetak (Secondary) --}}
             <button type="button" onclick="handlePrint()" class="flex-1 flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-600 px-8 py-4 rounded-2xl font-bold hover:bg-gray-100 transition-all active:scale-95">
@@ -135,7 +128,6 @@
                 Cetak PDF
             </button>
 
-            {{-- Tombol Pilih File --}}
             <input type="file" id="fileSertifikat" name="files[]" class="hidden" accept=".pdf" multiple onchange="handleFileSelect(this)">
             <button type="button" id="mainUploadBtn" onclick="document.getElementById('fileSertifikat').click()" class="flex-1 flex items-center justify-center gap-3 border-2 border-tsu-teal text-tsu-teal px-8 py-4 rounded-2xl font-bold hover:bg-teal-50 transition-all active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +136,6 @@
                 <span id="uploadBtnText">Upload File Magang</span>
             </button>
             
-            {{-- TOMBOL FINAL: SIMPAN KE SISTEM --}}
             <button type="button" onclick="submitFinal()" class="flex-[1.5] flex items-center justify-center gap-3 bg-tsu-teal text-white px-8 py-4 rounded-2xl font-bold hover:bg-teal-800 transition-all shadow-xl active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -164,7 +155,6 @@
         document.getElementById('totalSKS').innerText = total;
     }
 
-    // Fungsi Pilih File
     function handleFileSelect(input) {
         const files = input.files;
         const container = document.getElementById('fileListContainer');
@@ -201,18 +191,15 @@
         btnText.innerText = "Ganti File";
     }
 
-    // Fungsi Reset
     function resetFiles() {
         document.getElementById('fileSertifikat').value = '';
         document.getElementById('fileDisplayArea').classList.add('hidden');
         document.getElementById('uploadBtnText').innerText = "Upload File Magang";
     }
 
-    // FUNGSI SUBMIT KE BACKEND
     function submitFinal() {
         const fileInput = document.getElementById('fileSertifikat');
         
-        // Validasi Minimal 1 file
         if (fileInput.files.length === 0) {
             Swal.fire('File Kosong', 'Harap upload sertifikat magang terlebih dahulu.', 'warning');
             return;
@@ -228,19 +215,14 @@
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Tampilkan loading
                 Swal.fire({
                     title: 'Sedang Mengirim...',
                     allowOutsideClick: false,
                     didOpen: () => { Swal.showLoading(); }
                 });
 
-                // Simulasi pengiriman form menggunakan FormData (untuk dihubungkan ke backend)
                 const formData = new FormData(document.getElementById('formPenilaian'));
                 
-                // Di sini nanti AJAX / Axios kamu:
-                // axios.post('/api/penilaian', formData)...
-
                 setTimeout(() => {
                     Swal.fire({
                         title: 'Berhasil Terkirim!',

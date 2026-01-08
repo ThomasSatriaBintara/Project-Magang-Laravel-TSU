@@ -51,19 +51,18 @@
         .delay-500 { animation-delay: 0.5s; }
         .delay-600 { animation-delay: 0.6s; }
         .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-900 { animation-delay: 0.9s; }
     </style>
 </head>
 <body class="bg-[#F8F9FA] font-sans text-gray-800 min-h-screen">
 
     @php
-        // Deteksi Role untuk Link Dinamis
         $isMahasiswa = request()->is('mahasiswa*');
         $isDosen = request()->is('dosen*');
 
-        // Link Kembali ke Dashboard/Program sesuai role
         $backLink = $isMahasiswa ? route('mahasiswa.program') : ($isDosen ? route('dosen.dashboard') : url('/'));
         
-        // Link Setting sesuai role
         $settingLink = '#';
         if($isMahasiswa) $settingLink = route('mahasiswa.setting');
         elseif($isDosen) $settingLink = route('dosen.setting');
@@ -73,7 +72,6 @@
         <div class="container mx-auto px-6 py-3 flex justify-between items-center max-w-6xl">
             
             <div class="flex items-center gap-8">
-                {{-- Link logo kembali ke rute yang benar --}}
                 <a href="{{ $backLink }}" class="transition hover:opacity-80">
                     <img src="{{ asset('images/logo_tsu_white.svg') }}" class="h-12" alt="Logo TSU">
                 </a>
@@ -82,7 +80,6 @@
             </div>
 
             <div class="relative group">
-                {{-- Menggunakan Hover daripada Click Toggle agar lebih konsisten dengan App Sidebar --}}
                 <button class="flex items-center gap-3 hover:bg-white/10 p-2 rounded-xl transition">
                     <img src="{{ asset('images/ic_profile.png') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-white/50 shadow-sm">
                     <div class="text-left hidden sm:block leading-tight">
@@ -94,7 +91,6 @@
                     </div>
                 </button>
 
-                {{-- Dropdown Menu (Muncul saat hover group) --}}
                 <div class="absolute right-0 mt-0 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-[100]">
                     <a href="{{ $settingLink }}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +100,6 @@
                         Pengaturan
                     </a>
                     <hr class="my-1 border-gray-100">
-                    {{-- Tombol Logout memicu Modal --}}
                     <button id="logoutBtnHeader" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition font-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -120,7 +115,6 @@
         @yield('content')
     </main>
 
-    {{-- Modal Logout (Sama dengan app.blade agar seragam) --}}
     <div id="logoutModalHeader" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-transform duration-300 scale-95">
             <div class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -139,7 +133,6 @@
     </div>
 
     <script>
-        // Logic Modal Logout
         const logoutModal = document.getElementById('logoutModalHeader');
         const logoutBtn = document.getElementById('logoutBtnHeader');
         const cancelBtn = document.getElementById('cancelLogoutHeader');
@@ -154,7 +147,6 @@
             logoutModal.classList.remove('flex');
         });
 
-        // Menutup modal jika klik di luar area modal
         window.addEventListener('click', (e) => {
             if (e.target === logoutModal) {
                 logoutModal.classList.add('hidden');
