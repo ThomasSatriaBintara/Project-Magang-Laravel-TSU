@@ -69,7 +69,7 @@
                 <p class="text-gray-600 text-sm leading-relaxed mb-4">
                     Pendaftaran untuk Program Magang Mandiri batch Januari 2025 kini telah dibuka. Mahasiswa diharapkan segera melengkapi dokumen persyaratan di menu Setting.
                 </p>
-                <a href="{{ route('program') }}" class="inline-block bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-tsu-blue hover:text-white transition">Lihat Daftar Program</a>
+                <a href="{{ route('mahasiswa.program') }}" class="inline-block bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-tsu-blue hover:text-white transition">Lihat Daftar Program</a>
             </div>
 
             <div class="fade-up delay-400 bg-white border-l-8 border-tsu-orange rounded-3xl p-6 shadow-sm hover:shadow-md transition">

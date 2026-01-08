@@ -97,7 +97,7 @@
                         <span class="inline-block bg-teal-50 text-tsu-teal font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg mb-6 border border-teal-100" x-text="job.role"></span>
                     </div>
                     
-                    <a :href="`/program/detail/${job.id}`" class="flex items-center justify-center gap-2 w-full bg-tsu-teal text-white text-sm font-bold py-3 rounded-xl hover:bg-tsu-teal-dark transition-all active:scale-95 shadow-md shadow-teal-100">
+                    <a :href="`{{ url('mahasiswa/program/detail') }}/${job.id}`" class="flex items-center justify-center gap-2 w-full bg-tsu-teal text-white text-sm font-bold py-3 rounded-xl hover:bg-tsu-teal-dark transition-all active:scale-95 shadow-md shadow-teal-100">
                         Lihat Detail Program
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -157,9 +157,9 @@
             <h2 class="text-2xl font-black mb-2">Bangun Karir Lewat Magang Sesuai Skill Kamu!</h2>
             <p class="text-sm text-teal-50/80 font-light max-w-xl">Bergabunglah dengan ribuan mahasiswa lainnya dan dapatkan pengalaman kerja nyata di perusahaan impian.</p>
         </div>
-        <a href="#about" button class="bg-white text-tsu-teal px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl active:scale-95 whitespace-nowrap">
+        <a href="#about" class="bg-white text-tsu-teal px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition shadow-xl active:scale-95 whitespace-nowrap">
             Daftar Sekarang
-        </button>
+        </a>
     </div>
 
 @endsection

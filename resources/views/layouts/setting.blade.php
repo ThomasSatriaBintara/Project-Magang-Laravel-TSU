@@ -38,7 +38,7 @@
                 <div class="flex flex-col md:flex-row items-center gap-8 pb-8 border-b border-gray-100">
                     <div class="relative">
                         <div class="fade-up delay-200 w-36 h-36 rounded-full border-4 border-gray-50 overflow-hidden shadow-inner">
-                            <img id="previewFoto" src="https://ui-avatars.com/api/?name=Thomas+gtg&background=0d9488&color=fff&size=128" class="w-full h-full object-cover">
+                            <img id="previewFoto" src="{{ asset('images/ic_profile.png') }}" class="w-full h-full object-cover">
                         </div>
                         <label for="foto" class="fade-up delay-200 absolute bottom-1 right-1 bg-tsu-blue text-white p-2.5 rounded-full cursor-pointer hover:scale-110 transition shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -56,7 +56,7 @@
                 <div class="fade-up delay-300 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">Nama Lengkap</label>
-                        <input type="text" value="Thomas gtg" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
+                        <input type="text" value="Thomas Satria Bintara" disabled class="w-full px-5 py-4 rounded-2xl border border-gray-100 bg-gray-50 text-gray-400 cursor-not-allowed">
                     </div>
                     <div class="space-y-2">
                         <label class="text-sm font-bold text-gray-600 ml-1">NIM</label>

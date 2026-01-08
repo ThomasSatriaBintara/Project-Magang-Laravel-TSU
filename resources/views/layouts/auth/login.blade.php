@@ -56,17 +56,17 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
             </p>
 
-            <form action="{{ route('dashboard') }}" method="GET" class="space-y-5 w-full max-w-md">
+            <form action="{{ route('mahasiswa.dashboard') }}" method="GET" class="space-y-5 w-full max-w-md">
                 
                 <div>
                     <label class="block text-black font-medium text-sm mb-2">Email</label>
-                    <input type="email" placeholder="Masukkan Email WAJIB Berdomain @tsu.ac.id" 
+                    <input type="email" id="email" placeholder="Masukkan Email WAJIB Berdomain @tsu.ac.id" required
                         class="w-full border border-gray-400 px-4 py-3 rounded text-sm placeholder-gray-400 italic placeholder:font-light focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
                 </div>
 
                 <div>
                     <label class="block text-black font-medium text-sm mb-2">Password</label>
-                    <input type="password" placeholder="Masukkan Password" 
+                    <input type="password" id="password" placeholder="Masukkan Password" required
                         class="w-full border border-gray-400 px-4 py-3 rounded text-sm placeholder-gray-400 italic placeholder:font-light focus:outline-none focus:border-tsu-teal focus:ring-1 focus:ring-tsu-teal transition">
                 </div>
 
@@ -74,9 +74,36 @@
                     <a href="{{ route('password.request') }}" class="text-tsu-blue-link text-sm hover:underline font-medium decoration-tsu-blue-link">Lupa Kata Sandi?</a>
                 </div>
 
-                <button type="submit" class="w-full bg-tsu-teal text-white font-bold py-3 rounded-lg hover:bg-tsu-teal-dark transition shadow-lg mt-4 text-base">
+                <button type="button" onclick="handleLogin()" class="w-full bg-tsu-teal text-white font-bold py-3 rounded-lg hover:bg-tsu-teal-dark transition shadow-lg mt-4 text-base">
                     Masuk
                 </button>
+
+                <script>
+                    function handleLogin() {
+                    const emailField = document.getElementById('email');
+                    const passField = document.getElementById('password');
+
+                    if (!emailField || !passField) {
+                        console.error("Input ID tidak ditemukan!");
+                        return;
+                    }
+
+                    const email = emailField.value;
+                    const pass = passField.value;
+
+                    if (pass === "thomas123") {
+                        if (email === "mahasiswa@tsu.ac.id") {
+                            window.location.href = "/mahasiswa/dashboard";
+                        } else if (email === "dosen@tsu.ac.id") {
+                            window.location.href = "/dosen/logbook";
+                        } else if (email === "admin@tsu.ac.id") {
+                            window.location.href = "/admin/dashboard";
+                        } else {
+                            alert("Email tidak terdaftar untuk simulasi!");
+                        }
+                    }
+                }
+                </script>
             </form>
         </div>
 

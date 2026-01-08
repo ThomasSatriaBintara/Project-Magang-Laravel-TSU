@@ -36,28 +36,20 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
-        .sidebar-link.active { background-color: #074755; color: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        
+        .fade-up {
+            opacity: 0;
+            animation: fadeUp 0.6s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+        }
 
-.fade-up {
-    opacity: 0;
-    animation: fadeUp 0.6s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
-}
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-.delay-700 { animation-delay: 0.7s; }
-.delay-800 { animation-delay: 0.8s; }
-.delay-900 { animation-delay: 0.9s; }
-
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
     </style>
 </head>
 <body class="bg-white font-sans text-gray-800 flex min-h-screen">
@@ -68,52 +60,83 @@
         </div>
 
         @php
-            $currentPath = Request::path();
-            $isDashboard = $currentPath == 'dashboard' || $currentPath == '/';
-            $isProgram = str_starts_with($currentPath, 'program');
-            $isLogbook = str_starts_with($currentPath, 'logbook');
-            $isPenilaian = str_starts_with($currentPath, 'penilaian');
-            $isPembimbing = str_starts_with($currentPath, 'pembimbing');
-            
+            // Logika Deteksi Role & Active State
+            $isMahasiswa = request()->is('mahasiswa*');
+            $isDosen = request()->is('dosen*');
+            $isAdmin = request()->is('admin*');
+
             $activeClass = 'bg-[#074755] text-white shadow-md';
             $inactiveClass = 'bg-white text-black hover:bg-gray-100 transition shadow-sm';
+
+            // Menentukan Link Setting Dinamis
+            $settingLink = '#';
+            if($isMahasiswa) $settingLink = route('mahasiswa.setting');
+            elseif($isDosen) $settingLink = route('dosen.setting');
         @endphp
 
         <nav class="flex-1 px-4 space-y-3 mt-2">
-            <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ $isDashboard ? $activeClass : $inactiveClass }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                Dashboard
-            </a>
+            
+            {{-- MENU KHUSUS MAHASISWA --}}
+            @if($isMahasiswa)
+                <a href="{{ route('mahasiswa.dashboard') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.dashboard') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Dashboard
+                </a>
 
-            <a href="{{ route('program') }}" class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ $isProgram ? $activeClass : $inactiveClass }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                Program
-            </a>
+                <a href="{{ route('mahasiswa.program') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.program*') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                    Program
+                </a>
 
-            <a href="{{ route('logbook') }}" class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ $isLogbook ? $activeClass : $inactiveClass }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Logbook
-            </a>
+                <a href="{{ route('mahasiswa.logbook') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.logbook*') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Logbook
+                </a>
 
-            <a href="{{ route('penilaian') }}" class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ $isPenilaian ? $activeClass : $inactiveClass }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Penilaian
-            </a>
+                <a href="{{ route('mahasiswa.penilaian') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.penilaian*') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Penilaian
+                </a>
 
-            <a href="{{ route('pembimbing') }}" class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ $isPembimbing ? $activeClass : $inactiveClass }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                Pembimbing
-            </a>
+                <a href="{{ route('mahasiswa.pembimbing') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.pembimbing*') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    Pembimbing
+                </a>
+            @endif
+
+            {{-- MENU KHUSUS DOSEN --}}
+            @if($isDosen)
+                <a href="{{ route('dosen.dashboard') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.dashboard') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    Dashboard Dosen
+                </a>
+
+                <a href="{{ route('dosen.logbook') }}" 
+                   class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.logbook*') ? $activeClass : $inactiveClass }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                    </svg>
+                    Validasi Logbook
+                </a>
+            @endif
         </nav>
     </aside>
 
@@ -128,19 +151,25 @@
             <div class="flex items-center gap-4">
                 <div class="relative group">
                     <button class="flex items-center gap-3 bg-white p-2 pr-4 rounded-full shadow-sm border border-gray-100 focus:outline-none transition hover:bg-gray-50">
-                        <img src="{{ asset('images/foto_thomasgtg.png') }}" alt="User" class="w-10 h-10 rounded-full object-cover border-2 border-tsu-teal">
+                        <img src="{{ asset('images/ic_profile.png') }}" alt="User" class="w-10 h-10 rounded-full object-cover border-2 border-tsu-teal">
                         <div class="leading-none text-left">
-                            <p class="font-bold text-sm text-gray-800">Thomas gtg <span class="text-xs ml-1 transition-transform group-hover:rotate-180 inline-block">▼</span></p>
-                            <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">22430035</p>
+                            <p class="font-bold text-sm text-gray-800">
+                                {{ $isDosen ? 'Dosen Pembimbing' : 'Thomas Satria Bintara' }}
+                                <span class="text-xs ml-1 transition-transform group-hover:rotate-180 inline-block">▼</span>
+                            </p>
+                            <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">
+                                {{ $isDosen ? 'NIDN. 061234567' : '22430035' }}
+                            </p>
                         </div>
                     </button>
                     
-                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl py-2 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
-                        <a href="{{ url('/setting') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-tsu-teal font-medium">
+                    {{-- Dropdown Menu --}}
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl py-2 border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right z-50">
+                        <a href="{{ $settingLink }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-tsu-teal font-medium transition-colors">
                             <span class="mr-3 text-lg">⚙️</span> Pengaturan
                         </a>
                         <div class="my-1 border-t border-gray-100"></div>
-                        <a href="#" id="logoutLink" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium">
+                        <a href="#" id="logoutLink" class="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium transition-colors">
                             <span class="mr-3 text-lg">🚪</span> Keluar
                         </a>
                     </div>
@@ -153,8 +182,9 @@
         </div>
     </main>
 
+    {{-- Modal Logout --}}
     <div id="logoutModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-transform duration-300 scale-95" id="logoutModalContent">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm p-8 transform transition-transform duration-300 scale-95">
             <div class="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -170,28 +200,21 @@
         </div>
     </div>
 
-<script>
-    const logoutModal = document.getElementById('logoutModal');
-    const logoutLink = document.getElementById('logoutLink');
-    const cancelLogoutButton = document.getElementById('cancelLogout');
+    <script>
+        const logoutModal = document.getElementById('logoutModal');
+        const logoutLink = document.getElementById('logoutLink');
+        const cancelLogoutButton = document.getElementById('cancelLogout');
 
-    logoutLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        logoutModal.classList.remove('hidden');
-        logoutModal.classList.add('flex');
-    });
+        logoutLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            logoutModal.classList.remove('hidden');
+            logoutModal.classList.add('flex');
+        });
 
-    cancelLogoutButton.addEventListener('click', () => {
-        logoutModal.classList.add('hidden');
-        logoutModal.classList.remove('flex');
-    });
-
-    logoutModal.addEventListener('click', (e) => {
-        if (e.target === logoutModal) {
+        cancelLogoutButton.addEventListener('click', () => {
             logoutModal.classList.add('hidden');
             logoutModal.classList.remove('flex');
-        }
-    });
-</script>
+        });
+    </script>
 </body>
 </html>

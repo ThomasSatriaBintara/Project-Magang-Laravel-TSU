@@ -32,7 +32,7 @@
         
         <div class="flex items-center gap-3 mb-10">
             <div class="w-25 h-25 flex-shrink-0">
-                <img src="images/logo_tsu.svg" alt="">
+                <img src="/images/logo_tsu.svg" alt="">
             </div>
             <div class="flex flex-col text-left">
                 <span class="text-xs text-gray-800 leading-tight mt-1">Sistem Informasi Magang<br><span class="font-bold">UNIVERSITAS TIGA SERANGKAI</span></span>
