@@ -71,7 +71,7 @@
             <h3 class="fade-up text-2xl font-black text-gray-800 mb-8">Ubah Kata Sandi</h3>
             <form id="formReset" onsubmit="handleReset(event)" class="w-full max-w-md text-left space-y-5">
                 @csrf
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-100 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Lama</label>
                     <div class="relative">
                         <input type="password" id="pass_lama" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="••••••••">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-200 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Kata Sandi Baru</label>
                     <div class="relative">
                         <input type="password" id="pass_baru" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan minimal 8 karakter">
@@ -91,7 +91,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-2 relative">
+                <div class="fade-up delay-300 space-y-2 relative">
                     <label class="text-sm font-bold text-gray-600">Konfirmasi Kata Sandi Baru</label>
                     <div class="relative">
                         <input type="password" id="pass_konfirmasi" class="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:ring-2 focus:ring-tsu-blue outline-none" placeholder="Masukkan ulang kata sandi baru">
@@ -100,7 +100,7 @@
                         </button>
                     </div>
                 </div>
-                <button type="submit" class="fade-up delay-700 bg-tsu-blue text-white px-10 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition">Perbarui Kata Sandi</button>
+                <button type="submit" class="fade-up delay-400 bg-tsu-blue text-white px-10 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition">Perbarui Kata Sandi</button>
             </form>
         </div>
 
@@ -108,8 +108,8 @@
             <h3 class="fade-up text-2xl font-black text-gray-800 mb-2">Dokumen Pendukung</h3>
             <p class="fade-up delay-100 text-gray-500 mb-10 italic">Lengkapi dokumen di bawah ini agar tombol "Daftar Magang" dapat diakses.</p>
             
-            <div class="fade-up delay-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="fade-up delay-200 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-red-50 text-red-500 p-4 rounded-2xl group-hover:bg-red-500 group-hover:text-white transition">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="fade-up delay-300 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-blue-50 text-blue-500 p-4 rounded-2xl group-hover:bg-blue-500 group-hover:text-white transition">
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
+                <div class="fade-up delay-400 p-6 border-2 border-dashed border-gray-200 rounded-[2rem] hover:border-tsu-teal transition group flex flex-col justify-between">
                     <div>
                         <div class="flex items-center gap-4 mb-6">
                             <div class="bg-orange-50 text-orange-500 p-4 rounded-2xl group-hover:bg-orange-500 group-hover:text-white transition">
@@ -173,7 +173,7 @@
                 </div>
             </div>
 
-            <button onclick="saveDocs()" class="fade-up delay-600 w-full mt-10 bg-tsu-teal text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-700 transition shadow-xl shadow-teal-100">
+            <button onclick="saveDocs()" class="fade-up delay-500 w-full mt-10 bg-tsu-teal text-white py-5 rounded-2xl font-black text-lg hover:bg-teal-700 transition shadow-xl shadow-teal-100">
                 Simpan Semua Dokumen
             </button>
         </div>
