@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-// AUTH & LANDING (Public)
+// AUTH & LANDING
 Route::get('/', function () { return view('layouts.landing'); })->name('landing');
-Route::get('/login', function () { return view('layouts/auth.login'); })->name('login');
-Route::get('/register', function () { return view('layouts/auth.register'); })->name('register');
+Route::get('/login', function () { return view('layouts.auth.login'); })->name('login');
+Route::get('/register', function () { return view('layouts.auth.register'); })->name('register');
 
 // Forgot Password
 Route::prefix('password')->group(function () {
@@ -14,7 +14,7 @@ Route::prefix('password')->group(function () {
     Route::get('/reset', function () { return view('layouts.auth.forgot.password-reset'); })->name('password.reset');
 });
 
-//ROLE MAHASISWA
+// ROLE MAHASISWA
 Route::prefix('mahasiswa')->group(function () {
     Route::get('/dashboard', function () { return view('mahasiswa.dashboard.dashboard'); })->name('mahasiswa.dashboard');
     Route::get('/program', function () { return view('mahasiswa.program.program'); })->name('mahasiswa.program');
@@ -25,15 +25,19 @@ Route::prefix('mahasiswa')->group(function () {
     Route::get('/setting', function () { return view('layouts.setting'); })->name('mahasiswa.setting');
 });
 
-//ROLE DOSEN
+// ROLE DOSEN
 Route::prefix('dosen')->group(function () {
     Route::get('/dashboard', function () { return view('dosen.dashboard'); })->name('dosen.dashboard');
     Route::get('/logbook', function () { return view('dosen.logbook'); })->name('dosen.logbook');
-    Route::get('/penilaian', function () { return view('dosen.penilaian'); })->name('dosen.penilaian'); // Persiapan
+    Route::get('/penilaian', function () { return view('dosen.penilaian'); })->name('dosen.penilaian');
     Route::get('/setting', function () { return view('layouts.setting'); })->name('dosen.setting');
+    
+    // TAMBAHAN: Agar dosen bisa akses file mahasiswa pakai rute dosen sendiri
+    Route::get('/view-dashboard', function () { return view('mahasiswa.dashboard.dashboard'); })->name('dosen.view_dashboard');
+    Route::get('/view-program', function () { return view('mahasiswa.program.program'); })->name('dosen.view_program');
 });
 
-//ROLE ADMIN
+// ROLE ADMIN
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
 });

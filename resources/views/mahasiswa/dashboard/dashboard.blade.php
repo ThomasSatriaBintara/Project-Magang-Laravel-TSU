@@ -9,7 +9,7 @@
 
     <div class="fade-up relative overflow-hidden bg-tsu-teal rounded-[2.5rem] p-10 text-white shadow-2xl shadow-teal-100">
         <div class="relative z-10">
-            <h2 class="text-3xl font-black mb-2">Halo, Thomas gtg! 👋</h2>
+            <h2 class="text-3xl font-black mb-2">Halo, Thomas Satria Bintara! 👋</h2>
             <p class="text-teal-50/80 max-w-xl leading-relaxed">
                 Selamat datang di portal magang TSU. Pastikan Anda selalu memantau pengumuman terbaru di bawah ini untuk informasi periode magang dan administrasi.
             </p>
