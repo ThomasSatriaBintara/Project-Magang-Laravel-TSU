@@ -79,7 +79,6 @@
         @endphp
 
         <nav class="flex-1 px-4 space-y-3 mt-2">
-            {{-- MENU MAHASISWA --}}
             @if($isMahasiswa)
                 <a href="{{ route('mahasiswa.dashboard') }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.dashboard') ? $activeClass : $inactiveClass }}">
@@ -118,7 +117,6 @@
                 </a>
             @endif
 
-            {{-- MENU DOSEN --}}
             @if($isDosen)
                 <p class="text-[10px] text-teal-200 px-6 uppercase font-bold">Informasi Magang</p>
 
@@ -141,6 +139,25 @@
                 <a href="{{ route('dosen.penilaian') }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.penilaian*') ? $activeClass : $inactiveClass }}">
                     Input Penilaian
+                </a>
+            @endif
+
+            @if($isAdmin)
+                <a href="{{ route('admin.dashboard') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
+                    Dashboard
+                </a>
+                <a href="{{ route('admin.program.index') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.program*') ? $activeClass : $inactiveClass }}">
+                    Kelola Program
+                </a>
+                <a href="{{ route('admin.pendaftaran.index') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.pendaftaran*') ? $activeClass : $inactiveClass }}">
+                    ACC Pendaftaran
+                </a>
+                <a href="{{ route('admin.mahasiswa.index') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
+                    Data Mahasiswa
                 </a>
             @endif
         </nav>

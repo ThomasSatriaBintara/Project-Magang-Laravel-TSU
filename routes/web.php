@@ -40,4 +40,8 @@ Route::prefix('dosen')->group(function () {
 // ROLE ADMIN
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () { return view('admin.dashboard'); })->name('admin.dashboard');
+    Route::get('/program', function () { return view('admin.program.index'); })->name('admin.program.index');
+    Route::get('/pendaftaran', function () { return view('admin.pendaftaran.index'); })->name('admin.pendaftaran.index');
+    Route::get('/mahasiswa', function () { return view('admin.mahasiswa.index'); })->name('admin.mahasiswa.index');
+    Route::get('/setting', function () { return view('layouts.setting'); })->name('admin.setting');
 });

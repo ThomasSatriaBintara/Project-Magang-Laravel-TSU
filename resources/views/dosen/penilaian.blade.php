@@ -179,7 +179,6 @@
     let currentMhs = "";
     let selectedBtn = null;
 
-    // 1. Logika Huruf Otomatis
     function calculateGrade(input) {
         const val = input.value;
         const box = input.nextElementSibling;
@@ -197,7 +196,6 @@
         box.className = `grade-box w-10 h-10 flex items-center justify-center border-2 rounded-xl font-black text-sm transition-all ${colorClass}`;
     }
 
-    // 2. Statistik
     function updateStats() {
         document.getElementById('stat-total').innerText = document.querySelectorAll('.mhs-row').length;
         document.getElementById('stat-pending').innerText = document.querySelectorAll('[data-status="perlu-dinilai"]').length;
@@ -205,7 +203,6 @@
         document.getElementById('stat-docs').innerText = document.querySelectorAll('[data-status="tunggu-dokumen"]').length;
     }
 
-    // 3. Modal Control
     function openModal(name, isEdit, btnElement) {
         currentMhs = name;
         selectedBtn = btnElement;
@@ -229,24 +226,20 @@
         setTimeout(() => modal.classList.replace('flex', 'hidden'), 200);
     }
 
-    // 4. Handle Save (Ganti Tombol Disini)
     function handleSave(e) {
         e.preventDefault();
         
         if (selectedBtn) {
             const row = selectedBtn.closest('tr');
             
-            // Ubah Badge
             const badge = row.querySelector('.status-badge');
             badge.innerText = "Sudah Dinilai";
             badge.className = "status-badge px-3 py-1 bg-green-100 text-green-600 text-[10px] font-bold rounded-full uppercase";
 
-            // Ubah Tombol
             selectedBtn.innerText = "Edit Nilai";
             selectedBtn.className = "action-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-200 transition";
             selectedBtn.onclick = function() { openModal(currentMhs, true, this); };
             
-            // Update Data Status
             row.setAttribute('data-status', 'sudah-dinilai');
         }
 
