@@ -29,7 +29,8 @@ Route::prefix('mahasiswa')->group(function () {
 Route::prefix('dosen')->group(function () {
     Route::get('/view-dashboard', function () { return view('mahasiswa.dashboard.dashboard'); })->name('dosen.view_dashboard');
     Route::get('/view-program', function () { return view('mahasiswa.program.program'); })->name('dosen.view_program');
-    
+
+    Route::get('/logbook', function () { return view('dosen.logbook'); })->name('dosen.logbook');
     Route::get('/penilaian', function () { return view('dosen.penilaian'); })->name('dosen.penilaian');
     Route::get('/setting', function () { return view('layouts.setting'); })->name('dosen.setting');
 });

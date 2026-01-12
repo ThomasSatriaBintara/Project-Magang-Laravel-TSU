@@ -183,6 +183,7 @@
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">
                                 {{ $isDosen ? 'NIDN. 061234567' : '22430035' }}
                             </p>
+                            
                         </div>
                     </button>
                     

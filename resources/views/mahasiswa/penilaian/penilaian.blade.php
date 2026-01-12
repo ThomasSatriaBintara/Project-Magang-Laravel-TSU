@@ -2,7 +2,7 @@
 
 @section('title', 'Penilaian Magang')
 
-@section('header_title', 'Penilaian')
+@section('header_title', 'Penilaian Mahasiswa')
 
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
