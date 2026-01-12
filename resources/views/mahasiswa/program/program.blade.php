@@ -18,28 +18,28 @@
         perPage: 6,
         jobs: [
             /* 10 DATA MAGANG MANDIRI */
-            { id: 1, type: 'mandiri', title: 'Frontend Developer', company: 'PT. Tiga Serangkai', role: 'Website Penjualan' },
-            { id: 2, type: 'mandiri', title: 'Backend Engineer', company: 'Jujura Academy', role: 'API Management' },
-            { id: 3, type: 'mandiri', title: 'UI/UX Designer', company: 'Creative Hub', role: 'Mobile App Design' },
-            { id: 4, type: 'mandiri', title: 'QA Tester', company: 'Tech Solutions', role: 'Automation Testing' },
-            { id: 5, type: 'mandiri', title: 'Data Entry', company: 'Global Logistik', role: 'Inventory System' },
-            { id: 6, type: 'mandiri', title: 'IT Support', company: 'Bank Central', role: 'Network Maintenance' },
-            { id: 7, type: 'mandiri', title: 'Fullstack Dev', company: 'Startup XYZ', role: 'SaaS Project' },
-            { id: 8, type: 'mandiri', title: 'Database Admin', company: 'Data Center', role: 'SQL Optimization' },
-            { id: 9, type: 'mandiri', title: 'Security Analyst', company: 'Cyber Guard', role: 'Audit System' },
-            { id: 10, type: 'mandiri', title: 'DevOps Intern', company: 'Cloud Tech', role: 'Docker Deployment' },
+            { id: 1, type: 'mandiri', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan' },
+            { id: 2, type: 'mandiri', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management' },
+            { id: 3, type: 'mandiri', role: 'UI/UX Designer', company: 'Creative Hub', title: 'Mobile App Design' },
+            { id: 4, type: 'mandiri', role: 'QA Tester', company: 'Tech Solutions', title: 'Automation Testing' },
+            { id: 5, type: 'mandiri', role: 'Data Entry', company: 'Global Logistik', title: 'Inventory System' },
+            { id: 6, type: 'mandiri', role: 'IT Support', company: 'Bank Central', title: 'Network Maintenance' },
+            { id: 7, type: 'mandiri', role: 'Fullstack Dev', company: 'Startup XYZ', title: 'SaaS Project' },
+            { id: 8, type: 'mandiri', role: 'Database Admin', company: 'Data Center', title: 'SQL Optimization' },
+            { id: 9, type: 'mandiri', role: 'Security Analyst', company: 'Cyber Guard', title: 'Audit System' },
+            { id: 10, type: 'mandiri', role: 'DevOps Intern', company: 'Cloud Tech', title: 'Docker Deployment' },
 
             /* 10 DATA STUDI INDEPENDENT */
-            { id: 11, type: 'studi', title: 'Android Developer', company: 'Bangkit Academy', role: 'Mobile Specialist' },
-            { id: 12, type: 'studi', title: 'Cloud Architect', company: 'Google Cloud', role: 'Infrastructure' },
-            { id: 13, type: 'studi', title: 'Machine Learning', company: 'AI Research', role: 'Neural Networks' },
-            { id: 14, type: 'studi', title: 'Cyber Security', company: 'BSSN Academy', role: 'Ethical Hacking' },
-            { id: 15, type: 'studi', title: 'Digital Marketing', company: 'RevoU', role: 'Growth Hacking' },
-            { id: 16, type: 'studi', title: 'Blockchain Dev', company: 'Crypto Hub', role: 'Smart Contract' },
-            { id: 17, type: 'studi', title: 'Data Science', company: 'DQLab', role: 'Big Data Analysis' },
-            { id: 18, type: 'studi', title: 'Internet of Things', company: 'Makers Lab', role: 'Smart Home' },
-            { id: 19, type: 'studi', title: 'Game Development', company: 'Agate Academy', role: 'Unity 3D' },
-            { id: 20, type: 'studi', title: 'Product Management', company: 'PM School', role: 'Agile Framework' }
+            { id: 11, type: 'studi', role: 'Android Developer', company: 'Bangkit Academy', title: 'Mobile Specialist' },
+            { id: 12, type: 'studi', role: 'Cloud Architect', company: 'Google Cloud', title: 'Infrastructure' },
+            { id: 13, type: 'studi', role: 'Machine Learning', company: 'AI Research', title: 'Neural Networks' },
+            { id: 14, type: 'studi', role: 'Cyber Security', company: 'BSSN Academy', title: 'Ethical Hacking' },
+            { id: 15, type: 'studi', role: 'Digital Marketing', company: 'RevoU', title: 'Growth Hacking' },
+            { id: 16, type: 'studi', role: 'Blockchain Dev', company: 'Crypto Hub', title: 'Smart Contract' },
+            { id: 17, type: 'studi', role: 'Data Science', company: 'DQLab', title: 'Big Data Analysis' },
+            { id: 18, type: 'studi', role: 'Internet of Things', company: 'Makers Lab', title: 'Smart Home' },
+            { id: 19, type: 'studi', role: 'Game Development', company: 'Agate Academy', title: 'Unity 3D' },
+            { id: 20, type: 'studi', role: 'Product Management', company: 'PM School', title: 'Agile Framework' }
         ],
         get filteredJobs() {
             let filtered = this.jobs.filter(j => j.type === this.tab);
