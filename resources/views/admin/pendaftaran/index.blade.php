@@ -48,8 +48,9 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
-                                <button onclick="previewDoc('CV - Thomas', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
-                                <button onclick="previewDoc('KRS - Thomas', 'KRS')" class="p-2 bg-orange-50 text-orange-600 rounded-xl text-[10px] font-bold">📄 KRS</button>
+                                <button onclick="previewDoc('CV - Thomas Satria Bintara', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
+                                <button onclick="previewDoc('Transkrip - Thomas Satria Bintara', 'Transkrip')" class="p-2 bg-green-50 text-green-600 rounded-xl text-[10px] font-bold">📄 TRANSKRIP</button>
+                                <button onclick="previewDoc('KRS - Thomas Satria Bintara', 'KRS')" class="p-2 bg-orange-50 text-orange-600 rounded-xl text-[10px] font-bold">📄 KRS</button>
                             </div>
                         </td>
                         <td class="px-6 py-4 text-center action-cell">
@@ -63,9 +64,9 @@
                     <tr class="hover:bg-gray-50/50 transition mhs-row" data-status="pending" id="row-lucky">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600">LA</div>
+                                <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center font-bold text-emerald-600">LR</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800">Lucky Ardiansyah</p>
+                                    <p class="font-bold text-sm text-gray-800">Lucky Reza</p>
                                     <p class="text-[10px] text-gray-400">22430010</p>
                                 </div>
                             </div>
@@ -79,14 +80,15 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
-                                <button onclick="previewDoc('CV - Lucky', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
-                                <button onclick="previewDoc('Transkrip - Lucky', 'Transkrip')" class="p-2 bg-green-50 text-green-600 rounded-xl text-[10px] font-bold">📄 TRNSK</button>
+                                <button onclick="previewDoc('CV - Lucky Reza', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
+                                <button onclick="previewDoc('Transkrip - Lucky Reza', 'Transkrip')" class="p-2 bg-green-50 text-green-600 rounded-xl text-[10px] font-bold">📄 TRANSKRIP</button>
+                                <button onclick="previewDoc('KRS - Lucky Reza', 'KRS')" class="p-2 bg-orange-50 text-orange-600 rounded-xl text-[10px] font-bold">📄 KRS</button>
                             </div>
                         </td>
                         <td class="px-6 py-4 text-center action-cell">
                             <div class="flex justify-center gap-2">
-                                <button onclick="handleAcc('Lucky Ardiansyah', 'row-lucky')" class="px-4 py-2 bg-tsu-teal text-white rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-md">ACC</button>
-                                <button onclick="handleReject('Lucky Ardiansyah', 'row-lucky')" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
+                                <button onclick="handleAcc('Lucky Reza', 'row-lucky')" class="px-4 py-2 bg-tsu-teal text-white rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-md">ACC</button>
+                                <button onclick="handleReject('Lucky Reza', 'row-lucky')" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
                             </div>
                         </td>
                     </tr>
@@ -96,7 +98,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600">DW</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800">Dewa Saputra</p>
+                                    <p class="font-bold text-sm text-gray-800">Dewanata</p>
                                     <p class="text-[10px] text-gray-400">22430055</p>
                                 </div>
                             </div>
@@ -110,14 +112,15 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
-                                <button onclick="previewDoc('CV - Dewa', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
-                                <button onclick="previewDoc('KRS - Dewa', 'KRS')" class="p-2 bg-orange-50 text-orange-600 rounded-xl text-[10px] font-bold">📄 KRS</button>
+                                <button onclick="previewDoc('CV - Dewanata', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
+                                <button onclick="previewDoc('Transkrip - Dewanata', 'Transkrip')" class="p-2 bg-green-50 text-green-600 rounded-xl text-[10px] font-bold">📄 TRANSKRIP</button>
+                                <button onclick="previewDoc('KRS - Dewanata', 'KRS')" class="p-2 bg-orange-50 text-orange-600 rounded-xl text-[10px] font-bold">📄 KRS</button>
                             </div>
                         </td>
                         <td class="px-6 py-4 text-center action-cell">
                             <div class="flex justify-center gap-2">
-                                <button onclick="handleAcc('Dewa Saputra', 'row-dewa')" class="px-4 py-2 bg-tsu-teal text-white rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-md">ACC</button>
-                                <button onclick="handleReject('Dewa Saputra', 'row-dewa')" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
+                                <button onclick="handleAcc('Dewanata', 'row-dewa')" class="px-4 py-2 bg-tsu-teal text-white rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-md">ACC</button>
+                                <button onclick="handleReject('Dewanata', 'row-dewa')" class="px-4 py-2 bg-red-50 text-red-500 rounded-xl text-xs font-bold hover:bg-red-100 transition">Tolak</button>
                             </div>
                         </td>
                     </tr>

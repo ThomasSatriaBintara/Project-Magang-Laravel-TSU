@@ -34,20 +34,24 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-tsu-teal/10 flex items-center justify-center font-bold text-tsu-teal">TS</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800 student-name">Thomas Satria</p>
+                                    <p class="font-bold text-sm text-gray-800 student-name">Thomas Satria Bintara</p>
                                     <p class="text-[10px] text-gray-400">NIM: 22430035</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-6 py-4 text-xs font-bold text-gray-700">thomas@tsu.ac.id</td>
                         <td class="px-6 py-4">
-                            <span class="text-xs font-medium text-gray-600">Fullstack Web - PT. Digital Optima</span>
+                            <button onclick="viewProgramDetail('Project Website Penjualan', 'PT. Digital Solusi Indonesia', 'Fullstack Developer')" 
+                                    class="text-xs font-bold text-tsu-teal bg-teal-50 px-3 py-1 rounded-lg hover:bg-teal-100 transition flex items-center gap-2">
+                                <span>Project Website Penjualan</span>
+                                <span class="text-[10px]">ℹ️</span>
+                            </button>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                <button onclick="previewFile('CV', 'Thomas')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
-                                <button onclick="previewFile('KRS', 'Thomas')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
-                                <button onclick="previewFile('Transkrip', 'Thomas')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
+                                <button onclick="previewFile('CV', 'Thomas Satria Bintara')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
+                                <button onclick="previewFile('KRS', 'Thomas Satria Bintara')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
+                                <button onclick="previewFile('Transkrip', 'Thomas Satria Bintara')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
                             </div>
                         </td>
                     </tr>
@@ -55,7 +59,7 @@
                     <tr class="hover:bg-gray-50/50 transition mhs-row">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-600">LA</div>
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-600">LR</div>
                                 <div>
                                     <p class="font-bold text-sm text-gray-800 student-name">Lucky Reza</p>
                                     <p class="text-[10px] text-gray-400">NIM: 22430010</p>
@@ -68,9 +72,9 @@
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                <button onclick="previewFile('CV', 'Lucky')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
-                                <button onclick="previewFile('KRS', 'Lucky')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
-                                <button onclick="previewFile('Transkrip', 'Lucky')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
+                                <button onclick="previewFile('CV', 'Lucky Reza')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
+                                <button onclick="previewFile('KRS', 'Lucky Reza')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
+                                <button onclick="previewFile('Transkrip', 'Lucky Reza')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
                             </div>
                         </td>
                     </tr>
@@ -87,13 +91,17 @@
                         </td>
                         <td class="px-6 py-4 text-xs font-bold text-gray-700">dewa@tsu.ac.id</td>
                         <td class="px-6 py-4">
-                            <span class="text-xs font-medium text-gray-600">UI/UX Research - Creative Studio</span>
+                            <button onclick="viewProgramDetail('UI/UX Design Masterclass', 'Creative Studio XYZ', 'Junior Designer')" 
+                                    class="text-xs font-bold text-tsu-teal bg-teal-50 px-3 py-1 rounded-lg hover:bg-teal-100 transition flex items-center gap-2">
+                                <span>UI/UX Design Masterclass</span>
+                                <span class="text-[10px]">ℹ️</span>
+                            </button>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                <button onclick="previewFile('CV', 'Dewa')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
-                                <button onclick="previewFile('KRS', 'Dewa')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
-                                <button onclick="previewFile('Transkrip', 'Dewa')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
+                                <button onclick="previewFile('CV', 'Dewanata')" class="w-8 h-8 flex items-center justify-center bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition">📄</button>
+                                <button onclick="previewFile('KRS', 'Dewanata')" class="w-8 h-8 flex items-center justify-center bg-orange-50 text-orange-600 rounded-lg hover:bg-orange-100 transition">📋</button>
+                                <button onclick="previewFile('Transkrip', 'Dewanata')" class="w-8 h-8 flex items-center justify-center bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition">📊</button>
                             </div>
                         </td>
                     </tr>
@@ -121,6 +129,30 @@
             } else {
                 row.style.display = "none";
             }
+        });
+    }
+
+    function viewProgramDetail(name, company, role) {
+        Swal.fire({
+            title: '<span class="text-lg font-bold">Detail Program Magang</span>',
+            html: `
+                <div class="text-left space-y-4 p-2">
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Nama Program</p>
+                        <p class="text-sm font-bold text-gray-800">${name}</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Perusahaan</p>
+                        <p class="text-sm font-bold text-tsu-teal">${company}</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Role Pekerjaan</p>
+                        <p class="text-sm font-bold text-gray-800">${role}</p>
+                    </div>
+                </div>
+            `,
+            confirmButtonColor: '#086375',
+            confirmButtonText: 'Tutup'
         });
     }
 

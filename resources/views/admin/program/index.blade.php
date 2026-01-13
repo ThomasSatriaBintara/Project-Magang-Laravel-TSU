@@ -24,8 +24,8 @@
     },
     // Mock Data Program
     programs: [
-        { id: 1, type: 'mandiri', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan', kuota: 10, terisi: 2, mhs: ['Thomas Satria', 'Lucky Ardiansyah'] },
-        { id: 2, type: 'mandiri', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management', kuota: 5, terisi: 1, mhs: ['Dewa Saputra'] },
+        { id: 1, type: 'mandiri', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan', kuota: 10, terisi: 2, mhs: ['Thomas Satria Bintara', 'Lucky Reza'] },
+        { id: 2, type: 'mandiri', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management', kuota: 5, terisi: 1, mhs: ['Dewanata'] },
         { id: 3, type: 'mandiri', role: 'UI/UX Designer', company: 'Creative Agency', title: 'Mobile App Project', kuota: 8, terisi: 0, mhs: [] },
         { id: 4, type: 'mandiri', role: 'Data Analyst', company: 'Big Data Corp', title: 'Data Visualization', kuota: 4, terisi: 0, mhs: [] },
         { id: 5, type: 'mandiri', role: 'DevOps Intern', company: 'Cloud Infrastructure', title: 'Automation Ops', kuota: 3, terisi: 0, mhs: [] },
@@ -197,15 +197,15 @@
                 <div class="grid grid-cols-2 gap-6">
                     <div class="col-span-2">
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2 flex items-center gap-1">📌 Nama Program</label>
-                        <input type="text" x-model="formData.title" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: Modern Web Development 2026" required>
+                        <input type="text" x-model="formData.title" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: Website Penjualan" required>
                     </div>
                     <div>
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2 flex items-center gap-1">🏢 Perusahaan</label>
-                        <input type="text" x-model="formData.company" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: PT. Teknologi Maju" required>
+                        <input type="text" x-model="formData.company" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: PT. Tiga Serangkai" required>
                     </div>
                     <div>
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2 flex items-center gap-1">💼 Role Magang</label>
-                        <input type="text" x-model="formData.role" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: UI/UX Designer" required>
+                        <input type="text" x-model="formData.role" class="w-full bg-gray-50 border-2 border-transparent rounded-2xl py-4 px-6 focus:border-tsu-teal focus:bg-white transition mt-2 outline-none font-bold text-gray-700" placeholder="Contoh: Frontend Developer" required>
                     </div>
                     <div>
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2 flex items-center gap-1">📂 Tipe Program</label>
