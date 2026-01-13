@@ -80,29 +80,25 @@
 
                 <script>
                     function handleLogin() {
-                    const emailField = document.getElementById('email');
-                    const passField = document.getElementById('password');
+                        const emailField = document.getElementById('email');
+                        const passField = document.getElementById('password');
+                        const email = emailField.value;
+                        const pass = passField.value;
 
-                    if (!emailField || !passField) {
-                        console.error("Input ID tidak ditemukan!");
-                        return;
-                    }
-
-                    const email = emailField.value;
-                    const pass = passField.value;
-
-                    if (pass === "thomas123") {
-                        if (email === "mahasiswa@tsu.ac.id") {
-                            window.location.href = "/mahasiswa/dashboard";
-                        } else if (email === "dosen@tsu.ac.id") {
-                            window.location.href = "/dosen/logbook";
-                        } else if (email === "admin@tsu.ac.id") {
-                            window.location.href = "/admin/dashboard";
+                        if (pass === "thomas123") {
+                            if (email === "mahasiswa@tsu.ac.id") {
+                                window.location.href = "/mahasiswa/dashboard";
+                            } else if (email === "dosen@tsu.ac.id") {
+                                window.location.href = "/dosen/dashboard"; 
+                            } else if (email === "admin@tsu.ac.id") {
+                                window.location.href = "/admin/dashboard";
+                            } else {
+                                alert("Email tidak terdaftar untuk simulasi!");
+                            }
                         } else {
-                            alert("Email tidak terdaftar untuk simulasi!");
+                            alert("Password salah!");
                         }
                     }
-                }
                 </script>
             </form>
         </div>

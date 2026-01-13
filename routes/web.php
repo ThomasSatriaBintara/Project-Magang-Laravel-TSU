@@ -27,8 +27,17 @@ Route::prefix('mahasiswa')->group(function () {
 
 // ROLE DOSEN
 Route::prefix('dosen')->group(function () {
-    Route::get('/view-dashboard', function () { return view('mahasiswa.dashboard.dashboard'); })->name('dosen.view_dashboard');
-    Route::get('/view-program', function () { return view('mahasiswa.program.program'); })->name('dosen.view_program');
+    Route::get('/dashboard', function () { 
+        return view('mahasiswa.dashboard.dashboard'); 
+    })->name('dosen.dashboard'); 
+
+    Route::get('/program', function () { 
+        return view('mahasiswa.program.program'); 
+    })->name('dosen.program');
+
+    Route::get('/program/detail/{id}', function ($id) {
+        return view('mahasiswa.program.program-detail');
+    })->name('dosen.program.detail');
 
     Route::get('/logbook', function () { return view('dosen.logbook'); })->name('dosen.logbook');
     Route::get('/penilaian', function () { return view('dosen.penilaian'); })->name('dosen.penilaian');

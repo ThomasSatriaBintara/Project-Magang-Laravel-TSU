@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         tailwind.config = {
@@ -37,6 +38,14 @@
         ::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
         
+        .sidebar-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .rotate-180-icon {
+            transform: rotate(180deg);
+        }
+
         .fade-up {
             opacity: 0;
             animation: fadeUp 0.6s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
@@ -47,21 +56,26 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
-        .delay-700 { animation-delay: 0.7s; }
-        .delay-800 { animation-delay: 0.8s; }
-        .delay-900 { animation-delay: 0.9s; }
+        [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-white font-sans text-gray-800 flex min-h-screen">
+<body 
+    class="bg-white font-sans text-gray-800 flex min-h-screen overflow-x-hidden" 
+    x-data="{ 
+        sidebarOpen: localStorage.getItem('sidebarStatus') !== 'false',
+        toggleSidebar() {
+            this.sidebarOpen = !this.sidebarOpen;
+            localStorage.setItem('sidebarStatus', this.sidebarOpen);
+        }
+    }"
+    x-cloak
+>
 
-    <aside class="w-64 bg-tsu-teal flex-shrink-0 flex flex-col fixed h-full z-30 overflow-y-auto shadow-xl">
-        <div class="p-8 flex items-center justify-center">
+    <aside 
+        :class="sidebarOpen ? 'w-64' : 'w-0 -translate-x-full'"
+        class="sidebar-transition bg-tsu-teal flex-shrink-0 flex flex-col fixed h-full z-30 overflow-y-auto shadow-xl">
+        
+        <div class="p-8 flex items-center justify-center min-w-[16rem]" x-show="sidebarOpen" x-transition.opacity.duration.300ms>
             <img src="{{ asset('images/logo_tsu_white.svg') }}" class="h-20 mb-4" alt="TSU Logo">
         </div>
 
@@ -76,9 +90,10 @@
             $settingLink = '#';
             if($isMahasiswa) $settingLink = route('mahasiswa.setting');
             elseif($isDosen) $settingLink = route('dosen.setting');
+            elseif($isAdmin) $settingLink = route('admin.setting');
         @endphp
 
-        <nav class="flex-1 px-4 space-y-3 mt-2">
+        <nav class="flex-1 px-4 space-y-3 mt-2 min-w-[16rem]" x-show="sidebarOpen" x-transition.opacity.duration.300ms>
             @if($isMahasiswa)
                 <a href="{{ route('mahasiswa.dashboard') }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.dashboard') ? $activeClass : $inactiveClass }}">
@@ -119,19 +134,16 @@
 
             @if($isDosen)
                 <p class="text-[10px] text-teal-200 px-6 uppercase font-bold">Informasi Magang</p>
-
-                <a href="{{ route('dosen.view_dashboard') }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.view_dashboard') ? $activeClass : $inactiveClass }}">
+                <a href="{{ route('dosen.dashboard') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.dashboard') ? $activeClass : $inactiveClass }}">
                     Info Dashboard
                 </a>
-                <a href="{{ route('dosen.view_program') }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.view_program') ? $activeClass : $inactiveClass }}">
+                <a href="{{ route('dosen.program') }}" 
+                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.program') ? $activeClass : $inactiveClass }}">
                     Info Program
                 </a>
                 
-                <p class="text-[10px] text-teal-200 px-6 uppercase font-bold">Monitor Mahasiswa</p>
-
-                
+                <p class="text-[10px] text-teal-200 px-6 uppercase font-bold mt-4">Monitor Mahasiswa</p>
                 <a href="{{ route('dosen.logbook') }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('dosen.logbook*') ? $activeClass : $inactiveClass }}">
                     Validasi Logbook
@@ -163,12 +175,25 @@
         </nav>
     </aside>
 
-    <main class="flex-1 ml-64 bg-gray-50 min-h-screen">
+    <main 
+        :class="sidebarOpen ? 'ml-64' : 'ml-0'"
+        class="sidebar-transition flex-1 bg-gray-50 min-h-screen">
         
         <header class="sticky top-0 z-20 flex justify-between items-center px-8 py-6 bg-gray-50/80 backdrop-blur-md border-b border-gray-100">
-            <div>
-                <h1 class="text-3xl font-extrabold text-black">@yield('header_title')</h1>
-                <p class="text-gray-500 text-sm">Sistem Informasi Magang TSU</p>
+            <div class="flex items-center gap-4">
+                <button @click="toggleSidebar()" class="p-2 rounded-xl bg-white border border-gray-200 text-tsu-teal hover:bg-gray-100 transition shadow-sm outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                         class="h-6 w-6 transition-transform duration-500" 
+                         :class="sidebarOpen ? '' : 'rotate-180-icon'"
+                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <div>
+                    <h1 class="text-3xl font-extrabold text-black">@yield('header_title')</h1>
+                    <p class="text-gray-500 text-sm">Sistem Informasi Magang TSU</p>
+                </div>
             </div>
             
             <div class="flex items-center gap-4">
@@ -177,13 +202,24 @@
                         <img src="{{ asset('images/ic_profile.png') }}" alt="User" class="w-10 h-10 rounded-full object-cover border-2 border-tsu-teal">
                         <div class="leading-none text-left">
                             <p class="font-bold text-sm text-gray-800">
-                                {{ $isDosen ? 'Dosen Pembimbing' : 'Thomas Satria Bintara' }}
+                                @if($isAdmin)
+                                    Teguh Susyanto
+                                @elseif($isDosen)
+                                    Wawan Laksito
+                                @else
+                                    Thomas Satria Bintara
+                                @endif
                                 <span class="text-xs ml-1 transition-transform group-hover:rotate-180 inline-block">▼</span>
                             </p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">
-                                {{ $isDosen ? 'NIDN. 061234567' : '22430035' }}
+                                @if($isAdmin)
+                                    NUPTK. 0122334455
+                                @elseif($isDosen)
+                                    NUPTK. 061234567
+                                @else
+                                    NIM. 22430035
+                                @endif
                             </p>
-                            
                         </div>
                     </button>
                     

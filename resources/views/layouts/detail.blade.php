@@ -84,10 +84,10 @@
                     <img src="{{ asset('images/ic_profile.png') }}" alt="Profile" class="w-10 h-10 rounded-full object-cover border-2 border-white/50 shadow-sm">
                     <div class="text-left hidden sm:block leading-tight">
                         <p class="font-bold text-sm flex items-center gap-1">
-                            {{ $isDosen ? 'Dosen Pembimbing' : 'Thomas Satria Bintara' }}
+                            {{ $isDosen ? ' Wawan Laksito' : 'Thomas Satria Bintara' }}
                             <span class="text-[10px] transition-transform group-hover:rotate-180 inline-block">▼</span>
                         </p>
-                        <p class="text-[11px] text-gray-200 font-light">{{ $isDosen ? 'NIDN. 061234567' : '22430035' }}</p>
+                        <p class="text-[11px] text-gray-200 font-light">{{ $isDosen ? 'NIDN. 061234567' : 'NIM. 22430035' }}</p>
                     </div>
                 </button>
 

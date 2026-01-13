@@ -5,11 +5,33 @@
 @section('header_title', 'Dashboard Utama')
 
 @section('content')
+@php
+    $isMahasiswa = request()->is('mahasiswa*');
+    $isDosen = request()->is('dosen*');
+    $isAdmin = request()->is('admin*');
+
+    $namaUser = "Thomas Satria Bintara";
+    if ($isDosen) $namaUser = "Wawan Laksito";
+    if ($isAdmin) $namaUser = "Teguh Susyanto";
+
+    $sudahLengkapiDokumen = true;
+    $sudahIsiWA = true;
+
+    $isVerified = false;
+    if ($isAdmin) {
+        $isVerified = true;
+    } elseif ($isMahasiswa && $sudahLengkapiDokumen) {
+        $isVerified = true;
+    } elseif ($isDosen && $sudahIsiWA) {
+        $isVerified = true;
+    }
+@endphp
+
 <div class="max-w-6xl mx-auto space-y-8">
 
     <div class="fade-up relative overflow-hidden bg-tsu-teal rounded-[2.5rem] p-10 text-white shadow-2xl shadow-teal-100">
         <div class="relative z-10">
-            <h2 class="text-3xl font-black mb-2">Halo, Thomas Satria Bintara! 👋</h2>
+            <h2 class="text-3xl font-black mb-2">Halo, {{ $namaUser }}! 👋</h2>
             <p class="text-teal-50/80 max-w-xl leading-relaxed">
                 Selamat datang di portal magang TSU. Pastikan Anda selalu memantau pengumuman terbaru di bawah ini untuk informasi periode magang dan administrasi.
             </p>
@@ -21,7 +43,11 @@
                 <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/20">
                     <p class="text-[10px] uppercase font-bold text-teal-200">Status Akun</p>
                     <p class="font-bold flex items-center gap-2">
-                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Terverifikasi
+                        @if($isVerified)
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Terverifikasi
+                        @else
+                            <span class="w-2 h-2 bg-red-400 rounded-full"></span> Belum Terverifikasi
+                        @endif
                     </p>
                 </div>
             </div>
@@ -46,9 +72,8 @@
             </div>
 
             <div class="fade-up delay-200 bg-white border-l-8 border-tsu-red rounded-3xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="bg-red-50 text-red-600 text-[10px] font-black uppercase px-3 py-1 rounded-lg">Penting</span>
-                    <p class="text-gray-400 text-xs">27 Des 2024 - 10:00</p>
+                <div class="flex justify-end items-start mb-2">
+                    <p class="text-gray-400 text-xs font-medium">27 Des 2024 - 10:00</p>
                 </div>
                 <h4 class="text-lg font-bold text-gray-800 mb-2">Batas Akhir Unggah Laporan Bulanan Desember</h4>
                 <p class="text-gray-600 text-sm leading-relaxed mb-4">
@@ -61,21 +86,21 @@
             </div>
 
             <div class="fade-up delay-300 bg-white border-l-8 border-tsu-blue rounded-3xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="bg-blue-50 text-blue-600 text-[10px] font-black uppercase px-3 py-1 rounded-lg">Informasi</span>
-                    <p class="text-gray-400 text-xs">25 Des 2024 - 08:30</p>
+                <div class="flex justify-end items-start mb-2">
+                    <p class="text-gray-400 text-xs font-medium">25 Des 2024 - 08:30</p>
                 </div>
                 <h4 class="text-lg font-bold text-gray-800 mb-2">Pembukaan Batch Magang Mandiri Januari 2026</h4>
                 <p class="text-gray-600 text-sm leading-relaxed mb-4">
                     Pendaftaran untuk Program Magang Mandiri batch Januari 2025 kini telah dibuka. Mahasiswa diharapkan segera melengkapi dokumen persyaratan di menu Setting.
                 </p>
+                @if($isMahasiswa)
                 <a href="{{ route('mahasiswa.program') }}" class="inline-block bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-tsu-blue hover:text-white transition">Lihat Daftar Program</a>
+                @endif
             </div>
 
             <div class="fade-up delay-400 bg-white border-l-8 border-tsu-orange rounded-3xl p-6 shadow-sm hover:shadow-md transition">
-                <div class="flex justify-between items-start mb-4">
-                    <span class="bg-orange-50 text-orange-600 text-[10px] font-black uppercase px-3 py-1 rounded-lg">Update</span>
-                    <p class="text-gray-400 text-xs">20 Des 2024 - 14:20</p>
+                <div class="flex justify-end items-start mb-2">
+                    <p class="text-gray-400 text-xs font-medium">20 Des 2024 - 14:20</p>
                 </div>
                 <h4 class="text-lg font-bold text-gray-800 mb-2">Pembaruan Format Penilaian Pembimbing Lapangan</h4>
                 <p class="text-gray-600 text-sm leading-relaxed">
@@ -85,41 +110,53 @@
         </div>
 
         <div class="space-y-8">
-            <div class="fade-up delay-300 bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm">
-                <h4 class="font-black text-gray-800 mb-6 uppercase text-xs tracking-widest">Aktivitas Saya</h4>
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-teal-50 text-tsu-teal rounded-2xl flex items-center justify-center font-bold">12</div>
-                        <div>
-                            <p class="text-sm font-bold">Logbook Diisi</p>
-                            <p class="text-[10px] text-gray-400">Total bulan ini</p>
+            @if($isMahasiswa)
+                <div class="fade-up delay-300 bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm">
+                    <h4 class="font-black text-gray-800 mb-6 uppercase text-xs tracking-widest">Aktivitas Saya</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-teal-50 text-tsu-teal rounded-2xl flex items-center justify-center font-bold">12</div>
+                            <div>
+                                <p class="text-sm font-bold">Logbook Diisi</p>
+                                <p class="text-[10px] text-gray-400">Total bulan ini</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-50 text-tsu-blue rounded-2xl flex items-center justify-center font-bold">02</div>
-                        <div>
-                            <p class="text-sm font-bold">Program Dilamar</p>
-                            <p class="text-[10px] text-gray-400">Menunggu verifikasi</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-blue-50 text-tsu-blue rounded-2xl flex items-center justify-center font-bold">02</div>
+                            <div>
+                                <p class="text-sm font-bold">Program Dilamar</p>
+                                <p class="text-[10px] text-gray-400">Menunggu verifikasi</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="fade-up delay-500 bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm">
-                <h4 class="font-black text-gray-800 mb-6 uppercase text-xs tracking-widest">Agenda Mendatang</h4>
-                <div class="relative border-l-2 border-dashed border-gray-100 ml-2 space-y-8">
-                    <div class="relative pl-8">
-                        <div class="absolute left-[-9px] top-0 w-4 h-4 bg-tsu-teal rounded-full ring-4 ring-teal-50"></div>
-                        <p class="text-[10px] font-bold text-tsu-teal uppercase">30 Des 2024</p>
-                        <p class="text-sm font-bold">Deadline Laporan Akhir</p>
-                    </div>
-                    <div class="relative pl-8">
-                        <div class="absolute left-[-9px] top-0 w-4 h-4 bg-gray-200 rounded-full ring-4 ring-gray-50"></div>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase">05 Jan 2025</p>
-                        <p class="text-sm font-bold text-gray-400">Presentasi Hasil Magang</p>
+                <div class="fade-up delay-500 bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm">
+                    <h4 class="font-black text-gray-800 mb-6 uppercase text-xs tracking-widest">Agenda Mendatang</h4>
+                    <div class="relative border-l-2 border-dashed border-gray-100 ml-2 space-y-8">
+                        <div class="relative pl-8">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-tsu-teal rounded-full ring-4 ring-teal-50"></div>
+                            <p class="text-[10px] font-bold text-tsu-teal uppercase">30 Des 2024</p>
+                            <p class="text-sm font-bold">Deadline Laporan Akhir</p>
+                        </div>
+                        <div class="relative pl-8">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-gray-200 rounded-full ring-4 ring-gray-50"></div>
+                            <p class="text-[10px] font-bold text-gray-400 uppercase">05 Jan 2025</p>
+                            <p class="text-sm font-bold text-gray-400">Presentasi Hasil Magang</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="fade-up delay-300 bg-gray-50 border-2 border-dashed border-gray-200 rounded-[2rem] p-8 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h4 class="font-bold text-gray-400 uppercase text-xs tracking-widest">Fitur Khusus Mahasiswa</h4>
+                    <p class="text-gray-400 text-[10px] mt-2 leading-relaxed">Statistik aktivitas dan agenda pribadi hanya tersedia untuk akun Mahasiswa.</p>
+                </div>
+            @endif
         </div>
     </div>
 </div>
