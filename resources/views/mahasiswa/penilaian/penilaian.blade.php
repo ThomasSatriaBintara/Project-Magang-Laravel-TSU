@@ -9,14 +9,30 @@
 
 <style>
     @media print {
-        body * { visibility: hidden; box-shadow: none !important; }
+        body * { visibility: hidden; background: none !important; }
         #printArea, #printArea * { visibility: visible !important; }
-        #printArea { position: absolute; left: 0; top: 0; width: 100% !important; margin: 0 !important; padding: 0 !important; display: block !important; }
-        .fade-up { opacity: 1 !important; transform: none !important; animation: none !important; }
-        .no-print, aside, nav, header, button, .file-management, #fileDisplayArea { display: none !important; }
-        table { border-collapse: collapse !important; width: 100% !important; }
-        th, td { border: 1px solid #000 !important; -webkit-print-color-adjust: exact; }
-        .bg-teal-50 { background-color: #f0fdfa !important; -webkit-print-color-adjust: exact; }
+        #printArea { 
+            position: absolute; 
+            left: 0; 
+            top: 0; 
+            width: 100% !important; 
+            margin: 0 !important; 
+            padding: 20px !important; 
+            display: block !important; 
+        }
+        
+        .fade-up { opacity: 1 !important; transform: none !important; }
+        
+        .no-print, aside, nav, header, button, #fileDisplayArea, .file-management { display: none !important; }
+        
+        table { border-collapse: collapse !important; width: 100% !important; margin-top: 20px; }
+        th, td { border: 1px solid #000 !important; padding: 8px !important; }
+        th { background-color: #f3f4f6 !important; -webkit-print-color-adjust: exact; }
+
+        .table-input { border: none !important; padding: 0 !important; text-align: center; }
+        
+        .shadow-sm, .shadow-xl { box-shadow: none !important; }
+        .rounded-3xl { border-radius: 10px !important; border: 1px solid #ddd !important; }
     }
 
     .table-input { width: 100%; background: transparent; border: none; outline: none; padding: 4px; text-align: center; }
@@ -30,8 +46,16 @@
         <div id="printArea" class="max-w-5xl mx-auto print-container">
             
             <div class="fade-up bg-white border border-gray-200 rounded-3xl p-8 mb-6 shadow-sm">
-                <h2 class="text-3xl font-bold text-gray-800">Program Website Penjualan</h2>
-                <p class="text-xl text-gray-500 mt-2">PT. Tiga Serangkai</p>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Program Website Penjualan</h2>
+                        <p class="text-xl text-gray-500 mt-2">PT. Tiga Serangkai</p>
+                    </div>
+                    <div class="hidden print:block text-right">
+                        <p class="text-sm font-bold text-tsu-teal">LAPORAN PENILAIAN MAGANG</p>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">{{ date('d F Y') }}</p>
+                    </div>
+                </div>
                 <div class="mt-5">
                     <span class="bg-teal-50 text-teal-700 px-6 py-2 rounded-full text-sm font-semibold border border-teal-100 uppercase tracking-wide">
                         Frontend Developer
@@ -40,20 +64,20 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="fade-up delay-100 bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center border-l-8 border-l-tsu-blue">
+                <div class="fade-up bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center border-l-8 border-l-tsu-blue">
                     <h3 class="text-gray-600 font-semibold text-lg mb-2">Nilai Program</h3>
                     <span class="text-[100px] font-black text-tsu-blue leading-none tracking-tighter">87</span>
                     <p class="text-gray-400 mt-4 font-medium text-sm">Kuriman Tech, S.Kom, M.Kom.</p>
                 </div>
 
-                <div class="fade-up delay-200 bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center border-l-8 border-l-tsu-teal">
+                <div class="fade-up bg-white border border-gray-200 rounded-3xl p-10 shadow-sm flex flex-col items-center justify-center border-l-8 border-l-tsu-teal">
                     <h3 class="text-gray-600 font-semibold text-lg mb-2">Nilai Dosen Pembimbing</h3>
                     <span class="text-[100px] font-black text-tsu-teal leading-none tracking-tighter">85</span>
                     <p class="text-gray-400 mt-4 font-medium text-sm">Wawan Laksito, S.Kom, M.M.</p>
                 </div>
             </div>
 
-            <div class="fade-up delay-300 mb-10">
+            <div class="fade-up mb-10">
                 <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Komentar Pembimbing</h3>
                 <div class="bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-inner text-center md:text-left">
                     <p class="text-gray-600 leading-relaxed italic text-lg">
@@ -66,10 +90,10 @@
                 </div>
             </div>
 
-            <div class="fade-up delay-400 mb-6">
+            <div class="fade-up mb-6">
                 <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Konversi Mata Kuliah</h3>
-                <div class="overflow-hidden border border-gray-200 rounded-2xl shadow-sm">
-                    <table class="w-full text-sm text-left bg-white">
+                <div class="overflow-hidden border border-gray-200 rounded-2xl shadow-sm bg-white">
+                    <table class="w-full text-sm text-left">
                         <thead class="bg-gray-50 text-gray-700 uppercase font-bold text-xs">
                             <tr>
                                 <th class="px-4 py-4 text-center border-b w-12">No</th>
@@ -84,13 +108,13 @@
                             <tr class="border-b hover:bg-gray-50">
                                 <td class="px-4 py-3 text-center font-semibold text-gray-500">{{ $i }}</td>
                                 <td class="px-4 py-3">
-                                    <input type="text" name="mk_name[]" placeholder="..." class="table-input">
+                                    <input type="text" name="mk_name[]" placeholder="..." class="table-input" onkeyup="syncValue(this)">
                                 </td>
                                 <td class="px-4 py-3">
-                                    <input type="text" name="mk_code[]" placeholder="Kode" class="table-input">
+                                    <input type="text" name="mk_code[]" placeholder="Kode" class="table-input" onkeyup="syncValue(this)">
                                 </td>
                                 <td class="px-4 py-3">
-                                    <input type="number" name="mk_sks[]" placeholder="0" class="table-input sks-input" oninput="calculateTotalSKS()">
+                                    <input type="number" name="mk_sks[]" placeholder="0" class="table-input sks-input" oninput="calculateTotalSKS(); syncValue(this)">
                                 </td>
                                 <td class="px-4 py-3 bg-teal-50/30">
                                     <input type="text" value="-" disabled class="table-input font-bold text-tsu-teal">
@@ -100,12 +124,25 @@
                         </tbody>
                         <tfoot class="bg-gray-100 font-bold text-gray-800">
                             <tr>
-                                <td colspan="3" class="px-4 py-4 text-right pr-10">TOTAL</td>
+                                <td colspan="3" class="px-4 py-4 text-right pr-10">TOTAL SKS</td>
                                 <td class="px-4 py-4 text-center footer-center text-tsu-blue" id="totalSKS">0</td>
                                 <td class="px-4 py-4 text-center footer-center text-tsu-teal bg-teal-50/50" id="totalNilai">-</td>
                             </tr>
                         </tfoot>
                     </table>
+                </div>
+            </div>
+
+            <div class="hidden print:grid grid-cols-2 gap-20 mt-20 text-center">
+                <div>
+                    <p class="text-sm">Pembimbing Lapangan,</p>
+                    <div class="h-20"></div>
+                    <p class="font-bold underline">Kuriman Tech, S.Kom, M.Kom.</p>
+                </div>
+                <div>
+                    <p class="text-sm">Dosen Pembimbing Magang,</p>
+                    <div class="h-20"></div>
+                    <p class="font-bold underline">Wawan Laksito, S.Kom, M.M.</p>
                 </div>
             </div>
         </div>
@@ -115,11 +152,10 @@
                 <h3 class="text-xl font-bold text-gray-800">File Terlampir (Sertifikat & Nilai)</h3>
                 <button type="button" onclick="resetFiles()" class="text-xs font-bold text-red-500 hover:text-red-700 uppercase tracking-wider">Hapus Semua</button>
             </div>
-            <div id="fileListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                </div>
+            <div id="fileListContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
         </div>
 
-        <div class="fade-up delay-600 max-w-5xl mx-auto flex flex-col md:flex-row gap-4 no-print px-4 md:px-0">
+        <div class="fade-up max-w-5xl mx-auto flex flex-col md:flex-row gap-4 no-print px-4 md:px-0 mb-20">
             <button type="button" onclick="handlePrint()" class="flex-1 flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-600 px-8 py-4 rounded-2xl font-bold hover:bg-gray-100 transition-all active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -146,6 +182,10 @@
 </div>
 
 <script>
+    function syncValue(input) {
+        input.setAttribute('value', input.value);
+    }
+
     function calculateTotalSKS() {
         let total = 0;
         document.querySelectorAll('.sks-input').forEach(input => {
@@ -198,7 +238,6 @@
 
     function submitFinal() {
         const fileInput = document.getElementById('fileSertifikat');
-        
         if (fileInput.files.length === 0) {
             Swal.fire('File Kosong', 'Harap upload sertifikat magang terlebih dahulu.', 'warning');
             return;
@@ -210,33 +249,25 @@
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#086375',
-            confirmButtonText: 'Ya, Kirim Sekarang',
-            cancelButtonText: 'Batal'
+            confirmButtonText: 'Ya, Kirim Sekarang'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Sedang Mengirim...',
-                    allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
-                });
-
-                const formData = new FormData(document.getElementById('formPenilaian'));
-                
+                Swal.fire({ title: 'Sedang Mengirim...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); } });
                 setTimeout(() => {
-                    Swal.fire({
-                        title: 'Berhasil Terkirim!',
-                        text: 'Penilaian dan file berhasil disimpan di sistem.',
-                        icon: 'success',
-                        confirmButtonColor: '#086375'
-                    });
+                    Swal.fire({ title: 'Berhasil Terkirim!', icon: 'success', confirmButtonColor: '#086375' });
                 }, 2000);
             }
         });
     }
 
     function handlePrint() {
+        document.querySelectorAll('.table-input').forEach(input => {
+            input.setAttribute('value', input.value);
+        });
+
         Swal.fire({
             title: 'Cetak Laporan?',
+            text: 'Pastikan data tabel sudah terisi sebelum mencetak.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#086375',

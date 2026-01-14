@@ -73,12 +73,12 @@
             <div x-data="{ role: 'mahasiswa' }" class="w-full max-w-md animate-fade-in-up delay-200 opacity-0" style="animation-fill-mode: forwards;">
                 <div class="inline-flex p-1.5 bg-gray-100 rounded-2xl mb-8 w-full">
                     <button @click="role = 'mahasiswa'" 
-                        :class="role === 'mahasiswa' ? 'bg-white text-tsu-teal shadow-md' : 'text-gray-500 hover:text-gray-700'"
+                        :class="role === 'mahasiswa' ? 'bg-tsu-teal text-white shadow-md' : 'text-gray-500 hover:text-gray-700'"
                         class="flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300">
                         Mahasiswa
                     </button>
                     <button @click="role = 'dosen'" 
-                        :class="role === 'dosen' ? 'bg-white text-tsu-teal shadow-md' : 'text-gray-500 hover:text-gray-700'"
+                        :class="role === 'dosen' ? 'bg-tsu-teal text-white shadow-md' : 'text-gray-500 hover:text-gray-700'"
                         class="flex-1 py-2.5 text-sm font-bold rounded-xl transition-all duration-300">
                         Dosen Pembimbing
                     </button>
@@ -202,7 +202,6 @@
             const pass = document.getElementById('password').value;
             const confirm = e.target.querySelector('input[x-model="confirm_password"]').value;
 
-            // Tambahan validasi 1 Huruf Besar & 1 Angka sesuai permintaan login sebelumnya
             const hasUpperCase = /[A-Z]/.test(pass);
             const hasNumber = /[0-9]/.test(pass);
 

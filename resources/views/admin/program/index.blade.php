@@ -110,12 +110,12 @@
     <div class="fade-up delay-100 border border-gray-200 bg-white rounded-[2.5rem] p-8 mb-8 shadow-sm">
         <div class="flex bg-gray-100 p-1.5 rounded-2xl w-full md:w-max mb-8">
             <button @click="tab = 'mandiri'; page = 1" 
-                    :class="tab === 'mandiri' ? 'bg-white text-tsu-teal shadow-sm' : 'text-gray-500'"
+                    :class="tab === 'mandiri' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-500'"
                     class="flex-1 md:flex-none px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300">
                 Magang Mandiri
             </button>
             <button @click="tab = 'studi'; page = 1" 
-                    :class="tab === 'studi' ? 'bg-white text-tsu-teal shadow-sm' : 'text-gray-500'"
+                    :class="tab === 'studi' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-500'"
                     class="flex-1 md:flex-none px-10 py-3 rounded-xl text-sm font-bold transition-all duration-300">
                 Studi Independen
             </button>

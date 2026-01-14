@@ -57,7 +57,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-tsu-teal/10 flex items-center justify-center font-bold text-tsu-teal">TS</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800">Thomas Satria</p>
+                                    <p class="font-bold text-sm text-gray-800">Thomas Satria Bintara</p>
                                     <p class="text-[10px] text-gray-400">22430035</p>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                             <span class="status-badge px-3 py-1 bg-orange-100 text-orange-600 text-[10px] font-bold rounded-full uppercase">Perlu Dinilai</span>
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <button onclick="openModal('Thomas Satria', false, this)" class="action-btn bg-tsu-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-lg shadow-tsu-teal/20">Input Nilai</button>
+                            <button onclick="openModal('Thomas Satria Bintara', false, this)" class="action-btn bg-tsu-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-tsu-teal-dark shadow-lg shadow-tsu-teal/20">Input Nilai</button>
                         </td>
                     </tr>
 
@@ -80,7 +80,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-green-50 text-green-600 flex items-center justify-center font-bold">LA</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800">Lucky Ardiansyah</p>
+                                    <p class="font-bold text-sm text-gray-800">Lucky Reza</p>
                                     <p class="text-[10px] text-gray-400">22430010</p>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                             <span class="status-badge px-3 py-1 bg-green-100 text-green-600 text-[10px] font-bold rounded-full uppercase">Sudah Dinilai</span>
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <button onclick="openModal('Lucky Ardiansyah', true, this)" class="action-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-200">Edit Nilai</button>
+                            <button onclick="openModal('Lucky Reza', true, this)" class="action-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-200">Edit Nilai</button>
                         </td>
                     </tr>
 
@@ -103,7 +103,7 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center font-bold">DW</div>
                                 <div>
-                                    <p class="font-bold text-sm text-gray-800">Dewa Saputra</p>
+                                    <p class="font-bold text-sm text-gray-800">Dewanata</p>
                                     <p class="text-[10px] text-gray-400">22430055</p>
                                 </div>
                             </div>

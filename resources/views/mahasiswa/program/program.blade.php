@@ -26,7 +26,7 @@
         page: 1, 
         perPage: 6,
         jobs: [
-            /* 10 DATA MAGANG MANDIRI */
+            // MAGANG MANDIRI
             { id: 1, type: 'mandiri', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan' },
             { id: 2, type: 'mandiri', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management' },
             { id: 3, type: 'mandiri', role: 'UI/UX Designer', company: 'Creative Hub', title: 'Mobile App Design' },
@@ -38,7 +38,7 @@
             { id: 9, type: 'mandiri', role: 'Security Analyst', company: 'Cyber Guard', title: 'Audit System' },
             { id: 10, type: 'mandiri', role: 'DevOps Intern', company: 'Cloud Tech', title: 'Docker Deployment' },
 
-            /* 10 DATA STUDI INDEPENDENT */
+            // 10 DATA STUDI INDEPENDENT
             { id: 11, type: 'studi', role: 'Android Developer', company: 'Bangkit Academy', title: 'Mobile Specialist' },
             { id: 12, type: 'studi', role: 'Cloud Architect', company: 'Google Cloud', title: 'Infrastructure' },
             { id: 13, type: 'studi', role: 'Machine Learning', company: 'AI Research', title: 'Neural Networks' },
@@ -75,12 +75,12 @@
 
             <div class="flex bg-gray-100 p-1 rounded-xl w-full md:w-auto">
                 <button @click="tab = 'mandiri'; page = 1" 
-                        :class="tab === 'mandiri' ? 'bg-white text-tsu-teal shadow-sm' : 'text-gray-500'"
+                        :class="tab === 'mandiri' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-500'"
                         class="flex-1 md:flex-none px-8 py-2.5 rounded-lg text-sm font-bold transition-all">
                     Magang Mandiri
                 </button>
                 <button @click="tab = 'studi'; page = 1" 
-                        :class="tab === 'studi' ? 'bg-white text-tsu-teal shadow-sm' : 'text-gray-500'"
+                        :class="tab === 'studi' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-500'"
                         class="flex-1 md:flex-none px-8 py-2.5 rounded-lg text-sm font-bold transition-all">
                     Studi Independen
                 </button>
