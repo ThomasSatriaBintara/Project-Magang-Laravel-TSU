@@ -84,13 +84,18 @@
             $isDosen = request()->is('dosen*');
             $isAdmin = request()->is('admin*');
 
+            // SIMULASI ROLE (Nanti diganti Auth::user()->role oleh backend)
+            // Untuk sementara kita ambil dari URL agar kamu bisa demo: ?role=fakultas atau ?role=universitas atau ?role=prodi
+            $adminRole = request()->get('role', 'fakultas'); 
+            $roleQuery = ['role' => $adminRole];
+
             $activeClass = 'bg-[#074755] text-white shadow-md';
             $inactiveClass = 'bg-white text-black hover:bg-gray-100 transition shadow-sm';
 
             $settingLink = '#';
             if($isMahasiswa) $settingLink = route('mahasiswa.setting');
             elseif($isDosen) $settingLink = route('dosen.setting');
-            elseif($isAdmin) $settingLink = route('admin.setting');
+            elseif($isAdmin) $settingLink = route('admin.setting', $roleQuery);
         @endphp
 
         <nav class="flex-1 px-4 space-y-3 mt-2 min-w-[16rem]" x-show="sidebarOpen" x-transition.opacity.duration.300ms>
@@ -155,19 +160,24 @@
             @endif
 
             @if($isAdmin)
-                <a href="{{ route('admin.dashboard') }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
-                    Dashboard
-                </a>
-                <a href="{{ route('admin.program.index') }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.program*') ? $activeClass : $inactiveClass }}">
-                    Kelola Program
-                </a>
-                <a href="{{ route('admin.pendaftaran.index') }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.pendaftaran*') ? $activeClass : $inactiveClass }}">
-                    ACC Pendaftaran
-                </a>
-                <a href="{{ route('admin.mahasiswa.index') }}" 
+                {{-- Hanya muncul untuk Admin Fakultas --}}
+                @if($adminRole == 'fakultas')
+                    <a href="{{ route('admin.dashboard', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
+                        Dashboard
+                    </a>
+                    <a href="{{ route('admin.program.index', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.program*') ? $activeClass : $inactiveClass }}">
+                        Kelola Program
+                    </a>
+                    <a href="{{ route('admin.pendaftaran.index', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.pendaftaran*') ? $activeClass : $inactiveClass }}">
+                        ACC Pendaftaran
+                    </a>
+                @endif
+
+                {{-- Muncul untuk SEMUA Admin (Univ, Fakultas, Prodi) --}}
+                <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
                     Data Mahasiswa
                 </a>
@@ -192,18 +202,27 @@
 
                 <div>
                     <h1 class="text-3xl font-extrabold text-black">@yield('header_title')</h1>
-                    <p class="text-gray-500 text-sm">Sistem Informasi Magang TSU</p>
+                    <p class="text-gray-500 text-sm">Sistem Informasi Magang TSU - <span class="text-tsu-teal font-bold">{{ strtoupper($adminRole) }}</span></p>
                 </div>
             </div>
             
             <div class="flex items-center gap-4">
+                {{-- Switcher Role untuk Demo --}}
+                @if($isAdmin)
+                <div class="flex bg-gray-100 p-1 rounded-xl border border-gray-200">
+                    <a href="?role=universitas" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'universitas' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Univ</a>
+                    <a href="?role=fakultas" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'fakultas' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Fak</a>
+                    <a href="?role=prodi" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'prodi' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Prodi</a>
+                </div>
+                @endif
+
                 <div class="relative group">
                     <button class="flex items-center gap-3 bg-white p-2 pr-4 rounded-full shadow-sm border border-gray-100 focus:outline-none transition hover:bg-gray-50">
                         <img src="{{ asset('images/ic_profile.png') }}" alt="User" class="w-10 h-10 rounded-full object-cover border-2 border-tsu-teal">
                         <div class="leading-none text-left">
                             <p class="font-bold text-sm text-gray-800">
                                 @if($isAdmin)
-                                    Teguh Susyanto
+                                    Admin {{ ucfirst($adminRole) }}
                                 @elseif($isDosen)
                                     Wawan Laksito
                                 @else
@@ -213,7 +232,7 @@
                             </p>
                             <p class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">
                                 @if($isAdmin)
-                                    NUPTK. 0122334455
+                                    Access Control: {{ $adminRole }}
                                 @elseif($isDosen)
                                     NUPTK. 061234567
                                 @else

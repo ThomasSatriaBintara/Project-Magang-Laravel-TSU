@@ -188,9 +188,19 @@
                     window.location.href = "/mahasiswa/dashboard";
                 } else if (email === "dosen@tsu.ac.id") {
                     window.location.href = "/dosen/dashboard"; 
+                } 
+                // SIMULASI LOGIN BERBAGAI JENIS ADMIN
+                else if (email === "admin.univ@tsu.ac.id") {
+                    window.location.href = "/admin/dashboard?role=universitas";
+                } else if (email === "admin.fakultas@tsu.ac.id") {
+                    window.location.href = "/admin/dashboard?role=fakultas";
+                } else if (email === "admin.prodi@tsu.ac.id") {
+                    window.location.href = "/admin/dashboard?role=prodi";
                 } else if (email === "admin@tsu.ac.id") {
-                    window.location.href = "/admin/dashboard";
-                } else {
+                    // Default fallback jika masih pakai email lama
+                    window.location.href = "/admin/dashboard?role=fakultas";
+                } 
+                else {
                     Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: 'Email tidak terdaftar!', confirmButtonColor: '#086375' });
                 }
             } else {
