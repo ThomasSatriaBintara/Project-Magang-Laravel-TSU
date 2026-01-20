@@ -159,7 +159,21 @@
             }
 
             if (!hasDocuments) {
-                
+                Swal.fire({
+                    title: 'Dokumen Belum Lengkap!',
+                    text: 'Silakan upload CV dan Transkrip Nilai di menu Setting terlebih dahulu.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#086375',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ke Pengaturan Sekarang',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ route('mahasiswa.setting') }}#documents";
+                    }
+                });
+            } else {
                 Swal.fire({
                     title: 'Konfirmasi Pendaftaran',
                     text: "Setelah mendaftar, Anda tidak dapat membatalkan pendaftaran ini. Yakin ingin melanjutkan?",
