@@ -84,8 +84,6 @@
             $isDosen = request()->is('dosen*');
             $isAdmin = request()->is('admin*');
 
-            // SIMULASI ROLE (Nanti diganti Auth::user()->role oleh backend)
-            // Untuk sementara kita ambil dari URL agar kamu bisa demo: ?role=fakultas atau ?role=universitas atau ?role=prodi
             $adminRole = request()->get('role', 'fakultas'); 
             $roleQuery = ['role' => $adminRole];
 
@@ -160,7 +158,7 @@
             @endif
 
             @if($isAdmin)
-                {{-- Hanya muncul untuk Admin Fakultas --}}
+                {{-- Dashboard hanya aktif jika role fakultas --}}
                 @if($adminRole == 'fakultas')
                     <a href="{{ route('admin.dashboard', $roleQuery) }}" 
                     class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
@@ -176,7 +174,7 @@
                     </a>
                 @endif
 
-                {{-- Muncul untuk SEMUA Admin (Univ, Fakultas, Prodi) --}}
+                {{-- Data Mahasiswa Aktif untuk SEMUA admin, dan menjadi menu utama untuk Univ & Prodi --}}
                 <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
                     Data Mahasiswa
@@ -207,15 +205,6 @@
             </div>
             
             <div class="flex items-center gap-4">
-                {{-- Switcher Role untuk Demo --}}
-                @if($isAdmin)
-                <div class="flex bg-gray-100 p-1 rounded-xl border border-gray-200">
-                    <a href="?role=universitas" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'universitas' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Univ</a>
-                    <a href="?role=fakultas" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'fakultas' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Fak</a>
-                    <a href="?role=prodi" class="px-3 py-1 text-[10px] font-bold rounded-lg {{ $adminRole == 'prodi' ? 'bg-tsu-teal text-white shadow-sm' : 'text-gray-400 hover:text-tsu-teal' }}">Prodi</a>
-                </div>
-                @endif
-
                 <div class="relative group">
                     <button class="flex items-center gap-3 bg-white p-2 pr-4 rounded-full shadow-sm border border-gray-100 focus:outline-none transition hover:bg-gray-50">
                         <img src="{{ asset('images/ic_profile.png') }}" alt="User" class="w-10 h-10 rounded-full object-cover border-2 border-tsu-teal">
@@ -282,16 +271,20 @@
         const logoutLink = document.getElementById('logoutLink');
         const cancelLogoutButton = document.getElementById('cancelLogout');
 
-        logoutLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            logoutModal.classList.remove('hidden');
-            logoutModal.classList.add('flex');
-        });
+        if(logoutLink) {
+            logoutLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                logoutModal.classList.remove('hidden');
+                logoutModal.classList.add('flex');
+            });
+        }
 
-        cancelLogoutButton.addEventListener('click', () => {
-            logoutModal.classList.add('hidden');
-            logoutModal.classList.remove('flex');
-        });
+        if(cancelLogoutButton) {
+            cancelLogoutButton.addEventListener('click', () => {
+                logoutModal.classList.add('hidden');
+                logoutModal.classList.remove('flex');
+            });
+        }
     </script>
 </body>
 </html>

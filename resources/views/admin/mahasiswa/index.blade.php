@@ -5,15 +5,43 @@
 
 @section('content')
 <div class="space-y-6">
+    {{-- Bagian Header & Filter --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 fade-up">
         <div>
             <h3 class="text-xl font-bold text-gray-800">Manajemen Data Mahasiswa</h3>
             <p class="text-sm text-gray-500">Total <span id="student-count" class="font-bold text-tsu-teal">0</span> mahasiswa terdaftar</p>
         </div>
-        <div class="relative w-full md:w-72">
-            <input type="text" id="searchInput" onkeyup="searchMahasiswa()" placeholder="Cari Nama atau NIM..." 
-                   class="w-full bg-white border-none rounded-2xl py-3 px-11 shadow-sm focus:ring-2 focus:ring-tsu-teal transition">
-            <span class="absolute left-4 top-3.5 text-gray-400">🔍</span>
+        
+        <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+            @php
+                $adminRole = request()->get('role', 'fakultas');
+            @endphp
+
+            {{-- Dropdown Fakultas (Hanya untuk Admin Universitas) --}}
+            @if($adminRole == 'universitas')
+            <select id="filterFakultas" class="bg-white border-none rounded-2xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-tsu-teal text-sm font-medium text-gray-600 outline-none">
+                <option value="">Semua Fakultas</option>
+                <option value="FTI">Fakultas Teknologi Informasi</option>
+                <option value="FEB">Fakultas Ekonomi & Bisnis</option>
+                <option value="FK">Fakultas Kedokteran</option>
+            </select>
+            @endif
+
+            {{-- Dropdown Prodi (Untuk Admin Universitas dan Admin Fakultas) --}}
+            @if($adminRole == 'universitas' || $adminRole == 'fakultas')
+            <select id="filterProdi" class="bg-white border-none rounded-2xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-tsu-teal text-sm font-medium text-gray-600 outline-none">
+                <option value="">Semua Program Studi</option>
+                <option value="Informatika">Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Teknik Komputer">Teknik Komputer</option>
+            </select>
+            @endif
+
+            <div class="relative w-full md:w-64">
+                <input type="text" id="searchInput" onkeyup="searchMahasiswa()" placeholder="Cari Nama atau NIM..." 
+                       class="w-full bg-white border-none rounded-2xl py-3 px-11 shadow-sm focus:ring-2 focus:ring-tsu-teal transition text-sm">
+                <span class="absolute left-4 top-3.5 text-gray-400">🔍</span>
+            </div>
         </div>
     </div>
 
@@ -113,8 +141,12 @@
 
 <script>
     function updateStudentCount() {
-        const rows = document.querySelectorAll('.mhs-row').length;
-        document.getElementById('student-count').innerText = rows;
+        const rows = document.querySelectorAll('.mhs-row');
+        let visibleCount = 0;
+        rows.forEach(row => {
+            if (row.style.display !== "none") visibleCount++;
+        });
+        document.getElementById('student-count').innerText = visibleCount;
     }
 
     function searchMahasiswa() {
@@ -130,6 +162,7 @@
                 row.style.display = "none";
             }
         });
+        updateStudentCount();
     }
 
     function viewProgramDetail(name, company, role) {
@@ -156,26 +189,6 @@
         });
     }
 
-    function viewFullDetail(name, prodi) {
-        const modal = document.getElementById('modalDetailMhs');
-        const content = modal.querySelector('div');
-        
-        document.getElementById('detailName').innerText = name;
-        document.getElementById('detailProdi').innerText = prodi;
-        document.getElementById('detailInitial').innerText = name.split(' ').map(n => n[0]).join('');
-        
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        setTimeout(() => content.classList.replace('translate-x-full', 'translate-x-0'), 10);
-    }
-
-    function closeDetailMhs() {
-        const modal = document.getElementById('modalDetailMhs');
-        const content = modal.querySelector('div');
-        content.classList.replace('translate-x-0', 'translate-x-full');
-        setTimeout(() => modal.classList.replace('flex', 'hidden'), 300);
-    }
-
     function previewFile(type, mhs) {
         Swal.fire({
             title: 'Membuka ' + type,
@@ -183,6 +196,34 @@
             icon: 'info',
             timer: 1000,
             showConfirmButton: false
+        });
+    }
+
+    // Simulasi filter untuk demo
+    const filterFakultas = document.getElementById('filterFakultas');
+    const filterProdi = document.getElementById('filterProdi');
+
+    if(filterFakultas) {
+        filterFakultas.addEventListener('change', () => {
+            Swal.fire({
+                title: 'Memfilter Fakultas',
+                text: 'Menampilkan data mahasiswa dari ' + filterFakultas.value,
+                icon: 'success',
+                timer: 800,
+                showConfirmButton: false
+            });
+        });
+    }
+
+    if(filterProdi) {
+        filterProdi.addEventListener('change', () => {
+            Swal.fire({
+                title: 'Memfilter Prodi',
+                text: 'Menampilkan data mahasiswa program studi ' + filterProdi.value,
+                icon: 'success',
+                timer: 800,
+                showConfirmButton: false
+            });
         });
     }
 
