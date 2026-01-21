@@ -188,15 +188,11 @@
                 } else if (email === "dosen@tsu.ac.id") {
                     window.location.href = "/dosen/dashboard"; 
                 } 
-                // PERBAIKAN REDIRECT DISINI
                 else if (email === "admin.univ@tsu.ac.id") {
-                    // Langsung ke route Mahasiswa Index
                     window.location.href = "/admin/mahasiswa?role=universitas";
                 } else if (email === "admin.fakultas@tsu.ac.id") {
-                    // Tetap ke Dashboard
                     window.location.href = "/admin/dashboard?role=fakultas";
                 } else if (email === "admin.prodi@tsu.ac.id") {
-                    // Langsung ke route Mahasiswa Index
                     window.location.href = "/admin/mahasiswa?role=prodi";
                 } else if (email === "admin@tsu.ac.id") {
                     window.location.href = "/admin/dashboard?role=fakultas";

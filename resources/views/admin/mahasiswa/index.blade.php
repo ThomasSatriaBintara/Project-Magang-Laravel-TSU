@@ -199,7 +199,6 @@
         });
     }
 
-    // Simulasi filter untuk demo
     const filterFakultas = document.getElementById('filterFakultas');
     const filterProdi = document.getElementById('filterProdi');
 
