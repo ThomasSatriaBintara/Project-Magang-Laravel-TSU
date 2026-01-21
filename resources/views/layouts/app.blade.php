@@ -158,7 +158,6 @@
             @endif
 
             @if($isAdmin)
-                {{-- Dashboard hanya aktif jika role fakultas --}}
                 @if($adminRole == 'fakultas')
                     <a href="{{ route('admin.dashboard', $roleQuery) }}" 
                     class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
@@ -174,7 +173,6 @@
                     </a>
                 @endif
 
-                {{-- Data Mahasiswa Aktif untuk SEMUA admin, dan menjadi menu utama untuk Univ & Prodi --}}
                 <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
                     Data Mahasiswa

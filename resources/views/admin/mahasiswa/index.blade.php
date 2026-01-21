@@ -5,7 +5,6 @@
 
 @section('content')
 <div class="space-y-6">
-    {{-- Bagian Header & Filter --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 fade-up">
         <div>
             <h3 class="text-xl font-bold text-gray-800">Manajemen Data Mahasiswa</h3>
@@ -17,7 +16,6 @@
                 $adminRole = request()->get('role', 'fakultas');
             @endphp
 
-            {{-- Dropdown Fakultas (Hanya untuk Admin Universitas) --}}
             @if($adminRole == 'universitas')
             <select id="filterFakultas" class="bg-white border-none rounded-2xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-tsu-teal text-sm font-medium text-gray-600 outline-none">
                 <option value="">Semua Fakultas</option>
@@ -27,7 +25,6 @@
             </select>
             @endif
 
-            {{-- Dropdown Prodi (Untuk Admin Universitas dan Admin Fakultas) --}}
             @if($adminRole == 'universitas' || $adminRole == 'fakultas')
             <select id="filterProdi" class="bg-white border-none rounded-2xl py-3 px-4 shadow-sm focus:ring-2 focus:ring-tsu-teal text-sm font-medium text-gray-600 outline-none">
                 <option value="">Semua Program Studi</option>
