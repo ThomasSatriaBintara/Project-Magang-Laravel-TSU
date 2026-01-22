@@ -5,6 +5,7 @@
 
 @section('content')
 <div class="space-y-6">
+    {{-- Header & Toolbar --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 fade-up">
         <div>
             <h3 class="text-xl font-bold text-gray-800">Manajemen Data Mahasiswa</h3>
@@ -33,6 +34,11 @@
                 <option value="Teknik Komputer">Teknik Komputer</option>
             </select>
             @endif
+
+            <button onclick="exportToWord()" class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl shadow-sm transition font-bold text-sm">
+                <span>📄</span>
+                <span>Export Word</span>
+            </button>
 
             <div class="relative w-full md:w-64">
                 <input type="text" id="searchInput" onkeyup="searchMahasiswa()" placeholder="Cari Nama atau NIM..." 
@@ -160,6 +166,34 @@
             }
         });
         updateStudentCount();
+    }
+
+    function exportToWord() {
+        const fakultas = document.getElementById('filterFakultas')?.value || 'Semua';
+        const prodi = document.getElementById('filterProdi')?.value || 'Semua';
+        
+        let infoText = `Mengekspor data mahasiswa untuk:<br><b>Fakultas: ${fakultas}</b><br><b>Prodi: ${prodi}</b>`;
+        
+        Swal.fire({
+            title: 'Generating Word File...',
+            html: infoText,
+            icon: 'info',
+            showConfirmButton: false,
+            timer: 2000,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        }).then(() => {
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'File Word mahasiswa berhasil diunduh.',
+                icon: 'success',
+                confirmButtonColor: '#086375',
+            });
+            
+            // Arahne ke route backendmu lukk
+            // window.location.href = `/mahasiswa/export?fakultas=${fakultas}&prodi=${prodi}`;
+        });
     }
 
     function viewProgramDetail(name, company, role) {
