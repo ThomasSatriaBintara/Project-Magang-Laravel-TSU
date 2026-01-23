@@ -24,6 +24,7 @@
                     <tr class="bg-gray-50/50">
                         <th class="px-6 py-5 text-xs font-bold text-gray-400 uppercase">Mahasiswa</th>
                         <th class="px-6 py-5 text-xs font-bold text-gray-400 uppercase">Program Pilihan</th>
+                        <th id="dospem-header" class="px-6 py-5 text-xs font-bold text-gray-400 uppercase">Dosen Pembimbing</th>
                         <th class="px-6 py-5 text-xs font-bold text-gray-400 uppercase">Berkas</th>
                         <th class="px-6 py-5 text-xs font-bold text-gray-400 uppercase text-center">Status/Aksi</th>
                     </tr>
@@ -45,6 +46,9 @@
                                 <span>Project Website Penjualan</span>
                                 <span class="text-[10px]">ℹ️</span>
                             </button>
+                        </td>
+                        <td class="px-6 py-4 dospem-cell">
+                            <span class="text-gray-300 text-xs">-</span>
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
@@ -78,6 +82,9 @@
                                 <span class="text-[10px]">ℹ️</span>
                             </button>
                         </td>
+                        <td class="px-6 py-4 dospem-cell">
+                            <span class="text-gray-300 text-xs">-</span>
+                        </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
                                 <button onclick="previewDoc('CV - Lucky Reza', 'CV')" class="p-2 bg-purple-50 text-purple-600 rounded-xl text-[10px] font-bold">📄 CV</button>
@@ -109,6 +116,9 @@
                                 <span>UI/UX Design Masterclass</span>
                                 <span class="text-[10px]">ℹ️</span>
                             </button>
+                        </td>
+                        <td class="px-6 py-4 dospem-cell">
+                            <span class="text-gray-300 text-xs">-</span>
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex gap-2">
@@ -153,16 +163,34 @@
 
 <script>
     let currentActiveTab = 'pending';
+    
+    const daftarDosen = [
+        "Dr. Ir. Budi Santoso, M.Kom",
+        "Siti Aminah, S.T., M.Cs",
+        "Andi Wijaya, M.TI",
+        "Rina Melati, Ph.D"
+    ];
 
     function filterTab(status) {
         currentActiveTab = status;
         const rows = document.querySelectorAll('.mhs-row');
+        const dospemHeader = document.getElementById('dospem-header');
+        const dospemCells = document.querySelectorAll('.dospem-cell');
+        
         const btnPending = document.getElementById('tab-all-btn');
         const btnLolos = document.getElementById('tab-lolos-btn');
         const btnTolak = document.getElementById('tab-tolak-btn');
         const emptyState = document.getElementById('empty-state');
         const emptyText = document.getElementById('empty-text');
         let count = 0;
+
+        if (status === 'lolos') {
+            dospemHeader.classList.remove('hidden');
+            dospemCells.forEach(cell => cell.classList.remove('hidden'));
+        } else {
+            dospemHeader.classList.add('hidden');
+            dospemCells.forEach(cell => cell.classList.add('hidden'));
+        }
 
         [btnPending, btnLolos, btnTolak].forEach(btn => {
             btn.className = "px-6 py-2 bg-white text-gray-500 rounded-full text-xs font-bold hover:bg-gray-50 border border-gray-100 transition-all";
@@ -191,30 +219,6 @@
         emptyState.style.display = count === 0 ? "block" : "none";
     }
 
-    function viewProgramDetail(name, company, role) {
-        Swal.fire({
-            title: '<span class="text-lg font-bold">Detail Program Magang</span>',
-            html: `
-                <div class="text-left space-y-4 p-2">
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Nama Program</p>
-                        <p class="text-sm font-bold text-gray-800">${name}</p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Perusahaan</p>
-                        <p class="text-sm font-bold text-tsu-teal">${company}</p>
-                    </div>
-                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Role Pekerjaan</p>
-                        <p class="text-sm font-bold text-gray-800">${role}</p>
-                    </div>
-                </div>
-            `,
-            confirmButtonColor: '#086375',
-            confirmButtonText: 'Tutup'
-        });
-    }
-
     function handleAcc(name, rowId) {
         Swal.fire({
             title: 'ACC Mahasiswa?',
@@ -227,6 +231,13 @@
             if (result.isConfirmed) {
                 const row = document.getElementById(rowId);
                 row.setAttribute('data-status', 'lolos');
+                
+                row.querySelector('.dospem-cell').innerHTML = `
+                    <button onclick="setDospem('${rowId}')" class="text-[10px] font-bold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 hover:bg-blue-100 transition">
+                        + Tambah Dospem
+                    </button>
+                `;
+
                 row.querySelector('.action-cell').innerHTML = `
                     <span class="inline-block px-4 py-1.5 bg-green-50 text-green-600 rounded-full text-[10px] font-black uppercase tracking-widest">
                         ✅ LOLOS SELEKSI
@@ -236,6 +247,39 @@
                 filterTab(currentActiveTab);
             }
         })
+    }
+
+    function setDospem(rowId) {
+        let options = {};
+        daftarDosen.forEach(dosen => options[dosen] = dosen);
+
+        Swal.fire({
+            title: 'Pilih Dosen Pembimbing',
+            input: 'select',
+            inputOptions: options,
+            inputPlaceholder: '--- Pilih Dosen ---',
+            showCancelButton: true,
+            confirmButtonColor: '#086375',
+            confirmButtonText: 'Simpan',
+            cancelButtonText: 'Batal',
+            inputValidator: (value) => {
+                if (!value) return 'Anda harus memilih dosen!';
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const row = document.getElementById(rowId);
+                const dospemCell = row.querySelector('.dospem-cell');
+                
+                dospemCell.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-xs font-bold text-gray-800">${result.value}</span>
+                        <button onclick="setDospem('${rowId}')" class="text-[9px] text-blue-500 hover:underline text-left">Ganti Dosen</button>
+                    </div>
+                `;
+                
+                Swal.fire('Tersimpan!', 'Dosen pembimbing telah ditentukan.', 'success');
+            }
+        });
     }
 
     function handleReject(name, rowId) {
@@ -250,6 +294,9 @@
                 const row = document.getElementById(rowId);
                 const reason = result.value || "Alasan tidak disertakan";
                 row.setAttribute('data-status', 'rejected');
+                
+                row.querySelector('.dospem-cell').innerHTML = `<span class="text-gray-300 text-xs">-</span>`;
+                
                 row.querySelector('.action-cell').innerHTML = `
                     <div class="flex flex-col items-center">
                         <span class="inline-block px-4 py-1.5 bg-red-50 text-red-600 rounded-full text-[10px] font-black uppercase tracking-widest">❌ DITOLAK</span>
@@ -260,6 +307,18 @@
                 filterTab(currentActiveTab);
             }
         })
+    }
+
+    function viewProgramDetail(name, company, role) {
+        Swal.fire({
+            title: '<span class="text-lg font-bold">Detail Program Magang</span>',
+            html: `<div class="text-left space-y-4 p-2">
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100"><p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Nama Program</p><p class="text-sm font-bold text-gray-800">${name}</p></div>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100"><p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Perusahaan</p><p class="text-sm font-bold text-tsu-teal">${company}</p></div>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100"><p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Role Pekerjaan</p><p class="text-sm font-bold text-gray-800">${role}</p></div>
+            </div>`,
+            confirmButtonColor: '#086375', confirmButtonText: 'Tutup'
+        });
     }
 
     function previewDoc(title, type) {
