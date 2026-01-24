@@ -124,7 +124,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Penilaian
+                    Nilai
                 </a>
                 <a href="{{ route('mahasiswa.pembimbing') }}" 
                 class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('mahasiswa.pembimbing*') ? $activeClass : $inactiveClass }}">
@@ -198,7 +198,12 @@
 
                 <div>
                     <h1 class="text-3xl font-extrabold text-black">@yield('header_title')</h1>
-                    <p class="text-gray-500 text-sm">Sistem Informasi Magang TSU - <span class="text-tsu-teal font-bold">{{ strtoupper($adminRole) }}</span></p>
+                    <p class="text-gray-500 text-sm">
+                        Sistem Informasi Magang TSU 
+                        @if($isAdmin)
+                            - <span class="text-tsu-teal font-bold">{{ strtoupper($adminRole) }}</span>
+                        @endif
+                    </p>
                 </div>
             </div>
             
