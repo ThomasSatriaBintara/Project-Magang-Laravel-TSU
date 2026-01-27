@@ -6,299 +6,151 @@
 
 @section('content')
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <div class="fade-up bg-tsu-teal text-white rounded-xl p-6 mb-8 shadow-md">
-        <h2 class="text-xl font-bold mb-2">Jangan lupa untuk Mengisi Logbook!</h2>
-        <p class="text-sm text-gray-200 font-light">
-            Catat semua kegiatan Anda di sini untuk dinilai oleh Pembimbing.
-        </p>
+<div x-data="{
+    startDate: '2026-01-01',
+    perPage: 5,
+    showAll: false,
+    weeks: [
+        { id: 1, date: '01/01/2026', title: 'Analisis Sistem', desc: 'Melakukan observasi awal.', type: 'Individu', saved: true, validated: true },
+        { id: 2, date: '08/01/2026', title: '', desc: '', type: 'Individu', saved: false, validated: false },
+        { id: 3, date: '15/01/2026', title: '', desc: '', type: 'Individu', saved: false, validated: false },
+        { id: 4, date: '22/01/2026', title: '', desc: '', type: 'Individu', saved: false, validated: false },
+        { id: 5, date: '29/01/2026', title: '', desc: '', type: 'Individu', saved: false, validated: false },
+        { id: 6, date: '05/02/2026', title: '', desc: '', type: 'Individu', saved: false, validated: false }
+    ],
+    get filteredWeeks() {
+        return this.showAll ? this.weeks : this.weeks.slice(0, this.perPage);
+    },
+    saveLog(id) {
+        let week = this.weeks.find(w => w.id === id);
+        if (!week.title || !week.desc) {
+            Swal.fire('Perhatian', 'Harap isi nama dan uraian kegiatan!', 'warning');
+            return;
+        }
+
+        Swal.fire({
+            title: 'Simpan Logbook?',
+            text: 'Data yang sudah disimpan tidak dapat diubah atau dihapus kembali.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#086375',
+            confirmButtonText: 'Ya, Simpan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                week.saved = true;
+                Swal.fire('Tersimpan!', 'Logbook minggu ke-' + id + ' berhasil dikunci.', 'success');
+            }
+        });
+    }
+}">
+
+    <div class="fade-up bg-tsu-teal text-white rounded-xl p-6 mb-8 shadow-md flex justify-between items-center">
+        <div>
+            <h2 class="text-xl font-bold mb-2">Logbook Kegiatan Mingguan</h2>
+            <p class="text-sm text-teal-50/80 font-light">Isilah kegiatan Anda setiap minggu. Data yang telah disimpan akan dikunci secara otomatis.</p>
+        </div>
+        <button @click="Swal.fire('Upload Laporan', 'Pilih file PDF laporan akhir Anda.', 'info')" 
+                class="bg-white text-tsu-teal font-bold py-2.5 px-6 rounded-lg shadow-md hover:bg-gray-100 transition active:scale-95 text-sm">
+            Upload Laporan Akhir
+        </button>
     </div>
 
-    <div class="fade-up delay-100 bg-white p-6 rounded-xl shadow-md border border-gray-200 relative">
+    <div class="fade-up delay-100 bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-6 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <label class="text-sm font-bold text-gray-600">Lihat Minggu:</label>
+            <select x-model="showAll" class="bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-tsu-teal outline-none cursor-pointer">
+                <option :value="false">5 Minggu Terakhir</option>
+                <option :value="true">Tampilkan Semua</option>
+            </select>
+        </div>
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-            <div class="flex flex-wrap items-center gap-2">
-                <div class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-3 py-1.5">
-                    <label class="text-xs font-semibold text-gray-500 uppercase">Dari:</label>
-                    <input type="date" id="filterStartDate" class="bg-transparent text-sm focus:outline-none">
-                </div>
-                <div class="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-lg px-3 py-1.5">
-                    <label class="text-xs font-semibold text-gray-500 uppercase">Sampai:</label>
-                    <input type="date" id="filterEndDate" class="bg-transparent text-sm focus:outline-none">
-                </div>
-                <button id="filterBtn" class="bg-tsu-teal text-white text-sm font-semibold py-2 px-6 rounded-lg hover:bg-tsu-teal-dark transition shadow-sm">
-                    Cari Logbook
-                </button>
-                <button id="resetFilter" class="text-gray-500 text-xs hover:underline ml-2">Semua</button>
-            </div>
-
-            <button id="openModal" class="bg-blue-600 text-white text-sm font-semibold py-2.5 px-5 rounded-full shadow-lg hover:bg-blue-700 transition flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                </svg>
-                Tambah Logbook
-            </button>
-        </div>
-
-        <div class="relative">
-            <div id="emptyState" class="fade-up delay-400 flex flex-col items-center justify-center py-20 px-4">
-                <h3 class="text-lg font-bold text-gray-700 text-center">Kelihatannya Kamu Belum Mempunyai Logbook</h3>
-                <p class="text-gray-500 text-sm text-center">
-                    Klik 
-                    <span id="emptyStateAdd" class="text-blue-600 font-semibold uppercase cursor-pointer hover:underline">
-                        Tambah Logbook
-                    </span> 
-                    Untuk Mengisinya
-                </p>
-            </div>
-
-            <div id="tableContainer" class="overflow-x-auto hidden">
-                <table id="logbookTable" class="min-w-full border-collapse rounded-lg overflow-hidden border border-gray-200">
-                    <thead class="bg-tsu-teal text-white text-xs md:text-sm shadow-md">
-                        <tr>
-                            <th class="py-3 px-4 text-center font-semibold w-12 border-r border-white/10">No</th>
-                            <th class="py-3 px-4 text-center font-semibold w-40 border-r border-white/20">Periode Tanggal</th>
-                            <th class="py-3 px-4 text-center font-semibold w-1/4 border-r border-white/20">Nama Kegiatan</th>
-                            <th class="py-3 px-4 text-center font-semibold border-r border-white/20">Uraian Kegiatan</th>
-                            <th class="py-3 px-4 text-center font-semibold w-32 border-r border-white/20">Jenis</th>
-                            <th class="py-3 px-4 text-center font-semibold w-40">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="logbookTableBody" class="divide-y divide-gray-100 bg-white">
-                        <tr class="bg-white hover:bg-gray-50 transition text-sm" data-start="2026-01-01" data-end="2026-01-05">
-                            <td class="py-3 px-4 text-center text-gray-700 font-bold border-r border-gray-100">1</td>
-                            <td class="py-3 px-4 text-center text-gray-700 font-medium border-r border-gray-100">01/01/2026 - 05/01/2026</td>
-                            <td class="py-3 px-4 text-left text-gray-800 font-medium border-r border-gray-100">Analisis Kebutuhan Sistem</td>
-                            <td class="py-3 px-4 text-left text-gray-600 leading-relaxed border-r border-gray-100">Melakukan wawancara dengan stakeholder terkait fitur login.</td>
-                            <td class="py-3 px-4 text-center text-gray-700 font-medium border-r border-gray-100">Kelompok</td>
-                            <td class="py-3 px-4 text-center">
-                                <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase rounded-full text-green-700 bg-green-100">
-                                    Sudah Divalidasi
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="printActionContainer" class="hidden flex justify-end mt-6">
-            <button onclick="exportToWord()" class="bg-green-600 text-white text-sm font-bold py-3.5 px-10 rounded-xl shadow-lg hover:bg-green-700 transition flex items-center gap-3 active:scale-95">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                CETAK LOGBOOK (WORD)
-            </button>
-        </div>
+        <button onclick="window.print()" class="flex items-center gap-2 text-gray-600 hover:text-tsu-teal font-bold text-sm transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+            Cetak Logbook
+        </button>
     </div>
 
-    <div id="logbookModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl p-0 overflow-hidden transform transition-all scale-95 duration-300" id="logbookModalContent">
-            <div class="bg-tsu-teal p-4 text-white flex justify-between items-center">
-                <h3 class="text-lg font-bold">Tambah Logbook Baru</h3>
-                <button id="closeModal" class="text-white hover:text-gray-200"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-            </div>
+    <div class="fade-up delay-200 overflow-x-auto bg-white rounded-xl shadow-md border border-gray-200">
+        <table class="min-w-full border-collapse">
+            <thead class="bg-tsu-teal text-white text-sm">
+                <tr>
+                    <th class="py-4 px-4 text-center font-bold w-16 border-r border-white/10">Minggu</th>
+                    <th class="py-4 px-4 text-center font-bold w-40 border-r border-white/10">Tanggal</th>
+                    <th class="py-4 px-4 text-left font-bold w-1/4 border-r border-white/10">Nama Kegiatan</th>
+                    <th class="py-4 px-4 text-left font-bold border-r border-white/10">Uraian Kegiatan</th>
+                    <th class="py-4 px-4 text-center font-bold w-32 border-r border-white/10">Jenis</th>
+                    <th class="py-4 px-4 text-center font-bold w-44">Status & Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                <template x-for="(week, index) in filteredWeeks" :key="week.id">
+                    <tr class="hover:bg-gray-50 transition text-sm" :class="!week.saved ? 'bg-red-50/30' : ''">
+                        <td class="py-4 px-4 text-center font-black text-gray-700 border-r border-gray-100" x-text="week.id"></td>
+                        <td class="py-4 px-4 text-center text-gray-600 font-medium border-r border-gray-100" x-text="week.date"></td>
+                        
+                        <td class="py-4 px-4 border-r border-gray-100">
+                            <template x-if="!week.saved">
+                                <input type="text" x-model="week.title" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 focus:ring-1 focus:ring-tsu-teal outline-none">
+                            </template>
+                            <template x-if="week.saved">
+                                <span class="font-bold text-gray-800" x-text="week.title"></span>
+                            </template>
+                        </td>
 
-            <form id="formLogbook" class="p-6 space-y-4">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Mulai</label>
-                        <input type="date" id="inputTanggalMulai" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Selesai</label>
-                        <input type="date" id="inputTanggalSelesai" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Jenis Logbook</label>
-                    <select id="inputJenis" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition">
-                        <option value="Individu">Individu</option>
-                        <option value="Kelompok">Kelompok</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Kegiatan</label>
-                    <input type="text" id="inputNama" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Uraian Kegiatan</label>
-                    <textarea id="inputUraian" rows="4" required class="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:ring-tsu-teal focus:border-tsu-teal outline-none transition"></textarea>
-                </div>
-                <div class="flex justify-end gap-3 mt-6 border-t pt-4">
-                    <button type="button" id="cancelModal" class="px-6 py-2 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition text-sm">Batal</button>
-                    <button type="submit" class="px-6 py-2 bg-tsu-teal text-white font-semibold rounded-lg hover:bg-tsu-teal-dark transition shadow-md text-sm">Simpan Logbook</button>
-                </div>
-            </form>
-        </div>
+                        <td class="py-4 px-4 border-r border-gray-100">
+                            <template x-if="!week.saved">
+                                <textarea x-model="week.desc" rows="1" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-2 focus:ring-1 focus:ring-tsu-teal outline-none resize-none"></textarea>
+                            </template>
+                            <template x-if="week.saved">
+                                <span class="text-gray-600 leading-relaxed" x-text="week.desc"></span>
+                            </template>
+                        </td>
+
+                        <td class="py-4 px-4 text-center border-r border-gray-100">
+                            <template x-if="!week.saved">
+                                <select x-model="week.type" class="bg-white border border-gray-200 rounded px-2 py-1 text-xs outline-none">
+                                    <option>Individu</option>
+                                    <option>Kelompok</option>
+                                </select>
+                            </template>
+                            <template x-if="week.saved">
+                                <span class="text-gray-700" x-text="week.type"></span>
+                            </template>
+                        </td>
+
+                        <td class="py-4 px-4 text-center">
+                            <div class="flex flex-col items-center gap-2">
+                                <template x-if="!week.saved">
+                                    <div class="flex flex-col items-center gap-2">
+                                        <span class="text-[9px] font-black text-red-500 uppercase tracking-tighter animate-pulse">Belum Diisi</span>
+                                        <button @click="saveLog(week.id)" class="bg-tsu-teal text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-teal-700 transition active:scale-95 shadow-sm">
+                                            Simpan
+                                        </button>
+                                    </div>
+                                </template>
+
+                                <template x-if="week.saved">
+                                    <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase rounded-full"
+                                          :class="week.validated ? 'text-green-700 bg-green-100' : 'text-yellow-700 bg-yellow-100'"
+                                          x-text="week.validated ? 'Sudah Divalidasi' : 'Belum Divalidasi'">
+                                    </span>
+                                </template>
+                            </div>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
     </div>
 
-    <script>
-        const modal = document.getElementById('logbookModal');
-        const openBtn = document.getElementById('openModal');
-        const emptyStateAdd = document.getElementById('emptyStateAdd');
-        const closeBtn = document.getElementById('closeModal');
-        const cancelBtn = document.getElementById('cancelModal');
-        const form = document.getElementById('formLogbook');
-        const tableBody = document.getElementById('logbookTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const tableContainer = document.getElementById('tableContainer');
-        const printActionContainer = document.getElementById('printActionContainer');
-
-        function checkEmptyState() {
-            if (tableBody.rows.length > 0) {
-                emptyState.classList.add('hidden');
-                tableContainer.classList.remove('hidden');
-                printActionContainer.classList.remove('hidden');
-            } else {
-                emptyState.classList.remove('hidden');
-                tableContainer.classList.add('hidden');
-                printActionContainer.classList.add('hidden');
-            }
-        }
-
-        function toggleModal() {
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('flex');
-        }
-
-        openBtn.addEventListener('click', toggleModal);
-        emptyStateAdd.addEventListener('click', toggleModal);
-        closeBtn.addEventListener('click', toggleModal);
-        cancelBtn.addEventListener('click', toggleModal);
-
-        function formatDateDisplay(dateStr) {
-            const [y, m, d] = dateStr.split('-');
-            return `${d}/${m}/${y}`;
-        }
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const tglMulai = document.getElementById('inputTanggalMulai').value;
-            const tglSelesai = document.getElementById('inputTanggalSelesai').value;
-
-            if (new Date(tglMulai) > new Date(tglSelesai)) {
-                Swal.fire('Oops!', 'Tanggal Selesai tidak boleh mendahului Tanggal Mulai.', 'error');
-                return;
-            }
-
-            Swal.fire({
-                title: 'Simpan Logbook?',
-                text: "Logbook yang ditambahkan tidak dapat diedit maupun dihapus.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#086375',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Simpan!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    processSave();
-                }
-            });
-
-            function processSave() {
-                const jenis = document.getElementById('inputJenis').value;
-                const nama = document.getElementById('inputNama').value;
-                const uraian = document.getElementById('inputUraian').value;
-
-                const nextNumber = tableBody.rows.length + 1;
-                const newRow = document.createElement('tr');
-                newRow.className = "bg-white hover:bg-gray-50 transition text-sm";
-                newRow.setAttribute('data-start', tglMulai);
-                newRow.setAttribute('data-end', tglSelesai);
-
-                const rangeDisplay = (tglMulai === tglSelesai) 
-                    ? formatDateDisplay(tglMulai) 
-                    : `${formatDateDisplay(tglMulai)} - ${formatDateDisplay(tglSelesai)}`;
-
-                newRow.innerHTML = `
-                    <td class="py-3 px-4 text-center text-gray-700 font-bold border-r border-gray-100">${nextNumber}</td>
-                    <td class="py-3 px-4 text-center text-gray-700 font-medium border-r border-gray-100">${rangeDisplay}</td>
-                    <td class="py-3 px-4 text-left text-gray-800 font-medium border-r border-gray-100">${nama}</td>
-                    <td class="py-3 px-4 text-left text-gray-600 border-r border-gray-100">${uraian}</td>
-                    <td class="py-3 px-4 text-center text-gray-700 font-medium border-r border-gray-100">${jenis}</td>
-                    <td class="py-3 px-4 text-center">
-                        <span class="inline-block px-3 py-1 text-[10px] font-bold uppercase rounded-full text-yellow-700 bg-yellow-100">
-                            Belum Divalidasi
-                        </span>
-                    </td>
-                `;
-
-                tableBody.appendChild(newRow);
-                checkEmptyState();
-                toggleModal();
-                form.reset();
-
-                Swal.fire({
-                    title: 'Tersimpan!',
-                    text: 'Logbook berhasil ditambahkan.',
-                    icon: 'success',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-            }
-        });
-
-        document.getElementById('filterBtn').addEventListener('click', function() {
-            const startVal = document.getElementById('filterStartDate').value;
-            const endVal = document.getElementById('filterEndDate').value;
-            const rows = tableBody.getElementsByTagName('tr');
-
-            if (!startVal || !endVal) {
-                Swal.fire('Info', 'Silakan tentukan periode tanggal terlebih dahulu.', 'info');
-                return;
-            }
-
-            const fStart = new Date(startVal);
-            const fEnd = new Date(endVal);
-
-            for (let row of rows) {
-                const rStart = new Date(row.getAttribute('data-start'));
-                const rEnd = new Date(row.getAttribute('data-end'));
-                if (rStart >= fStart && rEnd <= fEnd) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            }
-        });
-
-        document.getElementById('resetFilter').addEventListener('click', () => {
-            location.reload();
-        });
-
-        function exportToWord() {
-            const table = document.getElementById('logbookTable').cloneNode(true);
-            table.setAttribute('border', '1');
-            table.style.borderCollapse = 'collapse';
-            table.style.width = '100%';
-
-            const header = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head><meta charset='utf-8'>
-                <style>
-                    body { font-family: 'Arial'; }
-                    table { border: 1px solid black; border-collapse: collapse; width: 100%; }
-                    th { background-color: #086375; color: white; border: 1px solid black; padding: 5px; }
-                    td { border: 1px solid black; padding: 5px; }
-                    .title { text-align: center; font-size: 16pt; font-weight: bold; }
-                </style></head><body>
-                <div class="title">LOGBOOK KEGIATAN MAGANG TSU</div><br>
-            `;
-            const footer = "</body></html>";
-            const blob = new Blob(['\ufeff', header + table.outerHTML + footer], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'Logbook_TSU.doc';
-            link.click();
-        }
-
-        checkEmptyState();
-    </script>
+    <div class="mt-6 flex gap-4 text-[11px] font-medium text-gray-500 italic">
+        <div class="flex items-center gap-1"><span class="w-3 h-3 bg-red-50 border border-red-100 rounded"></span> Minggu yang belum diisi</div>
+        <div class="flex items-center gap-1"><span class="w-3 h-3 bg-white border border-gray-200 rounded"></span> Minggu yang sudah disimpan</div>
+    </div>
+</div>
 
 @endsection
