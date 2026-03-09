@@ -88,7 +88,12 @@
                     <p class="text-gray-500">Gunakan akun @tsu.ac.id untuk masuk ke sistem.</p>
                 </div>
 
-                <form x-data="{ show: false, password: '' }" action="#" method="POST" class="space-y-6 animate-fade-in-up delay-300 opacity-0" style="animation-fill-mode: forwards;">
+                <form x-data="{ show: false, password: '' }" 
+                      @keydown.enter="handleLogin()"
+                      action="javascript:void(0);" 
+                      class="space-y-6 animate-fade-in-up delay-300 opacity-0" 
+                      style="animation-fill-mode: forwards;">
+                    
                     <div>
                         <label class="block text-gray-700 font-semibold text-sm mb-2">Alamat Email</label>
                         <div class="relative group">
@@ -145,7 +150,7 @@
                         <a href="{{ route('password.request') }}" class="text-tsu-blue-link text-sm hover:underline font-semibold transition-all hover:text-blue-700">Lupa Kata Sandi?</a>
                     </div>
 
-                    <button type="button" onclick="handleLogin()" 
+                    <button type="button" @click="handleLogin()" 
                         class="w-full bg-tsu-teal text-white font-bold py-4 rounded-2xl hover:bg-tsu-teal-dark hover:shadow-xl hover:-translate-y-1 active:scale-95 transition-all duration-300 mt-4 text-base shadow-lg shadow-tsu-teal/20">
                         Masuk Sekarang
                     </button>
@@ -169,6 +174,12 @@
             const email = emailField.value;
             const pass = passField.value;
 
+            // Validasi input kosong dulu agar tidak langsung proses
+            if(!email || !pass) {
+                Swal.fire({ icon: 'warning', title: 'Oops...', text: 'Email dan Password wajib diisi!', confirmButtonColor: '#086375' });
+                return;
+            }
+
             const hasUpperCase = /[A-Z]/.test(pass);
             const hasNumber = /[0-9]/.test(pass);
 
@@ -182,13 +193,13 @@
                 return;
             }
 
+            // Simulasi Login Logic
             if (pass === "Thomas123") {
                 if (email === "mahasiswa@tsu.ac.id") {
                     window.location.href = "/mahasiswa/dashboard";
                 } else if (email === "dosen@tsu.ac.id") {
                     window.location.href = "/dosen/dashboard"; 
-                } 
-                else if (email === "admin.univ@tsu.ac.id") {
+                } else if (email === "admin.univ@tsu.ac.id") {
                     window.location.href = "/admin/mahasiswa?role=universitas";
                 } else if (email === "admin.fakultas@tsu.ac.id") {
                     window.location.href = "/admin/dashboard?role=fakultas";
@@ -196,8 +207,7 @@
                     window.location.href = "/admin/mahasiswa?role=prodi";
                 } else if (email === "admin@tsu.ac.id") {
                     window.location.href = "/admin/dashboard?role=fakultas";
-                } 
-                else {
+                } else {
                     Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: 'Email tidak terdaftar!', confirmButtonColor: '#086375' });
                 }
             } else {

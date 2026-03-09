@@ -158,6 +158,7 @@
             @endif
 
             @if($isAdmin)
+                {{-- MENU KHUSUS ADMIN FAKULTAS --}}
                 @if($adminRole == 'fakultas')
                     <a href="{{ route('admin.dashboard', $roleQuery) }}" 
                     class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.dashboard') ? $activeClass : $inactiveClass }}">
@@ -173,10 +174,26 @@
                     </a>
                 @endif
 
-                <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
-                class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
-                    Data Mahasiswa
-                </a>
+                {{-- MENU KHUSUS ADMIN PRODI --}}
+                @if($adminRole == 'prodi')
+                    <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
+                        Data Mahasiswa
+                    </a>
+                    
+                    <a href="{{ route('admin.konversi.index', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.konversi*') ? $activeClass : $inactiveClass }}">
+                        Validasi Konversi
+                    </a>
+                @endif
+
+                {{-- MENU KHUSUS ADMIN UNIVERSITAS --}}
+                @if($adminRole == 'universitas')
+                    <a href="{{ route('admin.mahasiswa.index', $roleQuery) }}" 
+                    class="flex items-center gap-3 px-6 py-3 rounded-full font-bold {{ request()->routeIs('admin.mahasiswa*') ? $activeClass : $inactiveClass }}">
+                        Data Seluruh Mahasiswa
+                    </a>
+                @endif
             @endif
         </nav>
     </aside>

@@ -11,7 +11,7 @@
         $isDosen = request()->is('dosen*');
         $isAdmin = request()->is('admin*');
 
-        $deadlineDate = \Carbon\Carbon::parse('2026-02-1'); 
+        $deadlineDate = \Carbon\Carbon::parse('2026-03-1'); 
         $isClosed = now()->greaterThan($deadlineDate);
     @endphp
 

@@ -59,4 +59,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/pendaftaran', function () { return view('admin.pendaftaran.index'); })->name('admin.pendaftaran.index');
     Route::get('/mahasiswa', function () { return view('admin.mahasiswa.index'); })->name('admin.mahasiswa.index');
     Route::get('/setting', function () { return view('layouts.setting'); })->name('admin.setting');
+    
+    Route::get('/konversi', function () { 
+        return view('admin.konversi.konversi'); 
+    })->name('admin.konversi.index'); 
 });
