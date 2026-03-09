@@ -82,7 +82,7 @@
                 <div class="fade-up flex flex-col gap-4">
                     <p class="text-xs font-black text-slate-400 uppercase tracking-widest ml-2">1. Dokumen Usulan Konversi</p>
                     <input type="file" id="fileKonversi" class="hidden" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFilePreview('fileKonversi', 'previewKonversi')">
-                    <div onclick="document.getElementById('fileKonversi').click()" class="file-card">
+                    <div onclick="document.getElementById('fileKonversi').click()" class="file-card border-tsu-teal/20 bg-tsu-teal/[0.02]">
                         <div id="previewKonversi" class="flex flex-col items-center">
                             <div class="file-icon-wrapper bg-amber-50 text-amber-500 group-hover:bg-amber-500 group-hover:text-white group-hover:rotate-12">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
