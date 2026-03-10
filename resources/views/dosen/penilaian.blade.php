@@ -135,7 +135,7 @@
         </div>
         
         <form id="formPenilaian" onsubmit="handleSave(event)" class="p-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-8 overflow-y-auto max-h-[50vh] pr-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6 overflow-y-auto max-h-[45vh] pr-2">
                 @php
                     $mkData = [
                         ['code' => 'IF201', 'name' => 'Workshop Framework', 'sks' => 4],
@@ -160,11 +160,27 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <input type="number" oninput="calculateGrade(this)" name="nilai[]" required min="0" max="100" placeholder="0" 
-                               class="w-20 bg-white border-2 border-gray-100 rounded-2xl text-center font-bold text-tsu-teal focus:border-tsu-teal focus:ring-0 py-2">
+                               class="input-nilai w-20 bg-white border-2 border-gray-100 rounded-2xl text-center font-bold text-tsu-teal focus:border-tsu-teal focus:ring-0 py-2">
                         <div class="grade-box w-10 h-10 flex items-center justify-center bg-white border-2 border-gray-100 rounded-xl font-black text-sm text-gray-300">-</div>
                     </div>
                 </div>
                 @endforeach
+            </div>
+
+            <div class="bg-gradient-to-r from-tsu-teal to-blue-500 rounded-[2rem] p-6 mb-8 flex items-center justify-between shadow-lg shadow-teal-100">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-xl shadow-inner">📊</div>
+                    <div>
+                        <p class="text-white/70 text-[10px] font-bold uppercase tracking-widest">Rata-rata Akumulasi</p>
+                        <h4 class="text-white text-3xl font-black" id="avg-display">0.00</h4>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end">
+                    <span class="text-white/60 text-[9px] font-bold uppercase mb-1">Status Penilaian</span>
+                    <div id="status-text" class="px-4 py-1.5 bg-white rounded-full text-tsu-teal text-xs font-black uppercase shadow-sm">
+                        Belum Lengkap
+                    </div>
+                </div>
             </div>
 
             <div class="flex gap-4">
@@ -194,6 +210,39 @@
         }
         box.innerText = grade;
         box.className = `grade-box w-10 h-10 flex items-center justify-center border-2 rounded-xl font-black text-sm transition-all ${colorClass}`;
+
+        updateAverage();
+    }
+
+    function updateAverage() {
+        const inputs = document.querySelectorAll('.input-nilai');
+        let total = 0;
+        let count = 0;
+        let allFilled = true;
+
+        inputs.forEach(input => {
+            if (input.value !== "") {
+                total += parseFloat(input.value);
+                count++;
+            } else {
+                allFilled = false;
+            }
+        });
+
+        const avg = count > 0 ? (total / count) : 0;
+        document.getElementById('avg-display').innerText = avg.toFixed(2);
+
+        const statusText = document.getElementById('status-text');
+        if (count === 0) {
+            statusText.innerText = "Belum Lengkap";
+            statusText.className = "px-4 py-1.5 bg-white rounded-full text-gray-400 text-xs font-black uppercase shadow-sm";
+        } else if (allFilled) {
+            statusText.innerText = "Siap Disimpan";
+            statusText.className = "px-4 py-1.5 bg-white rounded-full text-green-500 text-xs font-black uppercase shadow-sm animate-pulse";
+        } else {
+            statusText.innerText = "Dalam Proses";
+            statusText.className = "px-4 py-1.5 bg-white rounded-full text-blue-500 text-xs font-black uppercase shadow-sm";
+        }
     }
 
     function updateStats() {
@@ -231,7 +280,6 @@
         
         if (selectedBtn) {
             const row = selectedBtn.closest('tr');
-            
             const badge = row.querySelector('.status-badge');
             badge.innerText = "Sudah Dinilai";
             badge.className = "status-badge px-3 py-1 bg-green-100 text-green-600 text-[10px] font-bold rounded-full uppercase";
@@ -245,7 +293,7 @@
 
         Swal.fire({
             title: 'Berhasil!',
-            text: 'Nilai ' + currentMhs + ' telah diperbarui.',
+            text: 'Nilai konversi ' + currentMhs + ' telah diperbarui.',
             icon: 'success',
             confirmButtonColor: '#086375'
         }).then(() => {
