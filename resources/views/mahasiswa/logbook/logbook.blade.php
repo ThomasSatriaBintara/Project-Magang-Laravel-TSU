@@ -13,7 +13,6 @@
     today: new Date('2026-01-10'), 
     startDate: new Date('2026-01-01'),
     weeks: [],
-    // State untuk upload laporan
     reportFile: null,
     reportName: '',
     
@@ -69,7 +68,6 @@
         });
     },
 
-    // Fungsi untuk handle pilih file
     handleFileUpload(event) {
         const file = event.target.files[0];
         if (file) {
@@ -85,7 +83,6 @@
         }
     },
 
-    // Fungsi untuk ganti file
     triggerUpload() {
         this.$refs.fileInput.click();
     }
@@ -216,16 +213,13 @@
         const originalTable = document.getElementById('tableLogbook');
         const clonedTable = originalTable.cloneNode(true);
         
-        // 1. Hapus kolom 'Status & Aksi' dari header dan body
         const headers = clonedTable.querySelectorAll('th');
         if(headers.length > 0) headers[headers.length - 1].remove();
 
         const rows = clonedTable.querySelectorAll('tbody tr');
         rows.forEach(row => {
-            // Hapus cell terakhir (kolom aksi)
             if(row.lastElementChild) row.lastElementChild.remove();
 
-            // 2. Bersihkan isi cell
             const cells = row.querySelectorAll('td');
             cells.forEach((cell) => {
                 const input = cell.querySelector('input');

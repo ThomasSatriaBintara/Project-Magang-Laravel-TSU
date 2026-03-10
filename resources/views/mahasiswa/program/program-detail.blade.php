@@ -14,13 +14,10 @@
         $deadlineDate = \Carbon\Carbon::parse('2026-04-1'); 
         $isClosed = now()->greaterThan($deadlineDate);
 
-        // Pembatasan Prodi
         $mhsProdi = 'Informatika'; 
 
-        // Target Prodi
         $targetProdi = ['Informatika', 'Sistem Informasi'];
 
-        // Cek Diizinkan Atau Tidaknya
         $isProdiMatch = in_array($mhsProdi, $targetProdi);
     @endphp
 

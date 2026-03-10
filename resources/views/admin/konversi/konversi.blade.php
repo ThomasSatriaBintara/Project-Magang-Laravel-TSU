@@ -12,17 +12,28 @@
 <div x-data="{
     showModal: false,
     selectedUsulan: null,
-    // Data Dummy Usulan Mahasiswa
+    searchQuery: '',
+    
     usulans: [
         { id: 1, nama: 'Thomas Satria Bintara', nim: '22430035', file: '/images/dummy-usulan.jpg', status: 'Menunggu' },
         { id: 2, nama: 'Lucky Reza', nim: '22400005', file: '/images/dummy-usulan-2.jpg', status: 'Menunggu' },
         { id: 3, nama: 'Dewanata', nim: '22430033', file: '/images/dummy-usulan-3.jpg', status: 'Menunggu' }
     ],
-    // State untuk form input matkul
+
+    get filteredUsulans() {
+        if (this.searchQuery === '') {
+            return this.usulans;
+        }
+        return this.usulans.filter(u => 
+            u.nama.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+            u.nim.includes(this.searchQuery)
+        );
+    },
+
     konversiMatkul: [
         { kode: '', nama: '', sks: '' }
     ],
-    // Statistik Sinkron
+
     get totalPerluValidasi() {
         return this.usulans.filter(u => u.status === 'Menunggu').length;
     },
@@ -32,6 +43,7 @@
     get totalMahasiswa() {
         return this.usulans.length;
     },
+
     addMatkul() {
         this.konversiMatkul.push({ kode: '', nama: '', sks: '' });
     },
@@ -102,13 +114,16 @@
     </div>
 
     <div class="bg-white rounded-[32px] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden fade-up delay-100">
-        <div class="p-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/30">
+        <div class="p-8 border-b border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50/30">
             <div>
                 <h3 class="font-black text-slate-800 text-lg">Daftar Usulan Konversi</h3>
                 <p class="text-xs text-slate-400 mt-1">Kelola dan validasi usulan mata kuliah mahasiswa</p>
             </div>
-            <div class="relative">
-                <input type="text" placeholder="Cari nama atau NIM..." class="pl-12 pr-6 py-3 bg-white border border-slate-200 rounded-2xl text-sm shadow-sm focus:ring-4 focus:ring-tsu-teal/10 focus:border-tsu-teal outline-none transition-all w-64">
+            <div class="relative w-full md:w-auto">
+                <input type="text" 
+                       x-model="searchQuery" 
+                       placeholder="Cari nama atau NIM..." 
+                       class="pl-12 pr-6 py-3 bg-white border border-slate-200 rounded-2xl text-sm shadow-sm focus:ring-4 focus:ring-tsu-teal/10 focus:border-tsu-teal outline-none transition-all w-full md:w-64">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-4 top-3.5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </div>
         </div>
@@ -122,7 +137,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-                <template x-for="u in usulans" :key="u.id">
+                <template x-for="u in filteredUsulans" :key="u.id">
                     <tr class="hover:bg-slate-50/50 transition-all group">
                         <td class="py-6 px-8">
                             <div class="flex items-center gap-4">
@@ -149,6 +164,11 @@
                         </td>
                     </tr>
                 </template>
+                <tr x-show="filteredUsulans.length === 0">
+                    <td colspan="3" class="py-12 text-center">
+                        <p class="text-slate-400 text-sm font-medium italic">Mahasiswa dengan nama atau NIM tersebut tidak ditemukan.</p>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

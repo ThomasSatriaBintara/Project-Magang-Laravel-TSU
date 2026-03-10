@@ -174,7 +174,6 @@
             const email = emailField.value;
             const pass = passField.value;
 
-            // Validasi input kosong dulu agar tidak langsung proses
             if(!email || !pass) {
                 Swal.fire({ icon: 'warning', title: 'Oops...', text: 'Email dan Password wajib diisi!', confirmButtonColor: '#086375' });
                 return;
@@ -193,7 +192,6 @@
                 return;
             }
 
-            // Simulasi Login Logic
             if (pass === "Thomas123") {
                 if (email === "mahasiswa@tsu.ac.id") {
                     window.location.href = "/mahasiswa/dashboard";

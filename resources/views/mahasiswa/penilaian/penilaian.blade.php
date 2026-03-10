@@ -8,7 +8,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-    /* Styling Khusus Input File yang Menarik */
     .file-card {
         @apply transition-all duration-300 border-2 border-dashed border-slate-200 rounded-[2rem] p-8 flex flex-col items-center justify-center gap-4 bg-white hover:border-tsu-teal hover:bg-teal-50/30 group cursor-pointer;
     }
@@ -211,7 +210,6 @@
     }
 
     function exportOnlyTableToWord() {
-        // Mengambil hanya bagian tabel
         const tableElement = document.getElementById('tableToExport').querySelector('table').outerHTML;
         
         const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
