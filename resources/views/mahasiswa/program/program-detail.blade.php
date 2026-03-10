@@ -11,17 +11,34 @@
         $isDosen = request()->is('dosen*');
         $isAdmin = request()->is('admin*');
 
-        $deadlineDate = \Carbon\Carbon::parse('2026-03-1'); 
+        $deadlineDate = \Carbon\Carbon::parse('2026-04-1'); 
         $isClosed = now()->greaterThan($deadlineDate);
+
+        // Pembatasan Prodi
+        $mhsProdi = 'Informatika'; 
+
+        // Target Prodi
+        $targetProdi = ['Informatika', 'Sistem Informasi'];
+
+        // Cek Diizinkan Atau Tidaknya
+        $isProdiMatch = in_array($mhsProdi, $targetProdi);
     @endphp
 
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
             <h2 class="fade-up text-3xl font-bold text-black mb-2">Project Website Penjualan</h2>
             
-            <span class="fade-up delay-100 inline-block bg-blue-100 text-blue-600 font-semibold px-4 py-1 rounded-full text-sm mb-3">
-                PT. Tiga Serangkai University
-            </span>
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+                <span class="fade-up delay-100 inline-block bg-blue-100 text-blue-600 font-semibold px-4 py-1 rounded-full text-sm">
+                    PT. Tiga Serangkai University
+                </span>
+                
+                @foreach($targetProdi as $prodi)
+                    <span class="fade-up delay-150 inline-block bg-gray-800 text-white font-bold px-4 py-1 rounded-full text-[10px] uppercase tracking-wider">
+                        {{ $prodi }}
+                    </span>
+                @endforeach
+            </div>
 
             <div class="flex flex-wrap items-center gap-4 mt-1">
                 @if($isClosed)
@@ -59,6 +76,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
                 <span>Hanya Mahasiswa</span>
+            </button>
+        @elseif(!$isProdiMatch)
+            <button class="fade-up delay-300 bg-red-50 text-red-400 border border-red-100 font-bold py-3 px-8 rounded-full flex items-center gap-2 cursor-not-allowed" disabled title="Prodi Anda tidak sesuai dengan kriteria">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
+                <span>Prodi Tidak Sesuai</span>
             </button>
         @else
             <button id="btnDaftar" onclick="prosesPendaftaran()" class="fade-up delay-300 bg-tsu-teal hover:bg-tsu-teal-dark text-white font-bold py-3 px-8 rounded-full flex items-center gap-2 shadow-lg transition transform hover:-translate-y-0.5">

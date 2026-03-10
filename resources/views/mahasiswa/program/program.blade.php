@@ -7,7 +7,7 @@
 @section('content')
 
 @php
-    $rolePrefix = 'mahasiswa'; // Default
+    $rolePrefix = 'mahasiswa'; 
     if (request()->is('dosen*')) {
         $rolePrefix = 'dosen';
     } elseif (request()->is('admin*')) {
@@ -56,28 +56,18 @@
         ],
         jobs: [
             // MAGANG
-            { id: 1, type: 'magang', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan' },
-            { id: 2, type: 'magang', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management' },
-            { id: 3, type: 'magang', role: 'UI/UX Designer', company: 'Creative Hub', title: 'Mobile App Design' },
-            { id: 4, type: 'magang', role: 'QA Tester', company: 'Tech Solutions', title: 'Automation Testing' },
-            { id: 5, type: 'magang', role: 'Data Entry', company: 'Global Logistik', title: 'Inventory System' },
-            { id: 6, type: 'magang', role: 'IT Support', company: 'Bank Central', title: 'Network Maintenance' },
-            { id: 7, type: 'magang', role: 'Fullstack Dev', company: 'Startup XYZ', title: 'SaaS Project' },
-            { id: 8, type: 'magang', role: 'Database Admin', company: 'Data Center', title: 'SQL Optimization' },
-            { id: 9, type: 'magang', role: 'Security Analyst', company: 'Cyber Guard', title: 'Audit System' },
-            { id: 10, type: 'magang', role: 'DevOps Intern', company: 'Cloud Tech', title: 'Docker Deployment' },
-
+            { id: 1, type: 'magang', role: 'Frontend Developer', company: 'PT. Tiga Serangkai', title: 'Website Penjualan', prodi: ['IF'] },
+            { id: 2, type: 'magang', role: 'Backend Engineer', company: 'Jujura Academy', title: 'API Management', prodi: ['IF', 'SI'] },
+            { id: 3, type: 'magang', role: 'UI/UX Designer', company: 'Creative Hub', title: 'Mobile App Design', prodi: ['SI'] },
+            { id: 4, type: 'magang', role: 'QA Tester', company: 'Tech Solutions', title: 'Automation Testing', prodi: ['IF', 'SI'] },
+            { id: 5, type: 'magang', role: 'Data Entry', company: 'Global Logistik', title: 'Inventory System', prodi: ['SI'] },
+            { id: 6, type: 'magang', role: 'IT Support', company: 'Bank Central', title: 'Network Maintenance', prodi: ['IF'] },
+            
             // STUDI INDEPENDENT
-            { id: 11, type: 'studi', role: 'Android Developer', company: 'Bangkit Academy', title: 'Mobile Specialist' },
-            { id: 12, type: 'studi', role: 'Cloud Architect', company: 'Google Cloud', title: 'Infrastructure' },
-            { id: 13, type: 'studi', role: 'Machine Learning', company: 'AI Research', title: 'Neural Networks' },
-            { id: 14, type: 'studi', role: 'Cyber Security', company: 'BSSN Academy', title: 'Ethical Hacking' },
-            { id: 15, type: 'studi', role: 'Digital Marketing', company: 'RevoU', title: 'Growth Hacking' },
-            { id: 16, type: 'studi', role: 'Blockchain Dev', company: 'Crypto Hub', title: 'Smart Contract' },
-            { id: 17, type: 'studi', role: 'Data Science', company: 'DQLab', title: 'Big Data Analysis' },
-            { id: 18, type: 'studi', role: 'Internet of Things', company: 'Makers Lab', title: 'Smart Home' },
-            { id: 19, type: 'studi', role: 'Game Development', company: 'Agate Academy', title: 'Unity 3D' },
-            { id: 20, type: 'studi', role: 'Product Management', company: 'PM School', title: 'Agile Framework' }
+            { id: 11, type: 'studi', role: 'Android Developer', company: 'Bangkit Academy', title: 'Mobile Specialist', prodi: ['IF'] },
+            { id: 12, type: 'studi', role: 'Cloud Architect', company: 'Google Cloud', title: 'Infrastructure', prodi: ['IF', 'SI'] },
+            { id: 13, type: 'studi', role: 'Machine Learning', company: 'AI Research', title: 'Neural Networks', prodi: ['IF'] },
+            { id: 14, type: 'studi', role: 'Cyber Security', company: 'BSSN Academy', title: 'Ethical Hacking', prodi: ['IF', 'SI'] }
         ],
         get filteredJobs() {
             let filtered = this.jobs.filter(j => j.type === this.tab);
@@ -130,14 +120,19 @@
                             <div class="p-3 bg-gray-50 rounded-xl group-hover:bg-teal-50 transition-colors text-xl">
                                 <span x-text="categories.find(c => c.id === tab).icon"></span>
                             </div>
-                            <span class="text-[9px] font-black px-2 py-1 rounded bg-gray-100 text-gray-500 uppercase" x-text="categories.find(c => c.id === tab).name"></span>
+                            <div class="flex gap-1">
+                                <template x-for="p in job.prodi">
+                                    <span class="text-[9px] font-black px-2 py-1 rounded bg-gray-800 text-white uppercase tracking-tighter" x-text="p"></span>
+                                </template>
+                            </div>
                         </div>
                         <h4 class="font-bold text-lg mb-1 text-gray-800 group-hover:text-tsu-teal transition-colors leading-tight" x-text="job.title"></h4>
                         <div class="text-sm text-gray-500 mb-4 font-medium" x-text="job.company"></div>
                         <span class="inline-block bg-teal-50 text-tsu-teal font-bold text-[10px] uppercase px-3 py-1.5 rounded-lg mb-6 border border-teal-100" x-text="job.role"></span>
                     </div>
                     
-                    <a :href="`{{ url('') }}/${'{{ $rolePrefix }}'}/program/detail/${job.id}`" class="flex items-center justify-center gap-2 w-full bg-tsu-teal text-white text-sm font-bold py-3 rounded-xl hover:bg-tsu-teal-dark transition-all active:scale-95 shadow-md">
+                    <a :href="`{{ url('') }}/${'{{ $rolePrefix }}'}/program/detail/${job.id}`" 
+                       class="flex items-center justify-center gap-2 w-full bg-tsu-teal text-white text-sm font-bold py-3 rounded-xl hover:bg-tsu-teal-dark transition-all active:scale-95 shadow-md">
                         Lihat Detail Program
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
