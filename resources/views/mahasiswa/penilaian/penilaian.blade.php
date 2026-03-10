@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="no-print space-y-8 mb-10">
+        <div class="fade-up no-print space-y-8 mb-10">
             <div class="flex items-center gap-4 px-2">
                 <div class="h-8 w-2 bg-tsu-teal rounded-full"></div>
                 <h3 class="text-2xl font-black text-slate-800 tracking-tight">Kelengkapan Berkas Magang</h3>
