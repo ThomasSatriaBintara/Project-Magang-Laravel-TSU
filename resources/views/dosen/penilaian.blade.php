@@ -97,26 +97,6 @@
                             <button onclick="openModal('Lucky Reza', true, this)" class="action-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-bold hover:bg-gray-200">Edit Nilai</button>
                         </td>
                     </tr>
-
-                    <tr class="hover:bg-gray-50/50 transition mhs-row" data-status="tunggu-dokumen">
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center font-bold">DW</div>
-                                <div>
-                                    <p class="font-bold text-sm text-gray-800">Dewanata</p>
-                                    <p class="text-[10px] text-gray-400">22430055</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-sm font-medium text-gray-600">Mobile Dev - StartUp Indo</td>
-                        <td class="px-6 py-4 text-[10px] italic text-gray-400 font-bold uppercase tracking-wider">Belum Ada Berkas</td>
-                        <td class="px-6 py-4">
-                            <span class="status-badge px-3 py-1 bg-gray-100 text-gray-400 text-[10px] font-bold rounded-full uppercase">Menunggu Dokumen</span>
-                        </td>
-                        <td class="px-6 py-4 text-center">
-                            <button disabled class="bg-gray-50 text-gray-300 px-4 py-2 rounded-xl text-xs font-bold cursor-not-allowed">Input Nilai</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -135,7 +115,7 @@
         </div>
         
         <form id="formPenilaian" onsubmit="handleSave(event)" class="p-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6 overflow-y-auto max-h-[45vh] pr-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6 overflow-y-auto max-h-[40vh] pr-2">
                 @php
                     $mkData = [
                         ['code' => 'IF201', 'name' => 'Workshop Framework', 'sks' => 4],
@@ -167,25 +147,24 @@
                 @endforeach
             </div>
 
-            <div class="bg-gradient-to-r from-tsu-teal to-blue-500 rounded-[2rem] p-6 mb-8 flex items-center justify-between shadow-lg shadow-teal-100">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white/20 rounded-2xl flex items-center justify-center text-xl shadow-inner">📊</div>
-                    <div>
-                        <p class="text-white/70 text-[10px] font-bold uppercase tracking-widest">Rata-rata Akumulasi</p>
-                        <h4 class="text-white text-3xl font-black" id="avg-display">0.00</h4>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="md:col-span-1 bg-gradient-to-br from-tsu-teal to-blue-600 rounded-[2rem] p-6 flex flex-col justify-center shadow-lg shadow-teal-100">
+                    <p class="text-white/70 text-[10px] font-bold uppercase tracking-widest">Nilai Akhir</p>
+                    <h4 class="text-white text-4xl font-black" id="avg-display">0.00</h4>
+                    <div id="status-text" class="mt-2 w-fit px-3 py-1 bg-white/20 rounded-full text-white text-[9px] font-black uppercase">Belum Lengkap</div>
                 </div>
-                <div class="flex flex-col items-end">
-                    <span class="text-white/60 text-[9px] font-bold uppercase mb-1">Status Penilaian</span>
-                    <div id="status-text" class="px-4 py-1.5 bg-white rounded-full text-tsu-teal text-xs font-black uppercase shadow-sm">
-                        Belum Lengkap
-                    </div>
+
+                <div class="md:col-span-2 space-y-2">
+                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Komentar & Review Dosen</label>
+                    <textarea name="komentar" id="komentarDosen" rows="3" required
+                        class="w-full bg-gray-50 border-2 border-gray-100 rounded-[1.5rem] p-4 text-sm font-medium text-gray-700 focus:border-tsu-teal focus:ring-0 placeholder:text-gray-300"
+                        placeholder="Tuliskan feedback progres mahasiswa selama magang dan hasil konversi..."></textarea>
                 </div>
             </div>
 
             <div class="flex gap-4">
                 <button type="button" onclick="closeModal()" class="flex-1 py-4 bg-gray-100 text-gray-500 font-bold rounded-2xl hover:bg-gray-200 transition">Batal</button>
-                <button type="submit" class="flex-[2] py-4 bg-tsu-teal text-white font-bold rounded-2xl hover:bg-tsu-teal-dark transition shadow-xl shadow-tsu-teal/30">Simpan Seluruh Nilai</button>
+                <button type="submit" class="flex-[2] py-4 bg-tsu-teal text-white font-bold rounded-2xl hover:bg-tsu-teal-dark transition shadow-xl shadow-tsu-teal/30">Finalisasi & Simpan Nilai</button>
             </div>
         </form>
     </div>
@@ -235,13 +214,13 @@
         const statusText = document.getElementById('status-text');
         if (count === 0) {
             statusText.innerText = "Belum Lengkap";
-            statusText.className = "px-4 py-1.5 bg-white rounded-full text-gray-400 text-xs font-black uppercase shadow-sm";
+            statusText.className = "mt-2 w-fit px-3 py-1 bg-white/20 rounded-full text-white text-[9px] font-black uppercase";
         } else if (allFilled) {
-            statusText.innerText = "Siap Disimpan";
-            statusText.className = "px-4 py-1.5 bg-white rounded-full text-green-500 text-xs font-black uppercase shadow-sm animate-pulse";
+            statusText.innerText = "Siap Simpan";
+            statusText.className = "mt-2 w-fit px-3 py-1 bg-green-400 rounded-full text-white text-[9px] font-black uppercase animate-pulse";
         } else {
             statusText.innerText = "Dalam Proses";
-            statusText.className = "px-4 py-1.5 bg-white rounded-full text-blue-500 text-xs font-black uppercase shadow-sm";
+            statusText.className = "mt-2 w-fit px-3 py-1 bg-blue-400 rounded-full text-white text-[9px] font-black uppercase";
         }
     }
 
@@ -258,11 +237,16 @@
         const modal = document.getElementById('modalPenilaian');
         document.getElementById('mhsNamePlaceholder').innerText = 'Mahasiswa: ' + name;
         
+        // Reset/Fill Form
         const inputs = document.querySelectorAll('#formPenilaian input[type="number"]');
+        const textComment = document.getElementById('komentarDosen');
+        
         inputs.forEach(input => {
-            input.value = isEdit ? Math.floor(Math.random() * 10) + 85 : "";
+            input.value = isEdit ? Math.floor(Math.random() * 11) + 85 : "";
             calculateGrade(input);
         });
+
+        textComment.value = isEdit ? "Mahasiswa telah menyelesaikan program dengan sangat baik. Kemampuan teknis sangat menonjol di bagian framework development." : "";
 
         modal.classList.remove('hidden');
         modal.classList.add('flex');
@@ -292,8 +276,8 @@
         }
 
         Swal.fire({
-            title: 'Berhasil!',
-            text: 'Nilai konversi ' + currentMhs + ' telah diperbarui.',
+            title: 'Berhasil Disimpan!',
+            text: 'Seluruh nilai dan komentar untuk ' + currentMhs + ' telah diproses ke transkrip.',
             icon: 'success',
             confirmButtonColor: '#086375'
         }).then(() => {
